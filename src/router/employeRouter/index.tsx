@@ -1,10 +1,11 @@
 // 员工菜单
 import { Navigate } from 'react-router-dom';
-import { MenuOutlined, AppstoreOutlined,RightSquareOutlined } from '@ant-design/icons';
+import { MenuOutlined, AppstoreOutlined, RightSquareOutlined, InfoCircleOutlined } from '@ant-design/icons';
 import EmployeIndexView from '../../views/EmployeAllView/EmployeIndexView';
 import EmployeHomeView from '../../views/EmployeHomeView'
 import LoginView from '../../views/LoginView';
 import EmployeClockView from '../../views/EmployeAllView/EmployeClockView'
+import EmployeLeaveView from '../../views/EmployeAllView/EmployeLeaveView';
 const eroutes: any = [
     // 重定向
     {
@@ -13,7 +14,7 @@ const eroutes: any = [
         auth: true,
         element: (
             <>
-                <Navigate to="/homeView/employeIndexView" />
+                <Navigate to="/homeView/mainView" />
             </>
         ),
 
@@ -34,8 +35,8 @@ const eroutes: any = [
         auth: true,
         children: [
             {
-                path: 'employeIndexView',
-                absolutePath: '/homeView/employeIndexView',
+                path: 'mainView',
+                absolutePath: '/homeView/mainView',
                 element: <EmployeIndexView />,
                 title: '首页信息',
                 breadcrumbName: '首页信息',
@@ -53,11 +54,22 @@ const eroutes: any = [
                 show: true,
                 auth: true,
             },
+
+            {
+                path: 'employeLeaveView',
+                absolutePath: '/homeView/employeLeaveView',
+                element: <EmployeLeaveView />,
+                title: '请假申请',
+                breadcrumbName: '请假申请',
+                icon: <InfoCircleOutlined />,
+                show: true,
+                auth: true,
+            },
         ]
     },
     {
         path: '/',
-        element: <Navigate to="/homeView/employeIndexView" />,
+        element: <Navigate to="/homeView/mainView" />,
         show: false,
         auth: true,
     },
@@ -72,7 +84,9 @@ const eroutes: any = [
 export const breadcrumbNameMapEmploye: Record<string, string> = {
     // ------------------员工菜单
     '/homeView': '首页',
-    '/homeView/employeIndexView': '我的主要信息',
+    '/homeView/mainView': '我的主要信息',
+    '/homeView/employeClockView': '上班打卡',
+    '/homeView/employeLeaveView': '请假申请'
 };
 
 export default eroutes;

@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react'
 // 引入路由表
-import eroutes from '../../router/employeRouter';
+import eroutes, { breadcrumbNameMapEmploye } from '../../router/employeRouter';
 // 引入location获取路径
 import { useLocation, useNavigate, Outlet, Link } from 'react-router-dom';
 import { Layout, Col, Row, Dropdown, Breadcrumb, Button, Menu, Avatar, message, Modal, Form, Tag, Input, Upload } from 'antd';
@@ -10,7 +10,6 @@ import type { MenuProps } from 'antd'
 import { mainViewDataInit, updatePassword, updateUserInfo, updateUserInfoNoAvatar, getMenuNodesEmploye } from '../../type/mainView';
 import { MenuFoldOutlined, MenuUnfoldOutlined, UserOutlined, DownOutlined, PlusOutlined, LoadingOutlined, CheckOutlined } from '@ant-design/icons';
 import './index.less'
-import { breadcrumbNameMap } from '../../router';
 import PubSub from 'pubsub-js'
 import RouterBeforeEach from '../../util/RouterBeforeEach';
 import { useDispatch, useSelector } from 'react-redux';
@@ -54,7 +53,7 @@ const MainView = (props: Props) => {
             const url = `/${pathSnippets.slice(0, index + 1).join('/')}`;
             return (
                 <Breadcrumb.Item key={url}>
-                    <Link to={url}>{breadcrumbNameMap[url]}</Link>
+                    <Link to={url}>{breadcrumbNameMapEmploye[url]}</Link>
                 </Breadcrumb.Item>
             );
         })

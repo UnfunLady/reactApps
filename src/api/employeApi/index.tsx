@@ -16,6 +16,8 @@ interface searchEmployeData {
 const reqAllDept = () => {
     return request({ url: '/api/deptInfo', method: 'get' })
 }
+
+
 // 根据部门号获取团队
 const reqGetDeptByDno = (params: {dno:number|String}) => {
     return request({ url: '/api/getDeptByDno', method: 'get', params })
@@ -91,7 +93,8 @@ const employe = {
     reqGetSalaryInfo,
     reqUpdateSalaryInfo,
     reqGetSalaryDetailInfo,
-    reqUpdateSalaryDetail
+    reqUpdateSalaryDetail,
+
 }
 
 export default employe

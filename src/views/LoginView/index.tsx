@@ -3,7 +3,7 @@ import { LockOutlined, UserOutlined } from '@ant-design/icons'
 import { loginCheck } from '../../type/loginView'
 import './index.less'
 // redux
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useForm } from 'antd/es/form/Form'
 import { useNavigate } from 'react-router-dom'
 export default function LoginView() {
@@ -11,6 +11,9 @@ export default function LoginView() {
     // 登录验证
     const [loginForm] = useForm()
     const navigate = useNavigate()
+    const userInfo = useSelector((state: any) => {
+        return state.user.userList.userInfo
+    })
     const checkSubmit = () => {
         loginForm.validateFields().then(async res => {
             // 登录验证

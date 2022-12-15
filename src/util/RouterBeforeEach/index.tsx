@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { Outlet, useLocation, useNavigate } from "react-router-dom"
 import { useSelector } from 'react-redux'
 import routes from "../../router"
+import eroutes from "../../router/employeRouter"
 import { message } from "antd"
 // 筛选路由 如果匹配了路径就返回路由信息 没有就返回null
 // 不能用map 之类 不能return终止的
@@ -19,9 +20,13 @@ const checkAuth = (routers: any, path: String) => {
     return null
 }
 // 筛选匹配的路由 返回信息出去
-const checkRouterAuth = (path: String) => {
+const checkRouterAuth = (path: String, level: number = 1) => {
     let auth = null
-    auth = checkAuth(routes, path)
+    if (level === 1) {
+        auth = checkAuth(routes, path)
+    } else {
+        auth = checkAuth(eroutes, path)
+    }
     return auth
 }
 // 路由鉴权
@@ -36,19 +41,35 @@ const RouterBeforeEach = () => {
     const userToken = useSelector((state: any) => {
         return state.user.userList.userToken
     })
-
+    const userInfo = useSelector((state: any) => {
+        return state.user.userList.userInfo
+    })
     useEffect(() => {
         // 获取和当前路由路径匹配的路由
-        const obj: any = checkRouterAuth(location.pathname)
-        // 登录鉴权
-        if (obj && obj.auth && isLogin == false && userToken == '') {
-            setAuth(false)
-            navigate('/loginView', { replace: true })
-            message.warning('请先登录！')
+        if (userInfo.level == 1) {
+            const obj: any = checkRouterAuth(location.pathname, 1)
+            // 登录鉴权
+            if (obj && obj.auth && isLogin == false && userToken == '') {
+                setAuth(false)
+                navigate('/loginView', { replace: true })
+                message.warning('请先登录！')
+            } else {
+                // 鉴权成功返回true
+                setAuth(true)
+            }
         } else {
-            // 鉴权成功返回true
-            setAuth(true)
+            const obj: any = checkRouterAuth(location.pathname, 2)
+            // 登录鉴权
+            if (obj && obj.auth && isLogin == false && userToken == '') {
+                setAuth(false)
+                navigate('/loginView', { replace: true })
+                message.warning('请先登录！')
+            } else {
+                // 鉴权成功返回true
+                setAuth(true)
+            }
         }
+
     }, [location.pathname])
     // 返回outlet或null
     return auth ? <Outlet /> : null

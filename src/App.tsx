@@ -2,9 +2,11 @@ import { FC, useEffect } from 'react';
 import { useRoutes } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import routes from './router'
+import eroutes from './router/employeRouter';
 import './App.less'
 const App: FC = () => {
-  const elements = useRoutes(routes)
+  const elements = useRoutes(routes);
+  const elemente = useRoutes(eroutes);
   const userInfo = useSelector((state: any) => {
     return state.user.userList.userInfo
   })
@@ -56,7 +58,7 @@ const App: FC = () => {
 
   return (
     <div className="App" >
-      {elements}
+      {userInfo.level == 1 ? elements : elemente}
     </div>
   );
 }

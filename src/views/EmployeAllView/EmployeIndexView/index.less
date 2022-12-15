@@ -1,0 +1,66 @@
+.topContainer {
+    display: flex;
+    justify-content: space-around;
+    .cardInfo {
+        width: 30%;
+        background-color: #60b2dd;
+        border-radius: 8px;
+        position: relative;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        .topInfo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            margin-top: 20px;
+
+            .leftBox {
+                width: 220px;
+            }
+
+            .rightBox {
+                margin-top: 20px;
+                color: white;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                .dcount {
+                    font-size: 22px;
+                }
+
+                .dcountNum {
+                    font-size: 40px;
+                    font-weight: bold;
+                }
+            }
+        }
+
+        .bottomInfo {
+            margin: 20px 0 20px 0;
+            width: 90%;
+            border-top: 1px solid rgba(255, 255, 255, 0.574);
+            display: flex;
+            height: 40px;
+            align-items: center;
+            justify-content: center;
+
+            .explain {
+                margin-top: 20px;
+                font-size: 18px;
+                color: rgb(255, 252, 252);
+                cursor: pointer;
+
+            }
+            .explain:hover{
+                color: #6995be;
+            }
+
+        }
+    }
+}
