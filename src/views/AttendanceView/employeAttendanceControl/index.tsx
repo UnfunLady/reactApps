@@ -161,7 +161,7 @@ const Index: FC = () => {
         const postData = {
             reply: "不予通过",
             whichVerfiy: userInfo.username,
-            verfiyState: verfiyForm.getFieldValue("state"),
+            verfiyState: "false",
             leaveNumber: record.leaveNumber,
         }
         const success = await updateEmployeLeave(postData);

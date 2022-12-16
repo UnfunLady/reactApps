@@ -69,19 +69,78 @@ export const updateEmployeLeave = async (data: object) => {
 // 员工主页相关
 // 员工信息:
 interface employeIndex {
-    employeInfo: []
+    // 卡片数量
+    cardList: Array<any>,
+    employeInfo: Array<any>,
+    showDept: boolean,
+    showLeave: boolean,
+    showInfo: boolean,
+    leaveInfo: [],
+    leaveCount: number
 }
 export class employeIndexInit {
+
     employeIndex: employeIndex = {
-        employeInfo: []
+        cardList: [
+            {
+                id: 1,
+                title: '所在部门数量',
+                count: undefined,
+                color: "#60b2dd",
+                showInfo: true,
+                src: require("../assets/imges/groupW.png"),
+                type: 'dept'
+            },
+            {
+                id: 2,
+                title: '个人档案信息',
+                count: undefined,
+                color: "#66d4ca",
+                showInfo: true,
+                src: require("../assets/imges/employeInfo.png"),
+                type: 'info'
+            },
+            {
+                id: 3,
+                title: '我的请假申请',
+                count: 0,
+                color: "#d35939",
+                showInfo: true,
+                src: require("../assets/imges/leave.png"),
+                type: 'leave'
+
+            }
+        ],
+        employeInfo: [],
+        showDept: false,
+        showLeave: false,
+        showInfo: false,
+        leaveInfo: [],
+        leaveCount: 0
     }
 }
 export const getEmployeInfo = async (data: employeIndexInit, setData: Function, postData: object) => {
     const res: any = await attendanceApi.reqGetEmployeInfo(postData);
     if (res.code === 200) {
         data.employeIndex.employeInfo = res.employeInfo;
+        data.employeIndex.cardList[0].count = res.employeInfo.length;
+        setData({ ...data })
     } else {
         message.error("获取信息失败")
+    }
+}
+
+// 获取请假申请
+export const getLeave = async (data: employeIndexInit, setData: Function, postData: object) => {
+    const res: any = await attendanceApi.getEmployeLeaveInfo(postData)
+    if (res.code === 200) {
+        data.employeIndex.leaveInfo = res.employeLeaveListInfo;
+        data.employeIndex.leaveCount = res.count;
+        data.employeIndex.cardList[2].count = res.count
+        setData({ ...data })
+    }
+    else {
+        return false;
     }
 }
 
@@ -92,7 +151,7 @@ interface employeLeaveRequest {
         leaveLong: string,
         leaveWhen: string,
         employeno: number,
-        employename: string,
+        employename: string | undefined,
         deptid: number,
         dno: number
     },
@@ -103,10 +162,11 @@ interface employeLeaveRequest {
     selectDeptId: number,
     // 员工基本信息
     employeBaseData: {
-        employename: string |undefined,
-        employeno: number | string|undefined,
+        employename: string | undefined,
+        employeno: number | string | undefined,
     },
-    active: number
+    active: number,
+    addSuccess: boolean
 }
 
 export class employeLeaveRequestInit {
@@ -129,7 +189,8 @@ export class employeLeaveRequestInit {
             employeno: 0,
 
         },
-        active: 0
+        active: 0,
+        addSuccess: false
     }
 }
 // 部门信息类型
@@ -169,14 +230,26 @@ export const getGroup = async (data: employeLeaveRequestInit, setData: Function,
 }
 // 获取员工信息
 // 选择部门后获取小组
-export const getName = async (data: employeLeaveRequestInit, setData: Function, postData) => {
+export const getName = async (data: employeLeaveRequestInit, setData: Function, postData: object) => {
     const res: any = await attendanceApi.reqGetEmployName(postData)
     if (res.code === 200) {
         data.data.employeBaseData.employename = res.employeInfo[0].employname;
         data.data.employeBaseData.employeno = res.employeInfo[0].employno;
         setData({ ...data })
+        console.log(data);
     }
     else {
         message.error('请求出错请稍后重试')
+    }
+}
+
+//添加请假申请
+export const addLeave = async (postData: object) => {
+    const res: any = await attendanceApi.reqAddLeave(postData)
+    if (res.code === 200) {
+        return true;
+    }
+    else {
+        return false;
     }
 }

@@ -18,9 +18,17 @@ const reqAllDeptE = (data: object) => {
 const reqGetGroup = (data: object) => {
     return request({ url: '/api/getGroupE', method: 'post', data })
 }
+// 获取员工名
 const reqGetEmployName = (data: object) => {
-
     return request({ url: '/api/reqGetEmployName', method: 'post', data })
+}
+// 添加请假申请
+const reqAddLeave = (data: object) => {
+    return request({ url: '/api/reqAddLeave', method: 'post', data })
+}
+// 根据员工号获取id
+const getEmployeLeaveInfo = (data: object) => {
+    return request({ url: '/api/getEmployeLeaveInfo', method: 'post', data })
 }
 export default {
     reqGetEmployeLeavePage,
@@ -28,5 +36,7 @@ export default {
     reqGetEmployeInfo,
     reqAllDeptE,
     reqGetGroup,
-    reqGetEmployName
+    reqGetEmployName,
+    reqAddLeave,
+    getEmployeLeaveInfo
 }
