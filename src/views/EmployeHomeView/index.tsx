@@ -396,7 +396,7 @@ const MainView = (props: Props) => {
                         }
 
                     </Form.Item>
-                    <Form.Item label="用户名/权限">
+                    <Form.Item label="员工号/权限">
                         <Tag color='processing'>{userInfo.username}</Tag>
                         <Tag color='error'>{userInfo.level == 1 ? "管理员" : "员工"}</Tag>
                     </Form.Item>

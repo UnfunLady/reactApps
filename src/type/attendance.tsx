@@ -73,6 +73,10 @@ interface employeIndex {
     cardList: Array<any>,
     employeInfo: Array<any>,
     showDept: boolean,
+    showDeptDetail: boolean,
+    showDeptInfo: {
+        [propName: string]: any
+    },
     showLeave: boolean,
     showInfo: boolean,
     leaveInfo: [],
@@ -113,8 +117,10 @@ export class employeIndexInit {
         ],
         employeInfo: [],
         showDept: false,
+        showDeptDetail: false,
         showLeave: false,
         showInfo: false,
+        showDeptInfo: {},
         leaveInfo: [],
         leaveCount: 0
     }
@@ -251,5 +257,34 @@ export const addLeave = async (postData: object) => {
     }
     else {
         return false;
+    }
+}
+
+// 判断员工是否打上午卡了
+export const GetClockInfo = async (postData: object) => {
+    const res: any = await attendanceApi.isClockM(postData);
+    if (res.code === 200) {
+        return res;
+    } else {
+        message.error("获取打卡信息失败")
+    }
+}
+
+export const getWhichDeptClock = async (postData: object) => {
+    const res: any = await attendanceApi.reqAllDeptE(postData);
+    if (res.code === 200) {
+        return res.deptInfo;
+    } else {
+        return undefined;
+    }
+}
+
+export const saveClockInfo = async (postData: object) => {
+    const res: any = await attendanceApi.saveClockInfo(postData);
+    if (res.code === 200) {
+        message.success("打卡成功!")
+    } else {
+        message.error("打卡失败!")
+
     }
 }

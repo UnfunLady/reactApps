@@ -10,7 +10,7 @@ const reqUpdateEmployeLeave = (data: object) => {
 const reqGetEmployeInfo = (data: object) => {
     return request({ url: '/api/getEmployeInfo', data, method: "post" })
 }
-// 获取员工所在部门
+// 获取员工所在部门信息及小组号
 const reqAllDeptE = (data: object) => {
     return request({ url: '/api/deptInfoE', method: 'post', data })
 }
@@ -30,6 +30,13 @@ const reqAddLeave = (data: object) => {
 const getEmployeLeaveInfo = (data: object) => {
     return request({ url: '/api/getEmployeLeaveInfo', method: 'post', data })
 }
+// 判断是否上午打卡了
+const isClockM = (data: object) => {
+    return request({ url: '/api/clockMorning', method: 'post', data })
+}
+const saveClockInfo=(data:object)=>{
+    return request({ url: '/api/saveclock', method: 'post', data })
+}
 export default {
     reqGetEmployeLeavePage,
     reqUpdateEmployeLeave,
@@ -38,5 +45,7 @@ export default {
     reqGetGroup,
     reqGetEmployName,
     reqAddLeave,
-    getEmployeLeaveInfo
+    getEmployeLeaveInfo,
+    isClockM,
+    saveClockInfo
 }

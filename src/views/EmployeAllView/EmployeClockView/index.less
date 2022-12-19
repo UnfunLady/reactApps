@@ -1,0 +1,56 @@
+.container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-around;
+    padding: 60px;
+    .calendar {
+        width: 600px;
+
+        height: 400px;
+    }
+
+
+
+    .clockCircle {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        background: radial-gradient(#1ba0e2b5, #1ba1e2);
+        box-shadow: 1px 1px 10px #1ba0e2bc;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        cursor: pointer;
+        transition: all 1s;
+
+        .topTitle {
+            color: white;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .nowTime {
+            font-size: 16px;
+            color: #c0dbeb;
+        }
+    }
+
+    .yellowCircle {
+        background: radial-gradient(#f08605a0, #d0801e);
+        transition: all 1s;
+
+        .nowTime {
+            font-size: 16px;
+            color: #ffffffe2;
+        }
+    }
+
+    .clockCircle:hover {
+        background: radial-gradient(#12a5b58e, #12aab5);
+        transition: all 1s;
+    }
+
+
+}

@@ -11,7 +11,7 @@
  Target Server Version : 80029
  File Encoding         : 65001
 
- Date: 13/12/2022 17:39:15
+ Date: 19/12/2022 18:43:09
 */
 
 SET NAMES utf8mb4;
@@ -31,7 +31,10 @@ CREATE TABLE `clockdepall`  (
 -- ----------------------------
 -- Records of clockdepall
 -- ----------------------------
-INSERT INTO `clockdepall` VALUES ('2022-12-13', 39, 'true', 'true');
+INSERT INTO `clockdepall` VALUES ('2022-12-14', 39, 'true', 'true');
+INSERT INTO `clockdepall` VALUES ('2022-12-13', 39, 'true', 'false');
+INSERT INTO `clockdepall` VALUES ('2022-12-19', 1, 'false', 'false');
+INSERT INTO `clockdepall` VALUES ('2022-12-19', 16, 'false', 'false');
 
 -- ----------------------------
 -- Table structure for clockemploye
@@ -44,20 +47,19 @@ CREATE TABLE `clockemploye`  (
   `employename` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `clockTime` datetime(0) NOT NULL,
-  `location` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `allClockMorning` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'false',
-  `allClockAfter` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'false'
+  `location` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of clockemploye
 -- ----------------------------
-INSERT INTO `clockemploye` VALUES (1, 1, 1, '鲁潜233', '上午', '2022-12-13 15:17:31', '广州', 'false', 'false');
-INSERT INTO `clockemploye` VALUES (1, 1, 1, '鲁潜233', '下午', '2022-12-13 18:17:31', '广州', 'false', 'false');
-INSERT INTO `clockemploye` VALUES (2, 5, 81, '鲁潜', '上午', '2022-12-13 15:17:31', '广州', 'false', 'false');
-INSERT INTO `clockemploye` VALUES (2, 5, 81, '鲁潜', '下午', '2022-12-13 18:17:31', '广州', 'false', 'false');
-INSERT INTO `clockemploye` VALUES (39, 112, 2, '邵金鑫', '上午', '2022-12-13 18:17:31', '广州', 'false', 'false');
-INSERT INTO `clockemploye` VALUES (39, 112, 2, '邵金鑫', '下午', '2022-12-13 18:17:31', '广州', 'false', 'false');
+INSERT INTO `clockemploye` VALUES (39, 112, 2, '邵金鑫', '上午', '2022-12-14 18:17:31', '广州');
+INSERT INTO `clockemploye` VALUES (39, 112, 2, '邵金鑫', '上午', '2022-12-13 18:17:31', '广州');
+INSERT INTO `clockemploye` VALUES (39, 112, 2, '邵金鑫', '下午', '2022-12-14 18:17:31', '广州');
+INSERT INTO `clockemploye` VALUES (1, 1, 1, '鲁潜223', '上午', '2022-12-19 18:35:21', NULL);
+INSERT INTO `clockemploye` VALUES (16, 76, 1, '鲁潜223', '上午', '2022-12-19 18:35:21', NULL);
+INSERT INTO `clockemploye` VALUES (1, 1, 1, '鲁潜223', '下午', '2022-12-19 18:35:26', NULL);
+INSERT INTO `clockemploye` VALUES (16, 76, 1, '鲁潜223', '下午', '2022-12-19 18:35:26', NULL);
 
 -- ----------------------------
 -- Table structure for covidinfo
@@ -80,7 +82,7 @@ INSERT INTO `covidinfo` VALUES (1, 1, 1, 'true', 'true', 'true');
 INSERT INTO `covidinfo` VALUES (16, 76, 1, 'true', 'true', 'true');
 INSERT INTO `covidinfo` VALUES (1, 1, 2, 'true', 'true', 'true');
 INSERT INTO `covidinfo` VALUES (2, 5, 2, 'true', 'true', 'true');
-INSERT INTO `covidinfo` VALUES (39, 112, 2, 'false', 'false', 'false');
+INSERT INTO `covidinfo` VALUES (39, 112, 2, 'true', 'true', 'true');
 INSERT INTO `covidinfo` VALUES (1, 1, 3, 'true', 'true', 'true');
 INSERT INTO `covidinfo` VALUES (16, 76, 3, 'false', 'false', 'false');
 INSERT INTO `covidinfo` VALUES (1, 1, 4, 'true', 'true', 'true');
@@ -352,7 +354,7 @@ INSERT INTO `depall` VALUES (5, '运维团队', '设计并开发高效的监控�
 INSERT INTO `depall` VALUES (6, '经营团队', '以可控的方式，尽可能高效的完成产品功能的迭代的变更工作，搞好市场调查与预测，选定产品发展方向，制定长期发展规划', 'https://img1.baidu.com/it/u=312885407,2370214083&fm=253&fmt=auto&app=138&f=JPEG', 13, 1, 'false', 2, 'false', 'false');
 INSERT INTO `depall` VALUES (7, '行政团队', '负责公司全体员工的后勤保障工作，负责接待来宾（比如：政府部门、职能部门人员），接听或转接外部电话，负责公司员工的考勤管理', 'https://img0.baidu.com/it/u=3450002477,2924136512&fm=253&fmt=auto&app=138&f=PNG', 10, 1, 'false', 2, 'false', 'false');
 INSERT INTO `depall` VALUES (16, '测试团队', '在规定的条件下对程序进行操作，以发现程序错误，衡量软件质量，并对其是否能满足设计要求进行评估', 'http://127.0.0.1:8888/images/uploadAvatarZengYu76264logo.jpg', 7, 1, 'false', 4, 'false', 'false');
-INSERT INTO `depall` VALUES (39, 'test1', '参与分布式test', 'http://127.0.0.1:8888/images/uploadAvatarZengYu46412log.jpg', 1, 2, 'false', 1, 'true', 'false');
+INSERT INTO `depall` VALUES (39, 'test1', '参与分布式test', 'http://127.0.0.1:8888/images/uploadAvatarZengYu46412log.jpg', 1, 2, 'true', 0, 'true', 'false');
 
 -- ----------------------------
 -- Table structure for dept
@@ -368,12 +370,12 @@ CREATE TABLE `dept`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `fk_dno`(`deptno`) USING BTREE,
   CONSTRAINT `fk_dno` FOREIGN KEY (`deptno`) REFERENCES `depall` (`dno`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 112 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 113 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of dept
 -- ----------------------------
-INSERT INTO `dept` VALUES (1, 1, '爬虫团队1组', '广州', 22, 76);
+INSERT INTO `dept` VALUES (1, 1, '爬虫团队1组', '广州', 22, 16);
 INSERT INTO `dept` VALUES (2, 1, '爬虫团队2组', '深圳', 22, 20);
 INSERT INTO `dept` VALUES (3, 1, '爬虫团队3组', '广州', 20, 20);
 INSERT INTO `dept` VALUES (4, 1, '爬虫团队4组', '长沙', 22, 20);
@@ -392,7 +394,7 @@ INSERT INTO `dept` VALUES (16, 6, '经营团队1组', '广州', 13, 11);
 INSERT INTO `dept` VALUES (17, 7, '行政团队1组', '广州', 10, 8);
 INSERT INTO `dept` VALUES (76, 16, '测试小组1组', '北京', 7, 3);
 INSERT INTO `dept` VALUES (110, 39, 'test1小组1', '河源', 0, 0);
-INSERT INTO `dept` VALUES (112, 39, '贴图', '贴图', 1, 0);
+INSERT INTO `dept` VALUES (112, 39, '贴图', '贴图', 1, 1);
 
 -- ----------------------------
 -- Table structure for deptredo
@@ -1053,6 +1055,24 @@ CREATE TABLE `employesub`  (
 INSERT INTO `employesub` VALUES (150, 800, 650, 500, 300, 1000);
 
 -- ----------------------------
+-- Table structure for eusers
+-- ----------------------------
+DROP TABLE IF EXISTS `eusers`;
+CREATE TABLE `eusers`  (
+  `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '88888888',
+  `nickname` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '普通员工',
+  `islock` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '0',
+  `level` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '2',
+  `avatar` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of eusers
+-- ----------------------------
+INSERT INTO `eusers` VALUES ('1', '88888888', '普通员工', '0', '2', '');
+
+-- ----------------------------
 -- Table structure for leaverequest
 -- ----------------------------
 DROP TABLE IF EXISTS `leaverequest`;
@@ -1069,15 +1089,15 @@ CREATE TABLE `leaverequest`  (
   `whichVerfiy` varchar(255) CHARACTER SET gb2312 COLLATE gb2312_chinese_ci NULL DEFAULT '暂无人核审' COMMENT '谁核审',
   `employename` varchar(255) CHARACTER SET gb2312 COLLATE gb2312_chinese_ci NOT NULL COMMENT '员工姓名',
   PRIMARY KEY (`leaveNumber`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 138253605 CHARACTER SET = gb2312 COLLATE = gb2312_chinese_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 138253611 CHARACTER SET = gb2312 COLLATE = gb2312_chinese_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of leaverequest
 -- ----------------------------
-INSERT INTO `leaverequest` VALUES (138253601, '事假', '3天', 1, '2022-09-29 00:00:00', '<p>去了就别回来了😋</p>', 'false', 1, 1, 'admin', '鲁潜223');
-INSERT INTO `leaverequest` VALUES (138253602, '病假', '1天', 1, '2022-10-29 00:00:00', '请快去快回', 'true', 1, 1, 'admin', '鲁潜223');
-INSERT INTO `leaverequest` VALUES (138253603, '病假', '1天', 1, '2022-10-29 00:00:00', '<p>去了就别回来了😛</p>', 'true', 1, 1, 'admin', '鲁潜223');
-INSERT INTO `leaverequest` VALUES (138253604, '病假', '2天', 1, '2022-12-13 00:00:00', '暂无回复', 'none', 1, 1, '暂无人审批', '鲁潜223');
+INSERT INTO `leaverequest` VALUES (138253607, '事假', '1天', 1, '2022-12-16 00:06:00', '<p>去了就别回来了！😸</p>', 'true', 1, 1, 'admin', '鲁潜223');
+INSERT INTO `leaverequest` VALUES (138253608, '事假', '3天', 1, '2023-01-11 15:03:43', '<p>今天人数满了 明天再申请🤣</p>', 'false', 76, 16, 'admin', '鲁潜223');
+INSERT INTO `leaverequest` VALUES (138253609, '事假', '1天', 1, '2022-12-30 15:26:14', '不予通过', 'false', 76, 16, 'admin', '鲁潜223');
+INSERT INTO `leaverequest` VALUES (138253610, '事假', '1周', 1, '2022-12-19 09:16:37', '<p>允许通过😇</p>', 'true', 1, 1, 'admin', '鲁潜223');
 
 -- ----------------------------
 -- Table structure for users
@@ -1113,20 +1133,26 @@ declare isExist int(10);
 declare nowDateFormat date;
 set nowDateFormat=(SELECT DATE_FORMAT(new.clockTime, '%Y-%m-%d'));
 set cDeptCount=(select count from depall where dno=new.dno);
-set cNowCount=(select count(*) from clockemploye where dno=new.dno AND type="上午");
-set cNowcountAfter=(select count(*) from clockemploye where dno=new.dno AND type="下午");
+set cNowCount=(select count(*) from clockemploye where dno=new.dno AND type="上午" AND (SELECT DATE_FORMAT(clockTime, '%Y-%m-%d'))=nowDateFormat);
+set cNowcountAfter=(select count(*) from clockemploye where dno=new.dno AND type="下午" AND (SELECT DATE_FORMAT(clockTime, '%Y-%m-%d'))=nowDateFormat);
 -- 判段部门打卡表是否有今天数据 没有则新增有则修改
 -- 如果上午打卡人数等于总数 则上午全勤 下午同理
 -- 如果没有则insert新的数据
-set isExist=(select count(*) from clockdepall where (clockDay=nowDateFormat));
+set isExist=(select count(*) from clockdepall where (clockDay=nowDateFormat) AND dno=new.dno) ;
 if(isExist>0) then	if(cDeptCount=cNowCount) then
-	update clockdepall set allClockMorning ='true';
+	update clockdepall set allClockMorning ='true' WHERE dno=new.dno AND clockDay=nowDateFormat;
 	end if;
 	if(cDeptCount=cNowCountAfter) then
-	update clockdepall set allClockAfter ='true';
+	update clockdepall set allClockAfter ='true' WHERE dno=new.dno AND clockDay=nowDateFormat;
 	end if;
 else
 INSERT INTO `clockdepall`(`clockDay`, `dno`) VALUES (nowDateFormat,new.dno);
+	if(cDeptCount=cNowCount) then
+	update clockdepall set allClockMorning ='true' WHERE dno=new.dno AND clockDay=nowDateFormat;
+	end if;
+	if(cDeptCount=cNowCountAfter) then
+	update clockdepall set allClockAfter ='true' WHERE dno=new.dno AND clockDay=nowDateFormat;
+	end if;
 end if;
 
 end

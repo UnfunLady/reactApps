@@ -97,6 +97,7 @@ const EmployeIndexView: FC = () => {
         data.employeIndex.showDept = false;
         data.employeIndex.showLeave = false;
         data.employeIndex.showInfo = false;
+        data.employeIndex.showDeptDetail = false;
         setData({ ...data })
     }
     // 展示部门信息
@@ -118,7 +119,12 @@ const EmployeIndexView: FC = () => {
                 break;
         }
     }
-
+    // 展示部门详情信息
+    const showDeptDetail = (dept: any) => {
+        data.employeIndex.showDeptInfo = dept;
+        data.employeIndex.showDeptDetail = true;
+        setData({ ...data })
+    }
     return (
         <div style={{ margin: "30px" }}>
             <Header title='个人基本信息' explain='展示属于你自己本人的个人基本信息 以及所在的部分小组等信息' />
@@ -152,7 +158,7 @@ const EmployeIndexView: FC = () => {
                                                         </div>
                                                     </div>
                                                     <div className="action" >
-                                                        <Button type="link"  >查看部门详情</Button>
+                                                        <Button type="link" onClick={() => { showDeptDetail(dept) }} >查看具体详情</Button>
                                                     </div>
                                                 </Card>
                                             </Col>
@@ -168,7 +174,7 @@ const EmployeIndexView: FC = () => {
                                 <Button type='primary' icon={<ArrowLeftOutlined />} size="large" onClick={back}>返回主页</Button>
                                 <br />
                                 <br />
-                                <Table bordered columns={columns} dataSource={data.employeIndex.leaveInfo} />
+                                <Table pagination={false} bordered columns={columns} dataSource={data.employeIndex.leaveInfo} />
                             </>
                             : data.employeIndex.showInfo == true ? <>
                                 <Button type='primary' icon={<ArrowLeftOutlined />} size="large" onClick={back}>返回主页</Button>
@@ -218,6 +224,18 @@ const EmployeIndexView: FC = () => {
 
 
                 <br />
+                {/* 部门详情页 */}
+                <div style={{ display: data.employeIndex.showDeptDetail == true ? "block" : "none" }}>
+                    <Descriptions title="具体信息" bordered>
+                        <Descriptions.Item label="部门名"><Tag color='red'>{data.employeIndex.showDeptInfo.dname}</Tag> </Descriptions.Item>
+                        <Descriptions.Item label="部门总小组数"><Tag>{data.employeIndex.showDeptInfo.groupCount}</Tag></Descriptions.Item>
+                        <Descriptions.Item label="部门总人数"><Tag>{data.employeIndex.showDeptInfo.depallCount}</Tag></Descriptions.Item>
+                        <Descriptions.Item label="我所在小组名"><Tag color='red'>{data.employeIndex.showDeptInfo.deptname}</Tag></Descriptions.Item>
+                        <Descriptions.Item label="我所在小组总人数"><Tag>{data.employeIndex.showDeptInfo.count}</Tag></Descriptions.Item>
+                        <Descriptions.Item label="部门所在地"><Tag>{data.employeIndex.showDeptInfo.location}</Tag></Descriptions.Item>
+                        <Descriptions.Item label="部门职责" span={2}><Tag color='red'>{data.employeIndex.showDeptInfo.explain}</Tag></Descriptions.Item>
+                    </Descriptions>
+                </div>
             </Card>
         </div >
 

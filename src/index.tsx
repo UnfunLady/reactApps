@@ -1,4 +1,5 @@
 import ReactDOM from 'react-dom/client';
+
 import './index.css';
 import './assets/icon/iconfont.js'
 import './assets/icon/iconfont.css'
@@ -10,6 +11,9 @@ import locale from 'antd/lib/locale/zh_CN';
 import { persistor, store } from './store/store';
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
+import moment from 'moment'
+import 'moment/locale/zh-cn'
+moment.locale('zh-cn')
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );

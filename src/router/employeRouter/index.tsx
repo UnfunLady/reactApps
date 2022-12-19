@@ -5,6 +5,7 @@ import EmployeIndexView from '../../views/EmployeAllView/EmployeIndexView';
 import EmployeHomeView from '../../views/EmployeHomeView'
 import LoginView from '../../views/LoginView';
 import EmployeClockView from '../../views/EmployeAllView/EmployeClockView'
+import NotFound from '../../component/404NotFoundView';
 import EmployeLeaveView from '../../views/EmployeAllView/EmployeLeaveView';
 const eroutes: any = [
     // 重定向
@@ -79,6 +80,13 @@ const eroutes: any = [
         auth: false,
         show: false
     },
+    // 404
+    {
+        path: '*',
+        element: <NotFound />,
+        auth: false,
+        show: false
+    }
 ]
 
 export const breadcrumbNameMapEmploye: Record<string, string> = {
