@@ -1,0 +1,270 @@
+.box {
+    border-radius: 6px;
+    box-shadow: 1px 1px 16px #3e3f3f14;
+}
+
+.bigBox {
+    display: flex;
+    position: relative;
+    z-index: 999;
+
+    .calendar {
+        width: 430px;
+        height: 400px;
+        padding: 40px;
+        background-color: #fff;
+
+    }
+
+    .todayInfo {
+        margin-left: 40px;
+        width: 380px;
+        height: 400px;
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        background-color: #fff;
+
+        .clockContent {
+            width: 100%;
+            height: 60px;
+            display: flex;
+            align-items: center;
+
+            .morning {
+                color: #59adf8;
+            }
+
+            .after {
+                color: #12aab5;
+            }
+
+            .icon {
+                width: 70px;
+                height: 60px;
+                line-height: 60px;
+            }
+
+            border-bottom: 1px solid rgba(230, 228, 228, 0.555);
+
+            .detailInfo {
+                display: flex;
+                flex-direction: column;
+                width: 215px;
+
+                .topTitle {
+
+                    display: flex;
+                    align-items: center;
+
+                    .tnum {
+                        font-size: 20px;
+                        margin: 0;
+                    }
+
+                }
+
+                .explain {
+                    color: #bcbbbb;
+                    font-size: 12px;
+
+                    .explainNum {
+                        margin: 0;
+                        font-size: 12px;
+
+                    }
+                }
+            }
+
+            .config {
+
+                color: #59adf8;
+                cursor: pointer;
+            }
+        }
+
+        .todayClockNumber {
+            display: flex;
+            border-bottom: 1px solid rgba(230, 228, 228, 0.555);
+            padding: 8px 0 8px 0;
+            height: 60px;
+            align-items: center;
+            justify-content: center;
+
+
+
+            .contentInfo {
+                display: flex;
+                flex-direction: column;
+                flex: 1;
+
+
+
+                .titleNumber {
+                    color: #1ba1e2;
+                    font-size: 26px;
+                }
+
+                .explain {
+                    color: #bcbbbb;
+                    font-size: 12px;
+
+                }
+
+                .after {
+                    color: #febe0b;
+                }
+
+            }
+
+            .icon {
+                width: 60px;
+                height: 60px;
+                text-align: center;
+                line-height: 60px;
+
+            }
+        }
+
+
+    }
+
+    .chartBox {
+        flex: 1;
+        margin-left: 40px;
+        background-color: #fff;
+    }
+}
+
+.allClockInfo {
+    display: flex;
+
+    margin: 30px auto;
+    border-radius: 8px;
+    background-color: #fff;
+    position: relative;
+    z-index: 99;
+
+
+    .leftBox {
+        background-color: #fff;
+        width: 460px;
+        text-align: center;
+
+
+        .detailBox {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+
+            .cardInfo {
+                display: flex;
+                width: 200px;
+                margin-top: 30px;
+                height: 100px;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 1px 1px 6px 2px #3e3f3f0f;
+            }
+
+            .icon {
+                width: 40%;
+                height: 60px;
+            }
+
+            .rightInfo {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                .topTitle {
+                    color: #888a88c8;
+                    font-size: 18px;
+                }
+
+                .topNumber {
+                    color: #1ba1e2;
+                    font-size: 18px;
+                }
+            }
+        }
+    }
+
+
+
+    .rightBox {
+        background-color: #fff;
+        flex: 1;
+        margin-left: 40px;
+        box-shadow: 1px 1px 6px 2px #6a6b6b0f;
+        border: 1px solid #edededa1;
+        display: flex;
+        flex-direction: column;
+        height: 505px;
+
+        .topInfo {
+            display: flex;
+            width: 100%;
+            border-bottom: 1px solid #ededed;
+            height: 120px;
+            margin: 0 30px 0;
+            align-items: center;
+
+            .leftBox {
+
+                display: flex;
+                flex-direction: column;
+
+                text-align: left;
+                width: 60%;
+
+                .topTitle {
+                    font-size: 30px;
+                    color: #232323;
+                    letter-spacing: 2px;
+                    font-weight: bold;
+                }
+
+                .explain {
+                    color: #a8a8a8;
+                    font-size: 16px;
+                    letter-spacing: 1px;
+                }
+            }
+
+            .tRightBox {
+                margin-left: 100px;
+                text-align: center;
+
+                .explainNumber {
+                    display: flex;
+                    flex-direction: column;
+
+                    .topTitle {
+                        color: #1ba1e2;
+
+                        .topNum {
+                            font-weight: bold;
+                            font-size: 40px;
+                        }
+
+
+                    }
+                }
+
+                .explain {
+                    color: #a8a8a8;
+                    font-size: 16px;
+                    letter-spacing: 1px;
+                }
+            }
+        }
+
+        .mainInfo {
+            
+         
+            margin: 0 30px 0;
+        }
+    }
+}

@@ -11,7 +11,7 @@
  Target Server Version : 80029
  File Encoding         : 65001
 
- Date: 19/12/2022 18:43:09
+ Date: 20/12/2022 17:42:12
 */
 
 SET NAMES utf8mb4;
@@ -35,6 +35,9 @@ INSERT INTO `clockdepall` VALUES ('2022-12-14', 39, 'true', 'true');
 INSERT INTO `clockdepall` VALUES ('2022-12-13', 39, 'true', 'false');
 INSERT INTO `clockdepall` VALUES ('2022-12-19', 1, 'false', 'false');
 INSERT INTO `clockdepall` VALUES ('2022-12-19', 16, 'false', 'false');
+INSERT INTO `clockdepall` VALUES ('2022-12-20', 1, 'false', 'false');
+INSERT INTO `clockdepall` VALUES ('2022-12-20', 2, 'false', 'false');
+INSERT INTO `clockdepall` VALUES ('2022-12-20', 39, 'true', 'false');
 
 -- ----------------------------
 -- Table structure for clockemploye
@@ -60,6 +63,9 @@ INSERT INTO `clockemploye` VALUES (1, 1, 1, '鲁潜223', '上午', '2022-12-19 1
 INSERT INTO `clockemploye` VALUES (16, 76, 1, '鲁潜223', '上午', '2022-12-19 18:35:21', NULL);
 INSERT INTO `clockemploye` VALUES (1, 1, 1, '鲁潜223', '下午', '2022-12-19 18:35:26', NULL);
 INSERT INTO `clockemploye` VALUES (16, 76, 1, '鲁潜223', '下午', '2022-12-19 18:35:26', NULL);
+INSERT INTO `clockemploye` VALUES (1, 1, 2, '邵金鑫', '上午', '2022-12-20 10:12:27', NULL);
+INSERT INTO `clockemploye` VALUES (2, 5, 2, '邵金鑫', '上午', '2022-12-20 10:12:27', NULL);
+INSERT INTO `clockemploye` VALUES (39, 112, 2, '邵金鑫', '上午', '2022-12-20 10:12:27', NULL);
 
 -- ----------------------------
 -- Table structure for covidinfo
@@ -1064,13 +1070,14 @@ CREATE TABLE `eusers`  (
   `nickname` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '普通员工',
   `islock` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '0',
   `level` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '2',
-  `avatar` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
+  `avatar` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of eusers
 -- ----------------------------
 INSERT INTO `eusers` VALUES ('1', '88888888', '普通员工', '0', '2', '');
+INSERT INTO `eusers` VALUES ('2', '88888888', '普通员工', '0', '2', ' ');
 
 -- ----------------------------
 -- Table structure for leaverequest
