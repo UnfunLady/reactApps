@@ -13,7 +13,7 @@ const EmployeIndexView: FC = () => {
         return state.user.userList.userInfo || {}
     })
     // 获取该用户所有部门id和小组id
-
+    
     // 获取当前时间
     const [nowTime, setTime] = useState(moment().format("HH:mm:ss"))
     // 获取当前小时
@@ -44,19 +44,28 @@ const EmployeIndexView: FC = () => {
         }
     }, [])
     // 插入打卡表
-    const saveClock = (info: any) => {
-        // 获取员工名字
-        saveClockInfo({
-            dno: info.dno,
-            deptid: info.id,
-            employeno: userInfo.username,
-            employename: info.employename,
-            type: !isClockMorning && !isClockAfter ? "上午" : "下午",
-            clockTime: moment().format("YYYY-MM-DD HH:mm:ss")
+    const saveClock = (res: any) => {
+        let postData: any = []
+        res.map((info: any) => {
+            //    插入打卡表
+            // 获取员工名字
+            // 容易死锁
+            postData.push({
+                dno: info.dno,
+                deptid: info.id,
+                employeno: userInfo.username,
+                employename: info.employename,
+                type: !isClockMorning && !isClockAfter ? "上午" : "下午",
+                clockTime: moment().format("YYYY-MM-DD HH:mm:ss")
+            })
         })
+        saveClockInfo(postData,ClockInfo)
+       
+
     }
     // 打卡
     const clock = async () => {
+
         if (isClockAfter && isClockMorning) {
             message.warning("今日已完成全部打卡！")
         } else {
@@ -67,11 +76,7 @@ const EmployeIndexView: FC = () => {
                     employeno: userInfo.username
                 });
                 if (res != undefined) {
-                    res.map((info: any) => {
-                        //    插入打卡表
-                        saveClock(info)
-                    })
-                    ClockInfo()
+                    saveClock(res)
                 }
             } else if (isClockMorning && nowHour < 18) {
                 message.warning("还未到下班时间！请继续努力工作哦~")

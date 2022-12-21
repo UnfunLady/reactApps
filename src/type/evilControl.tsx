@@ -108,7 +108,7 @@ export const chart = (dom: HTMLElement | null, data: chinaInfoInit, setData: Fun
             },
             legend: {
                 data: ['总数', '相较昨日'],
-                top:"10px"
+                top: "10px"
             },
             xAxis: [
                 {
@@ -164,7 +164,7 @@ export const chart = (dom: HTMLElement | null, data: chinaInfoInit, setData: Fun
                     },
                     tooltip: {
                         valueFormatter: function (value: any) {
-                            return value > 0 ? '+' + value + '人' : value + '人';
+                            return value ? (value > 0 ? '+' + value + '人' : value + '人') : '0';
                         }
                     },
                     data: data.chinaInfo.echarts.yData.moreData

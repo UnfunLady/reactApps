@@ -279,97 +279,162 @@ export const getWhichDeptClock = async (postData: object) => {
         return undefined;
     }
 }
-
-export const saveClockInfo = async (postData: object) => {
+// 保存打卡信息
+export const saveClockInfo = async (postData: object, ClockInfo: Function) => {
     const res: any = await attendanceApi.saveClockInfo(postData);
     if (res.code === 200) {
         message.success("打卡成功!")
+        ClockInfo()
+
     } else {
         message.error("打卡失败!")
 
     }
 }
+interface todayClockData {
+    // 今日早上打卡部门信息
+    todayMorningInfo: [],
+    // 今日下午打卡部门信息
+    todayAfterInfo: [],
+    // 今日全部打卡信息
+    allClockInfo: [],
+    // 今日总打卡数
+    allClockCount: number,
+    // 全部部门数
+    allDeptCount: number,
+    // 早上打卡部门数
+    deptMorningCount: number,
+    // 下午打卡部门数
+    deptAfterCount: number,
+    // 今日迟到打卡人数
+    delayCount: number,
+    // 迟到比率
+    delayPercentage: string,
+    // 基本信息
+    baseInfo: {
+        deptCount: number,
+        depallCount: number,
+        employeCount: number,
+        monthClockCount: number,
+        monthClockDelayCount: number,
+        monthClockPercentage: number
+    },
+    clockPage: number,
+    clockSize: number,
+}
+export class todayInfoInit {
+    data: todayClockData = {
+        todayMorningInfo: [],
+        todayAfterInfo: [],
+        allClockInfo: [],
+        allClockCount: 0,
+        allDeptCount: 0,
+        deptMorningCount: 0,
+        deptAfterCount: 0,
+        delayCount: 0,
+        delayPercentage: '0%',
+        baseInfo: {
+            deptCount: 0,
+            depallCount: 0,
+            employeCount: 0,
+            monthClockCount: 0,
+            monthClockDelayCount: 0,
+            monthClockPercentage: 0
+        },
+        clockPage: 1,
+        clockSize: 6,
+    }
+}
+// 获取今日打卡信息
+export const getClockInfoToday = async (data: todayInfoInit, setData: Function, postData: object) => {
+    const res: any = await attendanceApi.reqGetClockInfo(postData);
+    if (res.code === 200) {
+        data.data.todayMorningInfo = res.todayMorningInfo;
+        data.data.allClockCount = res.AllClockCount;
+        data.data.deptMorningCount = res.DeptMorningCount;
+        data.data.deptAfterCount = res.DeptAfterCount;
+        data.data.allDeptCount = res.AllDeptCount;
+        data.data.allClockInfo = res.todayAllInfo;
+        data.data.todayAfterInfo = res.todayAfterInfo;
+        data.data.delayCount = res.delayCount;
+        data.data.delayPercentage = res.delayPercentage;
+        setData({ ...data })
+    }
+}
+// 获取基本信息
+export const getBaseInfoClock = async (data: todayInfoInit, setData: Function) => {
+    const res: any = await attendanceApi.reqGetBaseInfo();
+    if (res.code === 200) {
+        data.data.baseInfo = {
+            deptCount: res.deptCount,
+            depallCount: res.depallCount,
+            employeCount: res.employeCount,
+            monthClockCount: res.monthClockCount,
+            monthClockDelayCount: res.monthClockDelayCount,
+            monthClockPercentage: res.monthClockPercentage
+        }
+        setData({ ...data })
+    }
+}
 export const initChartsOne = async (container: HTMLElement) => {
-    var colorList = ['#73DDFF', '#73ACFF', '#FDD56A', '#FDB36A', '#FD866A', '#9E87FF', '#58D5FF']
-    const option = {
-        title: {
-            text: '总数',
-            x: 'center',
-            y: 'center',
+    const res: any = await attendanceApi.reqGetBaseChartsInfo();
+    if (res.code === 200) {
+        const option = {
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                },
+            },
 
-            textStyle: {
-                fontSize: 20
-            }
-        },
-        tooltip: {
-            trigger: 'item'
-        },
-        series: [{
-            type: 'pie',
-            center: ['50%', '50%'],
-            radius: ['34%', '80%'],
-            clockwise: true,
-            avoidLabelOverlap: true,
-            hoverOffset: 15,
-            itemStyle: {
-                normal: {
-                    color: function (params: any) {
-                        return colorList[params.dataIndex]
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true,
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    data: res.titleList,
+                    axisTick: {
+                        alignWithLabel: true
                     }
                 }
-            },
-            label: {
-                show: true,
-                position: 'outside',
-                formatter: '{a|{b}：{d}%}\n{hr|}',
-                rich: {
-                    hr: {
-                        backgroundColor: 't',
-                        borderRadius: 3,
-                        width: 3,
-                        height: 3,
-                        padding: [3, 3, 0, -12]
-                    },
-                    a: {
-                        padding: [-30, 15, -20, 15]
-                    }
-                }
-            },
-            labelLine: {
-                normal: {
-                    length: 20,
-                    length2: 30,
-                    lineStyle: {
-                        width: 1
-                    }
-                }
-            },
-            data: [{
-                'name': '一月',
-                'value': 1.45
-            }, {
-                'name': '二月',
-                'value': 2.93
-            }, {
-                'name': '三月',
-                'value': 3.15
-            }, {
-                'name': '四月',
-                'value': 4.78
-            }, {
-                'name': '五月',
-                'value': 5.93
-            }, {
-                'name': '六月',
-                'value': 5.73
-            }
             ],
-        }]
-    };
-    //初始化echarts实例
-    var myChart = echarts.init(container);
-    myChart.setOption(option);
-    window.onresize = function () {
-        myChart.resize();
-    };
+            yAxis: [
+                {
+                    type: 'value',
+
+                }
+            ],
+            series: [
+                {
+                    name: '数量',
+                    type: 'bar',
+                    barWidth: '40%',
+                    data: res.dataList,
+                    itemStyle: {
+                        //这里是重点
+                        color: function (params: any) {
+                            //注意，如果颜色太少的话，后面颜色不会自动循环，最好多定义几个颜色
+                            var colorList = ['#4c7daf', '#4c7daf', '#144170', '#285b90', '#285b90', '#0d7cab', '#ca8622'];
+                            return colorList[params.dataIndex]
+                        }
+
+                    }
+                }
+            ]
+        };
+        //初始化echarts实例
+        var myChart = echarts.init(container);
+        myChart.setOption(option);
+        window.onresize = function () {
+            myChart.resize();
+        };
+    } else {
+        message.error("获取图表数据失败")
+    }
+
+
 }

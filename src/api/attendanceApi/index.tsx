@@ -34,9 +34,22 @@ const getEmployeLeaveInfo = (data: object) => {
 const isClockM = (data: object) => {
     return request({ url: '/api/clockMorning', method: 'post', data })
 }
-const saveClockInfo=(data:object)=>{
+const saveClockInfo = (data: object) => {
     return request({ url: '/api/saveclock', method: 'post', data })
 }
+// 获取今日打卡信息
+const reqGetClockInfo = (postData: object) => {
+    return request({ url: '/api/getClockInfo', method: 'get', params: postData })
+}
+// 获取基本信息
+const reqGetBaseInfo = () => {
+    return request({ url: '/api/getBaseInfo', method: 'get' })
+}
+// 获取echarts数据
+const reqGetBaseChartsInfo = () => {
+    return request({ url: '/api/getBaseChartsInfo', method: 'get' })
+}
+
 export default {
     reqGetEmployeLeavePage,
     reqUpdateEmployeLeave,
@@ -47,5 +60,8 @@ export default {
     reqAddLeave,
     getEmployeLeaveInfo,
     isClockM,
-    saveClockInfo
+    saveClockInfo,
+    reqGetClockInfo,
+    reqGetBaseInfo,
+    reqGetBaseChartsInfo
 }

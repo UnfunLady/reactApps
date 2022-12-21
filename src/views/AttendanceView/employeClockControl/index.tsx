@@ -1,49 +1,122 @@
-import { Avatar, Calendar, Card, Image, Tabs } from 'antd';
+import { Avatar, Calendar, Card, Image, Pagination, Tabs, Tag } from 'antd';
 import { FC, useState, useEffect } from 'react'
-import { initChartsOne } from '../../../type/attendance';
+import { initChartsOne, todayInfoInit, getBaseInfoClock, getClockInfoToday } from '../../../type/attendance';
 import './index.less'
 import Table, { ColumnsType } from 'antd/lib/table';
 import { DataType } from '../../../type/employeInfo';
+import CountUp from "react-countup";
+import moment from 'moment';
 const Index: FC = () => {
+    const [data, setData] = useState(new todayInfoInit());
+    // 获取今日打卡信息
+    const getBaseInfo = () => {
+        getClockInfoToday(data, setData, { page: data.data.clockPage, size: data.data.clockSize });
+        getBaseInfoClock(data, setData);
+
+    }
+    // 初始化echarts
     const initChart = () => {
         initChartsOne(document.querySelector(".chartBox") as HTMLElement)
     }
     useEffect(() => {
+        getBaseInfo()
         initChart()
     }, [])
     const columns: ColumnsType<DataType> = [
         {
             title: '员工',
-            dataIndex: 'name',
-            key: 'name',
+            key: 'employename',
+            dataIndex: 'employename',
             align: 'center',
-
         },
         {
             title: '员工号',
-            dataIndex: 'age',
-            key: 'age',
+            dataIndex: 'employeno',
+            key: 'employeno',
             align: 'center',
         },
         {
             title: '部门号',
-            key: 'action',
+            key: 'dno',
+            dataIndex: 'dno',
             align: 'center',
         },
         {
             title: '考勤情况',
-            dataIndex: 'address',
-            key: 'address',
+            key: 'typeInfo',
             align: 'center',
+            render: (_, record: any) => {
+                return <Tag color={Number(moment(record.clockTime).format('hh')) > 9 ? '#ee6666' : 'green'}>{Number(moment(record.clockTime).format('hh')) > 9 ? '迟到' : '正常'}</Tag>
+            }
+        },
+        {
+            title: '类型',
+            key: 'type',
+            align: 'center',
+            render: (_, record: any) => {
+                return <Tag color={record.type == "上午" ? '#79a0c9' : '#144170'}>{record.type == "上午" ? '上班卡' : '下班卡'}</Tag>
+            }
         },
         {
             title: '打卡时间',
-            key: 'tags',
-            dataIndex: 'tags',
+            key: 'clockTime',
             align: 'center',
+            render: (_, record: any) => {
+                return <Tag color='#79a0c9'>{moment(record.clockTime).format('yyyy-MM-DD hh:mm:ss')}</Tag>
+            }
         },
 
     ];
+    // 修改页码
+    const changePage = (page: number, pageSize: number) => {
+        data.data.clockPage = page;
+        data.data.clockSize = pageSize;
+        setData({ ...data })
+        getClockInfoToday(data, setData, { page: data.data.clockPage, size: data.data.clockSize });
+    }
+    // tabs item
+    const tabItems =
+        [
+            {
+                label: '全部',
+                key: '1',
+                children:
+                    <>
+                        <Table pagination={false} columns={columns} rowKey={(record) => { return Math.random() }} bordered size='small' dataSource={data.data.allClockInfo} />
+                        <br />
+                        <div style={{ float: 'right' }}>
+                            <Pagination
+                                total={data.data.allClockCount}
+                                size="default"
+                                showSizeChanger
+                                onChange={changePage}
+                                showQuickJumper
+                                defaultPageSize={6}
+                                defaultCurrent={1}
+                                pageSizeOptions={[6]}
+                                showTotal={(total) => `今日共 ${total} 打卡信息`}
+                            />
+                        </div>
+                    </>,
+
+            },
+            {
+                label: '出勤',
+                key: '2',
+                children: '出勤',
+
+            },
+            {
+                label: '迟到',
+                key: '3',
+                children: '迟到',
+            },
+            {
+                label: '请假',
+                key: '4',
+                children: '请假',
+            },
+        ]
     return (
         <div style={{ margin: "25px" }}>
             {/* <Header title='员工打卡管理' explain='查看员工的上班打卡信息以及部门总体情况' /> */}
@@ -60,10 +133,10 @@ const Index: FC = () => {
                             </div>
                             <div className='detailInfo'>
                                 <div className='topTitle morning'>
-                                    上午打卡部门数：<span className='tnum'>3</span>
+                                    上午打卡部门数：<span className='tnum'> <CountUp start={0} end={data.data.deptMorningCount} separator="," duration={1} /></span>
                                 </div>
                                 <div className='explain'>
-                                    总部门数: <span className='explainNum'>7</span>
+                                    总部门数: <span className='explainNum'> <CountUp start={0} end={data.data.allDeptCount} separator="," duration={1} /></span>
                                 </div>
                             </div>
                             <div className='config'>
@@ -77,10 +150,10 @@ const Index: FC = () => {
                             </div>
                             <div className='detailInfo'>
                                 <div className='topTitle after'>
-                                    下午打卡部门数：<span className='tnum'>3</span>
+                                    下午打卡部门数：<span className='tnum'> <CountUp start={0} end={data.data.deptAfterCount} separator="," duration={1} /></span>
                                 </div>
                                 <div className='explain'>
-                                    总部门数: <span className='explainNum'>7</span>
+                                    总部门数: <span className='explainNum'><CountUp start={0} end={data.data.allDeptCount} separator="," duration={1} /></span>
                                 </div>
                             </div>
                             <div className='config'>
@@ -89,7 +162,7 @@ const Index: FC = () => {
                         </div>
                         <div className='todayClockNumber'>
                             <div className='contentInfo'>
-                                <div className='titleNumber'>10</div>
+                                <div className='titleNumber'><CountUp start={0} end={data.data.allClockCount} separator="," duration={1} /></div>
                                 <div className='explain'>今日打卡次数</div>
                             </div>
                             <div className='icon'>
@@ -102,7 +175,7 @@ const Index: FC = () => {
                         </div>
                         <div className='todayClockNumber'>
                             <div className='contentInfo'>
-                                <div className='titleNumber after'>10</div>
+                                <div className='titleNumber after'><CountUp start={0} end={data.data.delayCount} separator="," duration={1} /></div>
                                 <div className='explain'>今日打卡迟到次数</div>
                             </div>
                             <div className='icon'>
@@ -119,7 +192,6 @@ const Index: FC = () => {
                 </div>
 
                 <div className='allClockInfo'>
-
                     <div className='leftBox'>
                         <span style={{ fontWeight: "bold", color: "#8c8c8c" }}>基本信息</span>
                         <div className='detailBox'>
@@ -133,7 +205,7 @@ const Index: FC = () => {
                                 </div>
                                 <div className='rightInfo'>
                                     <div className='topTitle'>部门数量</div>
-                                    <div className='topNumber'>4</div>
+                                    <div className='topNumber'><CountUp start={0} end={data.data.baseInfo.depallCount} separator="," duration={1} /></div>
                                 </div>
 
                             </div>
@@ -142,12 +214,12 @@ const Index: FC = () => {
                                     <Image
                                         width={45}
                                         preview={false}
-                                        src={require("../../../assets/imges/dept.png")}
+                                        src={require("../../../assets/imges/group.png")}
                                     />
                                 </div>
                                 <div className='rightInfo'>
-                                    <div className='topTitle'>部门数量</div>
-                                    <div className='topNumber'>4</div>
+                                    <div className='topTitle'>小组数量</div>
+                                    <div className='topNumber'><CountUp start={0} end={data.data.baseInfo.deptCount} separator="," duration={1} /></div>
                                 </div>
                             </div>
                             <div className='cardInfo'>
@@ -155,12 +227,12 @@ const Index: FC = () => {
                                     <Image
                                         width={45}
                                         preview={false}
-                                        src={require("../../../assets/imges/dept.png")}
+                                        src={require("../../../assets/imges/employe.png")}
                                     />
                                 </div>
                                 <div className='rightInfo'>
-                                    <div className='topTitle'>部门数量</div>
-                                    <div className='topNumber'>4</div>
+                                    <div className='topTitle'>员工数量</div>
+                                    <div className='topNumber'><CountUp start={0} end={data.data.baseInfo.employeCount} separator="," duration={1} /></div>
                                 </div>
                             </div>
                             <div className='cardInfo'>
@@ -168,12 +240,12 @@ const Index: FC = () => {
                                     <Image
                                         width={45}
                                         preview={false}
-                                        src={require("../../../assets/imges/dept.png")}
+                                        src={require("../../../assets/imges/mounthCount.png")}
                                     />
                                 </div>
                                 <div className='rightInfo'>
-                                    <div className='topTitle'>部门数量</div>
-                                    <div className='topNumber'>4</div>
+                                    <div className='topTitle'>月打卡数</div>
+                                    <div className='topNumber'><CountUp start={0} end={data.data.baseInfo.monthClockCount} separator="," duration={1} /></div>
                                 </div>
                             </div>
                             <div className='cardInfo'>
@@ -181,12 +253,12 @@ const Index: FC = () => {
                                     <Image
                                         width={45}
                                         preview={false}
-                                        src={require("../../../assets/imges/dept.png")}
+                                        src={require("../../../assets/imges/delayClock.png")}
                                     />
                                 </div>
                                 <div className='rightInfo'>
-                                    <div className='topTitle'>部门数量</div>
-                                    <div className='topNumber'>4</div>
+                                    <div className='topTitle'>月迟到数</div>
+                                    <div className='topNumber'><CountUp start={0} end={data.data.baseInfo.monthClockDelayCount} separator="," duration={1} /></div>
                                 </div>
                             </div>
                             <div className='cardInfo'>
@@ -194,12 +266,12 @@ const Index: FC = () => {
                                     <Image
                                         width={45}
                                         preview={false}
-                                        src={require("../../../assets/imges/dept.png")}
+                                        src={require("../../../assets/imges/percentage.png")}
                                     />
                                 </div>
                                 <div className='rightInfo'>
-                                    <div className='topTitle'>部门数量</div>
-                                    <div className='topNumber'>4</div>
+                                    <div className='topTitle'>迟到比率</div>
+                                    <div className='topNumber'>{data.data.baseInfo.monthClockPercentage}</div>
                                 </div>
                             </div>
                         </div>
@@ -208,37 +280,25 @@ const Index: FC = () => {
                     <div className='rightBox'>
                         <div className='topInfo'>
                             <div className='leftBox'>
-                                <div className='topTitle'>2022-12-20考勤</div>
+                                <div className='topTitle'>{moment().format("YYYY-MM-DD")}考勤</div>
                                 <div className='explain'>下面展示的是当天所有考勤的员工信息与状态</div>
                             </div>
                             <div className='tRightBox'>
                                 <div className='explainNumber'>
-                                    <div className='topTitle'><span className='topNum'>20</span> 人</div>
+                                    <div className='topTitle'><span className='topNum'><CountUp start={0} end={data.data.allClockCount} separator="," duration={1} /></span> 人</div>
                                     <div className='explain'>出勤</div>
                                 </div>
                             </div>
                             <div className='tRightBox'>
                                 <div className='explainNumber'>
-                                    <div className='topTitle'><span className='topNum'>100</span> %</div>
+                                    <div className='topTitle'><span className='topNum'>{data.data.delayPercentage}</span> </div>
                                     <div className='explain'>迟到率</div>
                                 </div>
                             </div>
                         </div>
                         <div className='mainInfo'>
-                            <Tabs>
-                                <Tabs.TabPane tab="全部" key="item-1">
-                                    <Table columns={columns} bordered  size='small'/>
-                                </Tabs.TabPane>
-                                <Tabs.TabPane tab="出勤" key="item-2">
-                                    出勤
-                                </Tabs.TabPane>
-                                <Tabs.TabPane tab="迟到" key="item-3">
-                                    迟到
-                                </Tabs.TabPane>
-                                <Tabs.TabPane tab="请假" key="item-4">
-                                    请假
-                                </Tabs.TabPane>
-                            </Tabs>
+                            <Tabs items={tabItems} />
+
                         </div>
                     </div>
                 </div>
