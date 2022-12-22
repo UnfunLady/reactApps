@@ -6,8 +6,10 @@ import Table, { ColumnsType } from 'antd/lib/table';
 import { DataType } from '../../../type/employeInfo';
 import CountUp from "react-countup";
 import moment from 'moment';
+import { useNavigate } from 'react-router-dom';
 const Index: FC = () => {
     const [data, setData] = useState(new todayInfoInit());
+    const navigate = useNavigate();
     // 获取今日打卡信息
     const getBaseInfo = () => {
         getClockInfoToday(data, setData, { page: data.data.clockPage, size: data.data.clockSize });
@@ -46,7 +48,7 @@ const Index: FC = () => {
             key: 'typeInfo',
             align: 'center',
             render: (_, record: any) => {
-                return <Tag color={Number(moment(record.clockTime).format('hh')) > 9 ? '#ee6666' : 'green'}>{Number(moment(record.clockTime).format('hh')) > 9 ? '迟到' : '正常'}</Tag>
+                return <Tag color={Number(moment(record.clockTime).format('HH')) > 9 ? '#ee6666' : 'green'}>{Number(moment(record.clockTime).format('HH')) > 9 ? '迟到' : '正常'}</Tag>
             }
         },
         {
@@ -62,7 +64,7 @@ const Index: FC = () => {
             key: 'clockTime',
             align: 'center',
             render: (_, record: any) => {
-                return <Tag color='#79a0c9'>{moment(record.clockTime).format('yyyy-MM-DD hh:mm:ss')}</Tag>
+                return <Tag color='#79a0c9'>{moment(record.clockTime).format('yyyy-MM-DD HH:mm:ss')}</Tag>
             }
         },
 
@@ -117,6 +119,17 @@ const Index: FC = () => {
                 children: '请假',
             },
         ]
+    // 展示部门打卡信息
+    const showClockDeptInfo = (type: string) => {
+        switch (type) {
+            case "morning":
+                navigate("/homeView/attendanceView/showClockDeptInfo", { state: { type: type, deptData: data.data.todayMorningInfo } })
+                break;
+            case "after":
+                navigate("/homeView/attendanceView/showClockDeptInfo", { state: { type: type, deptData: data.data.todayAfterInfo } })
+                break;
+        }
+    }
     return (
         <div style={{ margin: "25px" }}>
             {/* <Header title='员工打卡管理' explain='查看员工的上班打卡信息以及部门总体情况' /> */}
@@ -139,7 +152,9 @@ const Index: FC = () => {
                                     总部门数: <span className='explainNum'> <CountUp start={0} end={data.data.allDeptCount} separator="," duration={1} /></span>
                                 </div>
                             </div>
-                            <div className='config'>
+                            <div className='config' onClick={() => {
+                                showClockDeptInfo('morning')
+                            }}>
                                 ...
                             </div>
                         </div>
@@ -156,7 +171,9 @@ const Index: FC = () => {
                                     总部门数: <span className='explainNum'><CountUp start={0} end={data.data.allDeptCount} separator="," duration={1} /></span>
                                 </div>
                             </div>
-                            <div className='config'>
+                            <div className='config' onClick={() => {
+                                showClockDeptInfo('after')
+                            }}>
                                 ...
                             </div>
                         </div>
@@ -190,7 +207,6 @@ const Index: FC = () => {
                     <div className='chartBox box'>
                     </div>
                 </div>
-
                 <div className='allClockInfo'>
                     <div className='leftBox'>
                         <span style={{ fontWeight: "bold", color: "#8c8c8c" }}>基本信息</span>

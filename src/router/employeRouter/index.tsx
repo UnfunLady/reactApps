@@ -7,6 +7,7 @@ import LoginView from '../../views/LoginView';
 import EmployeClockView from '../../views/EmployeAllView/EmployeClockView'
 import NotFound from '../../component/404NotFoundView';
 import EmployeLeaveView from '../../views/EmployeAllView/EmployeLeaveView';
+
 const eroutes: any = [
     // 重定向
     {
@@ -54,6 +55,7 @@ const eroutes: any = [
                 icon: <RightSquareOutlined />,
                 show: true,
                 auth: true,
+          
             },
 
             {
@@ -94,7 +96,7 @@ export const breadcrumbNameMapEmploye: Record<string, string> = {
     '/homeView': '首页',
     '/homeView/mainView': '我的主要信息',
     '/homeView/employeClockView': '上班打卡',
-    '/homeView/employeLeaveView': '请假申请'
+    '/homeView/employeLeaveView': '请假申请',
 };
 
 export default eroutes;

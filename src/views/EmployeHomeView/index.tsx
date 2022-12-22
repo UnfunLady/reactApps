@@ -368,7 +368,7 @@ const MainView = (props: Props) => {
                                 <Dropdown overlay={menu}>
                                     <div className='userInfo'>
                                         {
-                                            userInfo.avatar ? <Avatar src={userInfo.avatar} /> : <Avatar icon={<UserOutlined />} />
+                                            <Avatar icon={<UserOutlined />} />
                                         }
                                         <span>{userInfo.nickname}</span>
                                         <DownOutlined />

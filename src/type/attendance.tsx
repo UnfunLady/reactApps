@@ -438,3 +438,18 @@ export const initChartsOne = async (container: HTMLElement) => {
 
 
 }
+
+// 显示部门信息
+
+interface showDeptType {
+    showMorningDeptInfo: boolean,
+    showAfterDeptInfo: boolean,
+    deptData: []
+}
+export class showDeptInit {
+    data: showDeptType = {
+        showMorningDeptInfo: false,
+        showAfterDeptInfo: false,
+        deptData: []
+    }
+}

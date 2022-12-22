@@ -1,5 +1,5 @@
 import { Navigate, } from 'react-router-dom'
-import { MenuOutlined, SolutionOutlined, IssuesCloseOutlined, FileProtectOutlined, HighlightOutlined, UserSwitchOutlined, SafetyOutlined, AreaChartOutlined, InsuranceOutlined, HomeOutlined, BlockOutlined, DatabaseOutlined, MoneyCollectOutlined, AppstoreOutlined, UserOutlined, TeamOutlined, DeleteOutlined } from '@ant-design/icons';
+import { MenuOutlined, SolutionOutlined, RightSquareOutlined, IssuesCloseOutlined, FileProtectOutlined, HighlightOutlined, UserSwitchOutlined, SafetyOutlined, AreaChartOutlined, InsuranceOutlined, HomeOutlined, BlockOutlined, DatabaseOutlined, MoneyCollectOutlined, AppstoreOutlined, UserOutlined, TeamOutlined, DeleteOutlined } from '@ant-design/icons';
 import HomeView from '../views/HomeView'
 import MainView from '../views/MainView'
 import EmployeView from '../views/EmployeView'
@@ -26,6 +26,7 @@ import RecoverGroup from '../views/RecoverGroup';
 import Attendance from '../views/AttendanceView'
 import EmployeAttendance from '../views/AttendanceView/employeAttendanceControl'
 import EmployeClock from '../views/AttendanceView/employeClockControl'
+import ShowClockDeptInfo from '../views/AttendanceView/showClockDeptInfo'
 const routes: any = [
     //重定向
     {
@@ -344,7 +345,19 @@ const routes: any = [
                         breadcrumbName: '打卡出勤情况',
                         show: true,
                         auth: true,
+                    },
+                    {
+                        path: 'showClockDeptInfo',
+                        absolutePath: '/homeView/attendanceView/showClockDeptInfo',
+                        element: <ShowClockDeptInfo />,
+                        title: '打卡部门信息',
+                        breadcrumbName: '打卡部门信息',
+                        icon: <RightSquareOutlined />,
+                        show: false,
+                        auth: true,
+
                     }
+
                 ]
             },
             {
@@ -416,6 +429,7 @@ export const breadcrumbNameMap: Record<string, string> = {
     '/homeView/recoverGroup': '恢复小组',
     '/homeView/attendanceView': '考勤管理',
     '/homeView/attendanceView/employeAttendance': '员工请假审批',
-    '/homeView/attendanceView/employeClock': '打卡出勤信息'
+    '/homeView/attendanceView/employeClock': '打卡出勤信息',
+    '/homeView/attendanceView/showClockDeptInfo': '打卡部门信息'
 };
 export default routes
