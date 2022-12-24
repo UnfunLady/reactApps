@@ -1,9 +1,11 @@
 import { FC, useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { showDeptInit } from '../../../type/attendance'
+import { showDeptInit, getTodayEmployeClockInfo } from '../../../type/attendance'
 import './index.less'
-import { Avatar, Card, Col, Empty, Row, Tag } from 'antd'
-
+import { Avatar, Col, Drawer, Empty, Pagination, Row, Table, Tag } from 'antd'
+import { ColumnsType } from 'antd/lib/table'
+import { DataType } from '../../../type/employeInfo'
+import moment from 'moment'
 const ShowClockDeptInfo: FC = () => {
     const [data, setData] = useState(new showDeptInit())
     const location = useLocation();
@@ -25,6 +27,71 @@ const ShowClockDeptInfo: FC = () => {
                 break;
         }
     }, [])
+
+    const [showEmploye, setShowEmploye] = useState(false);
+    const onClose = () => {
+        setShowEmploye(false)
+    }
+
+    const showClockEmployeInfo = (dept: any) => {
+        data.data.dno = dept.dno;
+        data.data.todayEmployeCount = dept.clockNum;
+        setData({ ...data })
+        getTodayEmployeClockInfo(data, setData, { dno: data.data.dno, page: data.data.page, size: data.data.size }, setShowEmploye);
+    }
+    const changePage = (page: number, pageSize: number) => {
+        data.data.page = page;
+        data.data.page = pageSize;
+        setData({ ...data })
+        getTodayEmployeClockInfo(data, setData, { dno: data.data.dno, page: data.data.page, size: data.data.size }, setShowEmploye);
+    }
+    const colums: ColumnsType<DataType> = [
+
+        {
+            title: '员工号',
+            key: 'employname',
+            dataIndex: 'employname',
+            align: 'center',
+        },
+        {
+            title: '员工名',
+            key: 'employno',
+            dataIndex: 'employno',
+            align: 'center',
+        },
+        {
+            title: '小组',
+            key: 'deptname',
+            dataIndex: 'deptname',
+            align: 'center',
+        },
+        {
+            title: '打卡类别',
+            key: 'type',
+            dataIndex: 'type',
+            align: 'center',
+            render: (_, record: any) => {
+                return <Tag color={record.type == "上午" ? '#79a0c9' : '#144170'}>{record.type == "上午" ? '上班卡' : '下班卡'}</Tag>
+            }
+        },
+        {
+            title: '状态',
+            key: 'typeInfo',
+            align: 'center',
+            render: (_, record: any) => {
+                return <Tag color={Number(moment(record.clockTime).format('HH')) > 9 ? '#ee6666' : 'green'}>{Number(moment(record.clockTime).format('HH')) > 9 ? '迟到' : '正常'}</Tag>
+            }
+        },
+        {
+            title: '打卡时间',
+            key: 'clockTime',
+            dataIndex: 'clockTime',
+            align: 'center',
+            render: (_, record: any) => {
+                return <Tag color='#79a0c9'>{moment(record.clockTime).format('yyyy-MM-DD HH:mm:ss')}</Tag>
+            }
+        },
+    ]
     return (
 
         <div style={{ margin: "30px" }}>
@@ -43,7 +110,7 @@ const ShowClockDeptInfo: FC = () => {
                                         <div className='explain'>
                                             {dept.explain}
                                         </div>
-                                        <div className='clockInfo'>
+                                        <div className='clockInfo' onClick={() => { showClockEmployeInfo(dept) }}>
                                             上午打卡数: <span style={{ color: "red" }}>{dept.clockNum}</span> 人/总人数:<span style={{ color: "#285b90" }}>{dept.count}</span> 人
                                         </div>
                                         <div className='mask'>
@@ -61,10 +128,33 @@ const ShowClockDeptInfo: FC = () => {
                     <div style={{ margin: "180px auto" }}>
                         <Empty />
                     </div>
-                </>}
+                </>
+            }
 
-
-        </div>
+            <Drawer
+                title="该部门打卡信息如下"
+                placement={"top"}
+                closable={false}
+                onClose={onClose}
+                open={showEmploye}
+            >
+                <Table pagination={false} bordered columns={colums} dataSource={data.data.employeData} size="small" />
+                <br />
+                <div style={{ float: "right" }}>
+                    <Pagination
+                        total={data.data.todayEmployeCount}
+                        size="default"
+                        showSizeChanger
+                        onChange={changePage}
+                        showQuickJumper
+                        defaultPageSize={6}
+                        defaultCurrent={1}
+                        pageSizeOptions={[6]}
+                        showTotal={(total) => `今日共 ${total} 人打卡`}
+                    />
+                </div>
+            </Drawer>
+        </div >
     )
 
 }

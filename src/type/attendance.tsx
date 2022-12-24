@@ -444,12 +444,99 @@ export const initChartsOne = async (container: HTMLElement) => {
 interface showDeptType {
     showMorningDeptInfo: boolean,
     showAfterDeptInfo: boolean,
-    deptData: []
+    deptData: [],
+    employeData: [],
+    dno: number,
+    page: number,
+    size: number,
+    todayEmployeCount: number
 }
 export class showDeptInit {
     data: showDeptType = {
         showMorningDeptInfo: false,
         showAfterDeptInfo: false,
-        deptData: []
+        deptData: [],
+        employeData: [],
+        dno: 0,
+        page: 1,
+        size: 6,
+        todayEmployeCount: 0
     }
+}
+
+export const getTodayEmployeClockInfo = async (data: showDeptInit, setData: Function, getData: object, setShowEmploye: Function) => {
+    const res: any = await attendanceApi.reqGetTodayEmployeClockInfo(getData);
+    if (res.code === 200) {
+        data.data.employeData = res.todayClockEmployeInfo;
+        setData({ ...data })
+        setShowEmploye(true)
+    }
+}
+
+// 账号封禁相关
+interface lockEuserType {
+    eusersData: {
+        eusersInfo: [],
+        count: number,
+        page: number,
+        size: number,
+    },
+    selectForm: {
+        username: string | number,
+        type: string,
+        keyword: string,
+    },
+    iskeyWord: boolean
+
+}
+export class lockEuserDataInit {
+    data: lockEuserType = {
+        eusersData: {
+            eusersInfo: [],
+            count: 0,
+            page: 1,
+            size: 8
+        },
+        selectForm: {
+            username: '',
+            type: '',
+            keyword: ''
+        },
+        iskeyWord: false
+    }
+}
+// 关键字获取
+export const getEusersInfoBykeyWord = async (data: lockEuserDataInit, setData: Function, postData: object) => {
+    const res: any = await attendanceApi.reqGetEusersInfoBykeyWord(postData);
+    if (res.code === 200) {
+        data.data.eusersData.eusersInfo = res.eusersList;
+        data.data.eusersData.count = res.count;
+        setData({ ...data })
+    }
+}
+// 获取所有用户分页
+export const getEusersInfo = async (data: lockEuserDataInit, setData: Function, postData: object) => {
+    if (data.data.iskeyWord) {
+        getEusersInfoBykeyWord(data, setData, postData)
+    } else {
+        const res: any = await attendanceApi.reqGetEusersInfo(postData);
+        if (res.code === 200) {
+            data.data.eusersData.eusersInfo = res.eusersList;
+            data.data.eusersData.count = res.count;
+            setData({ ...data })
+        }
+    }
+
+}
+//重置账号
+export const resetEuser = async (postData: Object) => {
+    const res: any = await attendanceApi.reqResetEuser(postData)
+    if (res.code === 200) {
+        message.success("重置成功！")
+        return true;
+    } else {
+        message.error("重置失败！")
+        return false;
+    }
+
 }

@@ -11,7 +11,7 @@
  Target Server Version : 80029
  File Encoding         : 65001
 
- Date: 20/12/2022 17:42:12
+ Date: 23/12/2022 18:02:12
 */
 
 SET NAMES utf8mb4;
@@ -37,7 +37,18 @@ INSERT INTO `clockdepall` VALUES ('2022-12-19', 1, 'false', 'false');
 INSERT INTO `clockdepall` VALUES ('2022-12-19', 16, 'false', 'false');
 INSERT INTO `clockdepall` VALUES ('2022-12-20', 1, 'false', 'false');
 INSERT INTO `clockdepall` VALUES ('2022-12-20', 2, 'false', 'false');
-INSERT INTO `clockdepall` VALUES ('2022-12-20', 39, 'true', 'false');
+INSERT INTO `clockdepall` VALUES ('2022-12-21', 1, 'false', 'false');
+INSERT INTO `clockdepall` VALUES ('2022-12-21', 2, 'false', 'false');
+INSERT INTO `clockdepall` VALUES ('2022-12-21', 39, 'true', 'false');
+INSERT INTO `clockdepall` VALUES ('2022-12-21', 16, 'false', 'false');
+INSERT INTO `clockdepall` VALUES ('2022-12-22', 16, 'false', 'false');
+INSERT INTO `clockdepall` VALUES ('2022-12-22', 1, 'false', 'false');
+INSERT INTO `clockdepall` VALUES ('2022-12-22', 2, 'false', 'false');
+INSERT INTO `clockdepall` VALUES ('2022-12-22', 39, 'true', 'false');
+INSERT INTO `clockdepall` VALUES ('2022-12-23', 1, 'false', 'false');
+INSERT INTO `clockdepall` VALUES ('2022-12-23', 16, 'false', 'false');
+INSERT INTO `clockdepall` VALUES ('2022-12-23', 2, 'false', 'false');
+INSERT INTO `clockdepall` VALUES ('2022-12-23', 39, 'true', 'false');
 
 -- ----------------------------
 -- Table structure for clockemploye
@@ -50,22 +61,36 @@ CREATE TABLE `clockemploye`  (
   `employename` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `clockTime` datetime(0) NOT NULL,
-  `location` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL
+  `location` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`employeno`, `clockTime`, `employename`, `deptid`, `dno`, `type`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of clockemploye
 -- ----------------------------
-INSERT INTO `clockemploye` VALUES (39, 112, 2, '邵金鑫', '上午', '2022-12-14 18:17:31', '广州');
-INSERT INTO `clockemploye` VALUES (39, 112, 2, '邵金鑫', '上午', '2022-12-13 18:17:31', '广州');
-INSERT INTO `clockemploye` VALUES (39, 112, 2, '邵金鑫', '下午', '2022-12-14 18:17:31', '广州');
 INSERT INTO `clockemploye` VALUES (1, 1, 1, '鲁潜223', '上午', '2022-12-19 18:35:21', NULL);
 INSERT INTO `clockemploye` VALUES (16, 76, 1, '鲁潜223', '上午', '2022-12-19 18:35:21', NULL);
 INSERT INTO `clockemploye` VALUES (1, 1, 1, '鲁潜223', '下午', '2022-12-19 18:35:26', NULL);
 INSERT INTO `clockemploye` VALUES (16, 76, 1, '鲁潜223', '下午', '2022-12-19 18:35:26', NULL);
+INSERT INTO `clockemploye` VALUES (1, 1, 1, '鲁潜223', '上午', '2022-12-21 10:50:16', NULL);
+INSERT INTO `clockemploye` VALUES (16, 76, 1, '鲁潜223', '上午', '2022-12-21 10:50:16', NULL);
+INSERT INTO `clockemploye` VALUES (16, 76, 1, '鲁潜223', '上午', '2022-12-22 10:50:16', NULL);
+INSERT INTO `clockemploye` VALUES (1, 1, 1, '鲁潜223', '上午', '2022-12-23 14:12:35', NULL);
+INSERT INTO `clockemploye` VALUES (16, 76, 1, '鲁潜223', '上午', '2022-12-23 14:12:35', NULL);
+INSERT INTO `clockemploye` VALUES (39, 112, 2, '邵金鑫', '上午', '2022-12-13 18:17:31', '广州');
+INSERT INTO `clockemploye` VALUES (39, 112, 2, '邵金鑫', '上午', '2022-12-14 18:17:31', '广州');
 INSERT INTO `clockemploye` VALUES (1, 1, 2, '邵金鑫', '上午', '2022-12-20 10:12:27', NULL);
 INSERT INTO `clockemploye` VALUES (2, 5, 2, '邵金鑫', '上午', '2022-12-20 10:12:27', NULL);
 INSERT INTO `clockemploye` VALUES (39, 112, 2, '邵金鑫', '上午', '2022-12-20 10:12:27', NULL);
+INSERT INTO `clockemploye` VALUES (1, 1, 2, '邵金鑫', '上午', '2022-12-21 10:50:02', NULL);
+INSERT INTO `clockemploye` VALUES (2, 5, 2, '邵金鑫', '上午', '2022-12-21 10:50:02', NULL);
+INSERT INTO `clockemploye` VALUES (39, 112, 2, '邵金鑫', '上午', '2022-12-21 10:50:02', NULL);
+INSERT INTO `clockemploye` VALUES (1, 1, 2, '邵金鑫', '上午', '2022-12-22 15:31:30', NULL);
+INSERT INTO `clockemploye` VALUES (2, 5, 2, '邵金鑫', '上午', '2022-12-22 15:31:30', NULL);
+INSERT INTO `clockemploye` VALUES (39, 112, 2, '邵金鑫', '上午', '2022-12-22 15:31:30', NULL);
+INSERT INTO `clockemploye` VALUES (1, 1, 2, '邵金鑫', '上午', '2022-12-23 14:12:43', NULL);
+INSERT INTO `clockemploye` VALUES (2, 5, 2, '邵金鑫', '上午', '2022-12-23 14:12:43', NULL);
+INSERT INTO `clockemploye` VALUES (39, 112, 2, '邵金鑫', '上午', '2022-12-23 14:12:43', NULL);
 
 -- ----------------------------
 -- Table structure for covidinfo
@@ -360,7 +385,7 @@ INSERT INTO `depall` VALUES (5, '运维团队', '设计并开发高效的监控�
 INSERT INTO `depall` VALUES (6, '经营团队', '以可控的方式，尽可能高效的完成产品功能的迭代的变更工作，搞好市场调查与预测，选定产品发展方向，制定长期发展规划', 'https://img1.baidu.com/it/u=312885407,2370214083&fm=253&fmt=auto&app=138&f=JPEG', 13, 1, 'false', 2, 'false', 'false');
 INSERT INTO `depall` VALUES (7, '行政团队', '负责公司全体员工的后勤保障工作，负责接待来宾（比如：政府部门、职能部门人员），接听或转接外部电话，负责公司员工的考勤管理', 'https://img0.baidu.com/it/u=3450002477,2924136512&fm=253&fmt=auto&app=138&f=PNG', 10, 1, 'false', 2, 'false', 'false');
 INSERT INTO `depall` VALUES (16, '测试团队', '在规定的条件下对程序进行操作，以发现程序错误，衡量软件质量，并对其是否能满足设计要求进行评估', 'http://127.0.0.1:8888/images/uploadAvatarZengYu76264logo.jpg', 7, 1, 'false', 4, 'false', 'false');
-INSERT INTO `depall` VALUES (39, 'test1', '参与分布式test', 'http://127.0.0.1:8888/images/uploadAvatarZengYu46412log.jpg', 1, 2, 'true', 0, 'true', 'false');
+INSERT INTO `depall` VALUES (39, 'test1', '参与分布式test', 'http://127.0.0.1:8888/images/uploadAvatarZengYu46412log.jpg', 1, 2, 'true', 0, 'false', 'false');
 
 -- ----------------------------
 -- Table structure for dept
@@ -381,7 +406,7 @@ CREATE TABLE `dept`  (
 -- ----------------------------
 -- Records of dept
 -- ----------------------------
-INSERT INTO `dept` VALUES (1, 1, '爬虫团队1组', '广州', 22, 16);
+INSERT INTO `dept` VALUES (1, 1, '爬虫团队1组', '广州', 22, 76);
 INSERT INTO `dept` VALUES (2, 1, '爬虫团队2组', '深圳', 22, 20);
 INSERT INTO `dept` VALUES (3, 1, '爬虫团队3组', '广州', 20, 20);
 INSERT INTO `dept` VALUES (4, 1, '爬虫团队4组', '长沙', 22, 20);
@@ -1096,7 +1121,7 @@ CREATE TABLE `leaverequest`  (
   `whichVerfiy` varchar(255) CHARACTER SET gb2312 COLLATE gb2312_chinese_ci NULL DEFAULT '暂无人核审' COMMENT '谁核审',
   `employename` varchar(255) CHARACTER SET gb2312 COLLATE gb2312_chinese_ci NOT NULL COMMENT '员工姓名',
   PRIMARY KEY (`leaveNumber`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 138253611 CHARACTER SET = gb2312 COLLATE = gb2312_chinese_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 138253612 CHARACTER SET = gb2312 COLLATE = gb2312_chinese_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of leaverequest
@@ -1105,6 +1130,7 @@ INSERT INTO `leaverequest` VALUES (138253607, '事假', '1天', 1, '2022-12-16 0
 INSERT INTO `leaverequest` VALUES (138253608, '事假', '3天', 1, '2023-01-11 15:03:43', '<p>今天人数满了 明天再申请🤣</p>', 'false', 76, 16, 'admin', '鲁潜223');
 INSERT INTO `leaverequest` VALUES (138253609, '事假', '1天', 1, '2022-12-30 15:26:14', '不予通过', 'false', 76, 16, 'admin', '鲁潜223');
 INSERT INTO `leaverequest` VALUES (138253610, '事假', '1周', 1, '2022-12-19 09:16:37', '<p>允许通过😇</p>', 'true', 1, 1, 'admin', '鲁潜223');
+INSERT INTO `leaverequest` VALUES (138253611, '事假', '1天', 2, '2022-12-23 14:24:19', '<p>去去去😿👎👎</p>', 'true', 112, 39, 'admin', '邵金鑫');
 
 -- ----------------------------
 -- Table structure for users
@@ -1316,24 +1342,6 @@ delimiter ;
 -- ----------------------------
 -- Triggers structure for table employee
 -- ----------------------------
-DROP TRIGGER IF EXISTS `triggercountdelete`;
-delimiter ;;
-CREATE TRIGGER `triggercountdelete` AFTER DELETE ON `employee` FOR EACH ROW begin
-declare newcoun int(255);
--- 删除后更新总数
-set newcoun=(select count(*) from employee,dept where employee.deptno=dept.id and employee.deptno=old.deptno);
-update dept  set  count =newcoun where dept.id=old.deptno;
--- 删除员工明细
-delete from employesalarydetail where employno=old.employno AND deptno=old.deptno;
--- 删除员工疫苗表
-delete from covidinfo where employid=old.employno AND deptid=old.deptno;
-end
-;;
-delimiter ;
-
--- ----------------------------
--- Triggers structure for table employee
--- ----------------------------
 DROP TRIGGER IF EXISTS `triggercountadd`;
 delimiter ;;
 CREATE TRIGGER `triggercountadd` AFTER INSERT ON `employee` FOR EACH ROW begin
@@ -1381,6 +1389,26 @@ INSERT INTO `employesalarydetail`(`deptno`, `employno`, `employname`,`salary`) V
 set newDepallid=(SELECT DISTINCT d.deptno from dept d,depall de WHERE d.id=new.deptno);
 UPDATE `covidinfo` SET `depallid` = newDepallid,deptid=new.deptno  WHERE `deptid` =old.deptno AND `employid` = old.employno;
 
+end
+;;
+delimiter ;
+
+-- ----------------------------
+-- Triggers structure for table employee
+-- ----------------------------
+DROP TRIGGER IF EXISTS `triggercountdelete`;
+delimiter ;;
+CREATE TRIGGER `triggercountdelete` AFTER DELETE ON `employee` FOR EACH ROW begin
+declare newcoun int(255);
+-- 删除后更新总数
+set newcoun=(select count(*) from employee,dept where employee.deptno=dept.id and employee.deptno=old.deptno);
+update dept  set  count =newcoun where dept.id=old.deptno;
+-- 删除员工明细
+delete from employesalarydetail where employno=old.employno AND deptno=old.deptno;
+-- 删除员工疫苗表
+delete from covidinfo where employid=old.employno AND deptid=old.deptno;
+-- 删除员工表账号密码
+delete from eusers WHERE username=old.employno;
 end
 ;;
 delimiter ;

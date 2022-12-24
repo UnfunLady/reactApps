@@ -49,6 +49,22 @@ const reqGetBaseInfo = () => {
 const reqGetBaseChartsInfo = () => {
     return request({ url: '/api/getBaseChartsInfo', method: 'get' })
 }
+// 获取今日打卡的员工信息
+const reqGetTodayEmployeClockInfo = (params: object) => {
+    return request({ url: '/api/getTodayClockEmployeInfo', method: 'get', params })
+}
+// 获取用户账号
+const reqGetEusersInfo = (data: object) => {
+    return request({ url: '/api/getEuses', method: 'post', data })
+}
+// 关键字获取账号
+const reqGetEusersInfoBykeyWord = (data: Object) => {
+    return request({ url: '/api/keyWordSearch', method: 'post', data })
+}
+// 重置账号
+const reqResetEuser = (data: Object) => {
+    return request({ url: '/api/resetEuser', method: 'post', data })
+}
 
 export default {
     reqGetEmployeLeavePage,
@@ -63,5 +79,9 @@ export default {
     saveClockInfo,
     reqGetClockInfo,
     reqGetBaseInfo,
-    reqGetBaseChartsInfo
+    reqGetBaseChartsInfo,
+    reqGetTodayEmployeClockInfo,
+    reqGetEusersInfo,
+    reqGetEusersInfoBykeyWord,
+    reqResetEuser
 }

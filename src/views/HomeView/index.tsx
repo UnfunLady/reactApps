@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 // 引入路由表
 import routes from '../../router'
 // 引入location获取路径
@@ -18,6 +18,7 @@ import { USEROUT } from '../../store/constant';
 import { userOut } from '../../store/actions/user';
 import { useForm } from 'antd/es/form/Form';
 import { RcFile, UploadFile, UploadProps } from 'antd/lib/upload';
+import SuspenseView from '../../component/SuspenseView';
 const { Header, Sider, Content } = Layout;
 type Props = {
 }
@@ -376,7 +377,9 @@ const MainView = (props: Props) => {
                     </div>
                 </Header>
                 <Content>
-                    {isAlive ? <RouterBeforeEach /> : ''}
+                    <Suspense fallback={<SuspenseView />}>
+                        {isAlive ? <RouterBeforeEach /> : ''}
+                    </Suspense>
                 </Content>
             </Layout>
             {/* 个人信息 */}

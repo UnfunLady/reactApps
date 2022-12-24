@@ -1,9 +1,10 @@
-import { FC, useEffect } from 'react';
+import { FC, Suspense, useEffect } from 'react';
 import { useRoutes } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import routes from './router'
 import eroutes from './router/employeRouter';
 import './App.less'
+import SuspenseView from './component/SuspenseView';
 const App: FC = () => {
   const elements = useRoutes(routes);
   const elemente = useRoutes(eroutes);
@@ -55,11 +56,13 @@ const App: FC = () => {
 
     }
   }, [userInfo.nickname])
-
   return (
-    <div className="App" >
-      {userInfo.level == 1 ? elements : elemente}
-    </div>
+
+    <Suspense fallback={<SuspenseView />}>
+      <div className="App" >
+        {userInfo.level == 1 ? elements : elemente}
+      </div>
+    </Suspense >
   );
 }
 
