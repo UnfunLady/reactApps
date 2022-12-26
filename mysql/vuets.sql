@@ -11,7 +11,7 @@
  Target Server Version : 80029
  File Encoding         : 65001
 
- Date: 23/12/2022 18:02:12
+ Date: 26/12/2022 18:58:22
 */
 
 SET NAMES utf8mb4;
@@ -49,6 +49,14 @@ INSERT INTO `clockdepall` VALUES ('2022-12-23', 1, 'false', 'false');
 INSERT INTO `clockdepall` VALUES ('2022-12-23', 16, 'false', 'false');
 INSERT INTO `clockdepall` VALUES ('2022-12-23', 2, 'false', 'false');
 INSERT INTO `clockdepall` VALUES ('2022-12-23', 39, 'true', 'false');
+INSERT INTO `clockdepall` VALUES ('2022-12-24', 1, 'false', 'false');
+INSERT INTO `clockdepall` VALUES ('2022-12-24', 16, 'false', 'false');
+INSERT INTO `clockdepall` VALUES ('2022-12-24', 2, 'false', 'false');
+INSERT INTO `clockdepall` VALUES ('2022-12-24', 39, 'true', 'false');
+INSERT INTO `clockdepall` VALUES ('2022-12-26', 1, 'false', 'false');
+INSERT INTO `clockdepall` VALUES ('2022-12-26', 16, 'false', 'false');
+INSERT INTO `clockdepall` VALUES ('2022-12-26', 2, 'false', 'false');
+INSERT INTO `clockdepall` VALUES ('2022-12-26', 39, 'true', 'true');
 
 -- ----------------------------
 -- Table structure for clockemploye
@@ -77,6 +85,12 @@ INSERT INTO `clockemploye` VALUES (16, 76, 1, '鲁潜223', '上午', '2022-12-21
 INSERT INTO `clockemploye` VALUES (16, 76, 1, '鲁潜223', '上午', '2022-12-22 10:50:16', NULL);
 INSERT INTO `clockemploye` VALUES (1, 1, 1, '鲁潜223', '上午', '2022-12-23 14:12:35', NULL);
 INSERT INTO `clockemploye` VALUES (16, 76, 1, '鲁潜223', '上午', '2022-12-23 14:12:35', NULL);
+INSERT INTO `clockemploye` VALUES (1, 1, 1, '鲁潜223', '上午', '2022-12-24 14:02:33', NULL);
+INSERT INTO `clockemploye` VALUES (16, 76, 1, '鲁潜223', '上午', '2022-12-24 14:02:33', NULL);
+INSERT INTO `clockemploye` VALUES (1, 1, 1, '鲁潜223', '上午', '2022-12-26 15:13:35', NULL);
+INSERT INTO `clockemploye` VALUES (16, 76, 1, '鲁潜223', '上午', '2022-12-26 15:13:35', NULL);
+INSERT INTO `clockemploye` VALUES (1, 1, 1, '鲁潜223', '下午', '2022-12-26 18:04:33', NULL);
+INSERT INTO `clockemploye` VALUES (16, 76, 1, '鲁潜223', '下午', '2022-12-26 18:04:33', NULL);
 INSERT INTO `clockemploye` VALUES (39, 112, 2, '邵金鑫', '上午', '2022-12-13 18:17:31', '广州');
 INSERT INTO `clockemploye` VALUES (39, 112, 2, '邵金鑫', '上午', '2022-12-14 18:17:31', '广州');
 INSERT INTO `clockemploye` VALUES (1, 1, 2, '邵金鑫', '上午', '2022-12-20 10:12:27', NULL);
@@ -91,6 +105,18 @@ INSERT INTO `clockemploye` VALUES (39, 112, 2, '邵金鑫', '上午', '2022-12-2
 INSERT INTO `clockemploye` VALUES (1, 1, 2, '邵金鑫', '上午', '2022-12-23 14:12:43', NULL);
 INSERT INTO `clockemploye` VALUES (2, 5, 2, '邵金鑫', '上午', '2022-12-23 14:12:43', NULL);
 INSERT INTO `clockemploye` VALUES (39, 112, 2, '邵金鑫', '上午', '2022-12-23 14:12:43', NULL);
+INSERT INTO `clockemploye` VALUES (1, 1, 2, '邵金鑫', '上午', '2022-12-24 14:02:41', NULL);
+INSERT INTO `clockemploye` VALUES (2, 5, 2, '邵金鑫', '上午', '2022-12-24 14:02:41', NULL);
+INSERT INTO `clockemploye` VALUES (39, 112, 2, '邵金鑫', '上午', '2022-12-24 14:02:41', NULL);
+INSERT INTO `clockemploye` VALUES (1, 1, 2, '邵金鑫', '上午', '2022-12-26 15:20:03', NULL);
+INSERT INTO `clockemploye` VALUES (2, 5, 2, '邵金鑫', '上午', '2022-12-26 15:20:03', NULL);
+INSERT INTO `clockemploye` VALUES (39, 112, 2, '邵金鑫', '上午', '2022-12-26 15:20:03', NULL);
+INSERT INTO `clockemploye` VALUES (39, 112, 2, '邵金鑫', '下午', '2022-12-26 18:20:03', NULL);
+INSERT INTO `clockemploye` VALUES (1, 1, 4, '潘 琪', '上午', '2022-12-26 15:22:00', NULL);
+INSERT INTO `clockemploye` VALUES (16, 76, 4, '潘 琪', '上午', '2022-12-26 15:22:00', NULL);
+INSERT INTO `clockemploye` VALUES (1, 1, 4, '潘 琪', '下午', '2022-12-26 18:10:16', NULL);
+INSERT INTO `clockemploye` VALUES (16, 76, 4, '潘 琪', '下午', '2022-12-26 18:10:16', NULL);
+INSERT INTO `clockemploye` VALUES (1, 1, 16, '顾金鑫1', '上午', '2022-12-26 15:14:11', NULL);
 
 -- ----------------------------
 -- Table structure for covidinfo
@@ -351,7 +377,7 @@ INSERT INTO `covidinfo` VALUES (4, 10, 245, 'false', 'false', 'false');
 INSERT INTO `covidinfo` VALUES (2, 5, 246, 'false', 'false', 'false');
 INSERT INTO `covidinfo` VALUES (4, 10, 247, 'false', 'false', 'false');
 INSERT INTO `covidinfo` VALUES (6, 16, 248, 'false', 'false', 'false');
-INSERT INTO `covidinfo` VALUES (6, 16, 249, 'false', 'false', 'false');
+INSERT INTO `covidinfo` VALUES (6, 16, 249, 'true', 'true', 'true');
 INSERT INTO `covidinfo` VALUES (5, 13, 250, 'false', 'false', 'false');
 INSERT INTO `covidinfo` VALUES (1, 1, 252, 'false', 'false', 'false');
 INSERT INTO `covidinfo` VALUES (1, 2, 253, 'false', 'false', 'false');
@@ -372,7 +398,7 @@ CREATE TABLE `depall`  (
   `allClockMorning` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'false',
   `allClockAfter` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'false',
   PRIMARY KEY (`dno`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 42 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 41 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of depall
@@ -382,7 +408,7 @@ INSERT INTO `depall` VALUES (2, '后端团队', '设计开发以及测试并且�
 INSERT INTO `depall` VALUES (3, 'UI团队', '负责软件界面的美术设计、创意工作和制作工作，根据各种相关软件的用户群，提出构思新颖、有高度吸引力的创意设计', 'https://img1.baidu.com/it/u=3213166844,1927952924&fm=253&fmt=auto&app=138&f=PNG', 21, 2, 'true', 0, 'false', 'false');
 INSERT INTO `depall` VALUES (4, '前端团队', '配合UI设计师实现预期的视觉交互效果，定期的更新和优化产品，保持产品的生命力和可用性，配合后端工程师完成相关应用的开发工作', 'https://img2.baidu.com/it/u=2213282682,62301055&fm=253&fmt=auto&app=138&f=JPEG', 32, 3, 'false', 2, 'false', 'false');
 INSERT INTO `depall` VALUES (5, '运维团队', '设计并开发高效的监控平台和告警平台，以可控的方式，尽可能高效的完成产品功能的迭代的变更工作', 'https://img0.baidu.com/it/u=3231418332,3200306261&fm=253&fmt=auto&app=138&f=JPEG', 32, 3, 'false', 2, 'false', 'false');
-INSERT INTO `depall` VALUES (6, '经营团队', '以可控的方式，尽可能高效的完成产品功能的迭代的变更工作，搞好市场调查与预测，选定产品发展方向，制定长期发展规划', 'https://img1.baidu.com/it/u=312885407,2370214083&fm=253&fmt=auto&app=138&f=JPEG', 13, 1, 'false', 2, 'false', 'false');
+INSERT INTO `depall` VALUES (6, '经营团队', '以可控的方式，尽可能高效的完成产品功能的迭代的变更工作，搞好市场调查与预测，选定产品发展方向，制定长期发展规划', 'https://img1.baidu.com/it/u=312885407,2370214083&fm=253&fmt=auto&app=138&f=JPEG', 13, 1, 'false', 1, 'false', 'false');
 INSERT INTO `depall` VALUES (7, '行政团队', '负责公司全体员工的后勤保障工作，负责接待来宾（比如：政府部门、职能部门人员），接听或转接外部电话，负责公司员工的考勤管理', 'https://img0.baidu.com/it/u=3450002477,2924136512&fm=253&fmt=auto&app=138&f=PNG', 10, 1, 'false', 2, 'false', 'false');
 INSERT INTO `depall` VALUES (16, '测试团队', '在规定的条件下对程序进行操作，以发现程序错误，衡量软件质量，并对其是否能满足设计要求进行评估', 'http://127.0.0.1:8888/images/uploadAvatarZengYu76264logo.jpg', 7, 1, 'false', 4, 'false', 'false');
 INSERT INTO `depall` VALUES (39, 'test1', '参与分布式test', 'http://127.0.0.1:8888/images/uploadAvatarZengYu46412log.jpg', 1, 2, 'true', 0, 'false', 'false');
@@ -401,12 +427,12 @@ CREATE TABLE `dept`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `fk_dno`(`deptno`) USING BTREE,
   CONSTRAINT `fk_dno` FOREIGN KEY (`deptno`) REFERENCES `depall` (`dno`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 113 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 112 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of dept
 -- ----------------------------
-INSERT INTO `dept` VALUES (1, 1, '爬虫团队1组', '广州', 22, 76);
+INSERT INTO `dept` VALUES (1, 1, '爬虫团队1组', '广州', 22, 16);
 INSERT INTO `dept` VALUES (2, 1, '爬虫团队2组', '深圳', 22, 20);
 INSERT INTO `dept` VALUES (3, 1, '爬虫团队3组', '广州', 20, 20);
 INSERT INTO `dept` VALUES (4, 1, '爬虫团队4组', '长沙', 22, 20);
@@ -421,7 +447,7 @@ INSERT INTO `dept` VALUES (12, 4, '前端团队3组', '北京', 10, 10);
 INSERT INTO `dept` VALUES (13, 5, '运维团队1组', '广州', 12, 10);
 INSERT INTO `dept` VALUES (14, 5, '运维团队2组', '广州', 10, 10);
 INSERT INTO `dept` VALUES (15, 5, '运维团队3组', '深圳', 10, 10);
-INSERT INTO `dept` VALUES (16, 6, '经营团队1组', '广州', 13, 11);
+INSERT INTO `dept` VALUES (16, 6, '经营团队1组', '广州', 13, 12);
 INSERT INTO `dept` VALUES (17, 7, '行政团队1组', '广州', 10, 8);
 INSERT INTO `dept` VALUES (76, 16, '测试小组1组', '北京', 7, 3);
 INSERT INTO `dept` VALUES (110, 39, 'test1小组1', '河源', 0, 0);
@@ -474,7 +500,7 @@ CREATE TABLE `employee`  (
   INDEX `employname`(`employname`) USING BTREE,
   INDEX `employno`(`employno`) USING BTREE,
   CONSTRAINT `fk_deptno` FOREIGN KEY (`deptno`) REFERENCES `dept` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 254 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 261 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of employee
@@ -775,7 +801,7 @@ CREATE TABLE `employesalary`  (
 -- ----------------------------
 -- Records of employesalary
 -- ----------------------------
-INSERT INTO `employesalary` VALUES (1, 1, 150, 800, 650, 500, 300, 91, 'true');
+INSERT INTO `employesalary` VALUES (1, 1, 150, 800, 650, 500, 300, 100, 'true');
 INSERT INTO `employesalary` VALUES (1, 2, 150, 800, 650, 500, 300, 100, 'true');
 INSERT INTO `employesalary` VALUES (1, 3, 150, 800, 650, 500, 300, 100, 'true');
 INSERT INTO `employesalary` VALUES (1, 4, 150, 800, 650, 500, 300, 100, 'true');
@@ -820,30 +846,30 @@ CREATE TABLE `employesalarydetail`  (
 -- ----------------------------
 -- Records of employesalarydetail
 -- ----------------------------
-INSERT INTO `employesalarydetail` VALUES (1, 1, '鲁潜223', 'true', 'true', 'true', 'true', 'true', 91, 4000, 'true');
+INSERT INTO `employesalarydetail` VALUES (1, 1, '鲁潜223', 'true', 'true', 'true', 'true', 'true', 100, 4000, 'true');
 INSERT INTO `employesalarydetail` VALUES (76, 1, '鲁潜223', 'true', 'true', 'true', 'true', 'true', 100, 3500, 'true');
-INSERT INTO `employesalarydetail` VALUES (1, 2, '邵金鑫', 'true', 'true', 'true', 'true', 'true', 91, 3500, 'true');
+INSERT INTO `employesalarydetail` VALUES (1, 2, '邵金鑫', 'true', 'true', 'true', 'true', 'true', 100, 3500, 'true');
 INSERT INTO `employesalarydetail` VALUES (5, 2, '邵金鑫', 'true', 'true', 'true', 'true', 'true', 100, 3500, 'true');
 INSERT INTO `employesalarydetail` VALUES (112, 2, '邵金鑫', 'true', 'true', 'true', 'true', 'true', 100, 3500, 'true');
-INSERT INTO `employesalarydetail` VALUES (1, 3, '陈昊强', 'true', 'true', 'true', 'true', 'true', 91, 3500, 'true');
+INSERT INTO `employesalarydetail` VALUES (1, 3, '陈昊强', 'true', 'true', 'true', 'true', 'true', 100, 3500, 'true');
 INSERT INTO `employesalarydetail` VALUES (76, 3, '陈昊强', 'true', 'true', 'true', 'true', 'true', 100, 3500, 'true');
-INSERT INTO `employesalarydetail` VALUES (1, 4, '潘 琪', 'true', 'true', 'true', 'true', 'true', 91, 3500, 'true');
+INSERT INTO `employesalarydetail` VALUES (1, 4, '潘 琪', 'true', 'true', 'true', 'true', 'true', 100, 3500, 'true');
 INSERT INTO `employesalarydetail` VALUES (76, 4, '潘 琪', 'true', 'true', 'true', 'true', 'true', 100, 3500, 'true');
-INSERT INTO `employesalarydetail` VALUES (1, 5, '洪弘文', 'true', 'true', 'true', 'true', 'true', 91, 3500, 'true');
-INSERT INTO `employesalarydetail` VALUES (1, 6, '顾金鑫', 'true', 'true', 'true', 'true', 'true', 91, 3500, 'true');
-INSERT INTO `employesalarydetail` VALUES (1, 7, '卢文昊', 'true', 'true', 'true', 'true', 'true', 91, 3500, 'true');
+INSERT INTO `employesalarydetail` VALUES (1, 5, '洪弘文', 'true', 'true', 'true', 'true', 'true', 100, 3500, 'true');
+INSERT INTO `employesalarydetail` VALUES (1, 6, '顾金鑫', 'true', 'true', 'true', 'true', 'true', 100, 3500, 'true');
+INSERT INTO `employesalarydetail` VALUES (1, 7, '卢文昊', 'true', 'true', 'true', 'true', 'true', 100, 3500, 'true');
 INSERT INTO `employesalarydetail` VALUES (17, 7, '卢文昊', 'true', 'true', 'true', 'true', 'true', 100, 3500, 'true');
 INSERT INTO `employesalarydetail` VALUES (76, 7, '卢文昊', 'true', 'true', 'true', 'true', 'true', 100, 3500, 'true');
-INSERT INTO `employesalarydetail` VALUES (1, 8, '韦苑博', 'true', 'true', 'true', 'true', 'true', 91, 3500, 'true');
-INSERT INTO `employesalarydetail` VALUES (1, 10, '严耀杰', 'true', 'true', 'true', 'true', 'true', 91, 3500, 'true');
-INSERT INTO `employesalarydetail` VALUES (1, 11, '鲁潜1', 'true', 'true', 'true', 'true', 'true', 91, 3500, 'true');
+INSERT INTO `employesalarydetail` VALUES (1, 8, '韦苑博', 'true', 'true', 'true', 'true', 'true', 100, 3500, 'true');
+INSERT INTO `employesalarydetail` VALUES (1, 10, '严耀杰', 'true', 'true', 'true', 'true', 'true', 100, 3500, 'true');
+INSERT INTO `employesalarydetail` VALUES (1, 11, '鲁潜1', 'true', 'true', 'true', 'true', 'true', 100, 3500, 'true');
 INSERT INTO `employesalarydetail` VALUES (76, 11, '鲁潜1', 'true', 'true', 'true', 'true', 'true', 100, 3500, 'true');
-INSERT INTO `employesalarydetail` VALUES (1, 12, '邵金鑫1', 'true', 'true', 'true', 'true', 'true', 91, 3500, 'true');
-INSERT INTO `employesalarydetail` VALUES (1, 14, '潘 琪1', 'true', 'true', 'true', 'true', 'true', 91, 3500, 'true');
-INSERT INTO `employesalarydetail` VALUES (1, 16, '顾金鑫1', 'true', 'true', 'true', 'true', 'true', 91, 3500, 'true');
-INSERT INTO `employesalarydetail` VALUES (1, 17, '卢文昊1', 'true', 'true', 'true', 'true', 'true', 91, 3500, 'true');
-INSERT INTO `employesalarydetail` VALUES (1, 18, '韦苑博1', 'true', 'true', 'true', 'true', 'true', 91, 3500, 'true');
-INSERT INTO `employesalarydetail` VALUES (1, 19, '江涛1', 'true', 'true', 'true', 'true', 'true', 91, 3500, 'true');
+INSERT INTO `employesalarydetail` VALUES (1, 12, '邵金鑫1', 'true', 'true', 'true', 'true', 'true', 100, 3500, 'true');
+INSERT INTO `employesalarydetail` VALUES (1, 14, '潘 琪1', 'true', 'true', 'true', 'true', 'true', 100, 3500, 'true');
+INSERT INTO `employesalarydetail` VALUES (1, 16, '顾金鑫1', 'true', 'true', 'true', 'true', 'true', 100, 3500, 'true');
+INSERT INTO `employesalarydetail` VALUES (1, 17, '卢文昊1', 'true', 'true', 'true', 'true', 'true', 100, 3500, 'true');
+INSERT INTO `employesalarydetail` VALUES (1, 18, '韦苑博1', 'true', 'true', 'true', 'true', 'true', 100, 3500, 'true');
+INSERT INTO `employesalarydetail` VALUES (1, 19, '江涛1', 'true', 'true', 'true', 'true', 'true', 100, 3500, 'true');
 INSERT INTO `employesalarydetail` VALUES (2, 21, '鲁潜', 'true', 'true', 'true', 'true', 'true', 100, 3500, 'true');
 INSERT INTO `employesalarydetail` VALUES (2, 22, '邵金鑫', 'true', 'true', 'true', 'true', 'true', 100, 3500, 'true');
 INSERT INTO `employesalarydetail` VALUES (2, 23, '陈昊强', 'true', 'true', 'true', 'true', 'true', 100, 3500, 'true');
@@ -1048,15 +1074,15 @@ INSERT INTO `employesalarydetail` VALUES (17, 219, '江涛1', 'true', 'true', 't
 INSERT INTO `employesalarydetail` VALUES (16, 220, '李四1', 'true', 'true', 'true', 'true', 'true', 100, 3500, 'true');
 INSERT INTO `employesalarydetail` VALUES (4, 225, '陆语熙', 'true', 'true', 'true', 'true', 'true', 100, 3500, 'true');
 INSERT INTO `employesalarydetail` VALUES (4, 226, '陆语熙1', 'true', 'true', 'true', 'true', 'true', 100, 3500, 'true');
-INSERT INTO `employesalarydetail` VALUES (1, 227, '陆语熙141', 'true', 'true', 'true', 'true', 'true', 91, 3500, 'true');
+INSERT INTO `employesalarydetail` VALUES (1, 227, '陆语熙141', 'true', 'true', 'true', 'true', 'true', 100, 3500, 'true');
 INSERT INTO `employesalarydetail` VALUES (5, 228, '陆语熙', 'true', 'true', 'true', 'true', 'true', 100, 3500, 'true');
 INSERT INTO `employesalarydetail` VALUES (5, 229, '陆语熙', 'true', 'true', 'true', 'true', 'true', 100, 3500, 'true');
-INSERT INTO `employesalarydetail` VALUES (1, 230, '鲁潜2233', 'true', 'true', 'true', 'true', 'true', 91, 3500, 'true');
+INSERT INTO `employesalarydetail` VALUES (1, 230, '鲁潜2233', 'true', 'true', 'true', 'true', 'true', 100, 3500, 'true');
 INSERT INTO `employesalarydetail` VALUES (1, 231, '鲁潜2234', 'true', 'true', 'true', 'true', 'true', 100, 3500, 'true');
 INSERT INTO `employesalarydetail` VALUES (2, 233, '艾尔2', 'true', 'true', 'true', 'true', 'true', 100, 3500, 'true');
 INSERT INTO `employesalarydetail` VALUES (13, 240, '123123', 'true', 'true', 'true', 'true', 'true', 100, 3500, 'true');
-INSERT INTO `employesalarydetail` VALUES (1, 242, 'test', 'true', 'true', 'true', 'true', 'true', 91, 3500, 'true');
-INSERT INTO `employesalarydetail` VALUES (1, 243, 'test1', 'true', 'true', 'true', 'true', 'true', 91, 3500, 'true');
+INSERT INTO `employesalarydetail` VALUES (1, 242, 'test', 'true', 'true', 'true', 'true', 'true', 100, 3500, 'true');
+INSERT INTO `employesalarydetail` VALUES (1, 243, 'test1', 'true', 'true', 'true', 'true', 'true', 100, 3500, 'true');
 INSERT INTO `employesalarydetail` VALUES (8, 244, 'test3', 'true', 'true', 'true', 'true', 'true', 100, 3500, 'true');
 INSERT INTO `employesalarydetail` VALUES (10, 245, 'test4', 'true', 'true', 'true', 'true', 'true', 100, 3500, 'true');
 INSERT INTO `employesalarydetail` VALUES (5, 246, '她222', 'true', 'true', 'true', 'true', 'true', 100, 3500, 'true');
@@ -1064,7 +1090,7 @@ INSERT INTO `employesalarydetail` VALUES (10, 247, '123', 'true', 'true', 'true'
 INSERT INTO `employesalarydetail` VALUES (16, 248, '啊啊啊', 'true', 'true', 'true', 'true', 'true', 100, 3500, 'true');
 INSERT INTO `employesalarydetail` VALUES (16, 249, '啊11', 'true', 'true', 'true', 'true', 'true', 100, 123123, 'true');
 INSERT INTO `employesalarydetail` VALUES (13, 250, '1231231', 'true', 'true', 'true', 'true', 'true', 100, 3500, 'true');
-INSERT INTO `employesalarydetail` VALUES (1, 252, 'test22', 'true', 'true', 'true', 'true', 'true', 91, 2222, 'true');
+INSERT INTO `employesalarydetail` VALUES (1, 252, 'test22', 'true', 'true', 'true', 'true', 'true', 100, 2222, 'true');
 INSERT INTO `employesalarydetail` VALUES (2, 253, 'test2玩玩', 'true', 'true', 'true', 'true', 'true', 100, 2222, 'true');
 
 -- ----------------------------
@@ -1103,6 +1129,17 @@ CREATE TABLE `eusers`  (
 -- ----------------------------
 INSERT INTO `eusers` VALUES ('1', '88888888', '普通员工', '0', '2', '');
 INSERT INTO `eusers` VALUES ('2', '88888888', '普通员工', '0', '2', ' ');
+INSERT INTO `eusers` VALUES ('3', '88888888', '普通员工', '0', '2', NULL);
+INSERT INTO `eusers` VALUES ('4', '88888888', '普通员工', '0', '2', NULL);
+INSERT INTO `eusers` VALUES ('5', '88888888', '普通员工', '0', '2', NULL);
+INSERT INTO `eusers` VALUES ('6', '88888888', '普通员工', '0', '2', NULL);
+INSERT INTO `eusers` VALUES ('7', '88888888', '普通员工', '0', '2', NULL);
+INSERT INTO `eusers` VALUES ('8', '88888888', '普通员工', '1', '2', NULL);
+INSERT INTO `eusers` VALUES ('10', '88888888', '普通员工', '1', '2', NULL);
+INSERT INTO `eusers` VALUES ('11', '88888888', '普通员工', '1', '2', NULL);
+INSERT INTO `eusers` VALUES ('12', '88888888', '普通员工', '1', '2', NULL);
+INSERT INTO `eusers` VALUES ('14', '88888888', '普通员工', '1', '2', NULL);
+INSERT INTO `eusers` VALUES ('16', '88888888', '普通员工', '0', '2', NULL);
 
 -- ----------------------------
 -- Table structure for leaverequest
@@ -1121,7 +1158,7 @@ CREATE TABLE `leaverequest`  (
   `whichVerfiy` varchar(255) CHARACTER SET gb2312 COLLATE gb2312_chinese_ci NULL DEFAULT '暂无人核审' COMMENT '谁核审',
   `employename` varchar(255) CHARACTER SET gb2312 COLLATE gb2312_chinese_ci NOT NULL COMMENT '员工姓名',
   PRIMARY KEY (`leaveNumber`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 138253612 CHARACTER SET = gb2312 COLLATE = gb2312_chinese_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 138253611 CHARACTER SET = gb2312 COLLATE = gb2312_chinese_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of leaverequest
@@ -1131,6 +1168,8 @@ INSERT INTO `leaverequest` VALUES (138253608, '事假', '3天', 1, '2023-01-11 1
 INSERT INTO `leaverequest` VALUES (138253609, '事假', '1天', 1, '2022-12-30 15:26:14', '不予通过', 'false', 76, 16, 'admin', '鲁潜223');
 INSERT INTO `leaverequest` VALUES (138253610, '事假', '1周', 1, '2022-12-19 09:16:37', '<p>允许通过😇</p>', 'true', 1, 1, 'admin', '鲁潜223');
 INSERT INTO `leaverequest` VALUES (138253611, '事假', '1天', 2, '2022-12-23 14:24:19', '<p>去去去😿👎👎</p>', 'true', 112, 39, 'admin', '邵金鑫');
+INSERT INTO `leaverequest` VALUES (138253612, '事假', '1天', 16, '2022-12-26 15:14:32', '<p>最近人手缺 晚点请</p>', 'false', 1, 1, 'admin', '顾金鑫1');
+INSERT INTO `leaverequest` VALUES (138253613, '病假', '一周以上', 4, '2022-12-26 15:22:07', '暂无答复', 'none', 1, 1, '暂无人核审', '潘 琪');
 
 -- ----------------------------
 -- Table structure for users
