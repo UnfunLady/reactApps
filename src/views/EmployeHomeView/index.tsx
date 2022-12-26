@@ -7,16 +7,16 @@ import { useLocation, useNavigate, Outlet, Link } from 'react-router-dom';
 import { Layout, Col, Row, Dropdown, Breadcrumb, Button, Menu, Avatar, message, Modal, Form, Tag, Input, Upload } from 'antd';
 // 引入type数据
 import type { MenuProps } from 'antd'
-import { mainViewDataInit, updatePassword, updateUserInfo, updateUserInfoNoAvatar, getMenuNodesEmploye } from '../../type/mainView';
+import { mainViewDataInit, updateUserInfo, updateUserInfoNoAvatar, getMenuNodesEmploye } from '../../type/mainView';
+import { updateEuserPassword } from '../../type/attendance';
 import { MenuFoldOutlined, MenuUnfoldOutlined, UserOutlined, DownOutlined, PlusOutlined, LoadingOutlined, CheckOutlined } from '@ant-design/icons';
 import './index.less'
 import PubSub from 'pubsub-js'
 import RouterBeforeEach from '../../util/RouterBeforeEach';
 import { useDispatch, useSelector } from 'react-redux';
 import { USEROUT } from '../../store/constant';
-import { userOut } from '../../store/actions/user';
 import { useForm } from 'antd/es/form/Form';
-import { RcFile, UploadFile, UploadProps } from 'antd/lib/upload';
+// import { RcFile, UploadFile, UploadProps } from 'antd/lib/upload';
 const { Header, Sider, Content } = Layout;
 type Props = {
 }
@@ -173,20 +173,20 @@ const MainView = (props: Props) => {
     );
     // 修改密码表单
     const [updatePwdForm] = useForm()
-    const [updateUserForm] = useForm()
+    // const [updateUserForm] = useForm()
     // 个人信息
     const [showInfo, setShowInfo] = useState(false)
     // 修改密码
     const [showPwd, setShowPwd] = useState(false)
     // 修改个人信息
-    const [showEdit, setShowEdit] = useState(false)
-    // 头像相关
-    const [loading, setLoading] = useState(false);
-    const [imageUrl, setImageUrl] = useState<any>(userInfo.avatar);
-    const [fileList, setFileList] = useState<UploadFile[]>([
-    ]);
-    const [isUploadAvatar, setUploadAvatar] = useState(false)
-    const [openImg, setOpenImg] = useState(false)
+    // const [showEdit, setShowEdit] = useState(false)
+    // // 头像相关
+    // const [loading, setLoading] = useState(false);
+    // const [imageUrl, setImageUrl] = useState<any>(userInfo.avatar);
+    // const [fileList, setFileList] = useState<UploadFile[]>([
+    // ]);
+    // const [isUploadAvatar, setUploadAvatar] = useState(false)
+    // const [openImg, setOpenImg] = useState(false)
     // 取消修改
     const cancelUpdatePwd = () => {
         setShowPwd(false)
@@ -196,7 +196,7 @@ const MainView = (props: Props) => {
     const updatePwd = () => {
         updatePwdForm.validateFields().then(async res => {
             if (res.confirmNewPwd === res.newPwd) {
-                const updateSuccess = await updatePassword({
+                const updateSuccess = await updateEuserPassword({
                     nowPassword: res.nowPwd,
                     newPassword: res.newPwd,
                     user: userInfo.username
@@ -207,135 +207,134 @@ const MainView = (props: Props) => {
                     // 退出登录
                     dispatch({ type: USEROUT, data: {} })
                     navitage('/loginView')
+                    message.success("修改密码成功！请重新登陆")
                 }
             } else {
                 message.warn('两次密码输入不一致!')
             }
-
         }).catch(err => {
             message.warning('请按要求输入数据！')
         })
-
     }
     // 修改个人信息
-    const editInfo = (): void => {
-        setShowInfo(false)
-        setShowEdit(true)
-        setFileList([    // 回显头像
-            {
-                uid: '1',
-                name: 'image.png',
-                status: 'done',
-                url: userInfo.avatar,
-            },])
-        updateUserForm.setFieldValue("newUsername", userInfo.nickname)
-    }
-    const cancelEditInfo = () => {
-        setShowEdit(false)
-        updateUserForm.resetFields()
-        setFileList([])
-        setLoading(false)
-    }
+    // const editInfo = (): void => {
+    //     setShowInfo(false)
+    //     setShowEdit(true)
+    //     setFileList([    // 回显头像
+    //         {
+    //             uid: '1',
+    //             name: 'image.png',
+    //             status: 'done',
+    //             url: userInfo.avatar,
+    //         },])
+    //     updateUserForm.setFieldValue("newUsername", userInfo.nickname)
+    // }
+    // const cancelEditInfo = () => {
+    //     setShowEdit(false)
+    //     updateUserForm.resetFields()
+    //     setFileList([])
+    //     setLoading(false)
+    // }
     // 头像相关
     // 图片转码
-    const getBase64 = (img: RcFile, callback: (url: string) => void) => {
-        const reader = new FileReader();
-        reader.addEventListener('load', () => callback(reader.result as string));
-        reader.readAsDataURL(img);
-    };
+    // const getBase64 = (img: RcFile, callback: (url: string) => void) => {
+    //     const reader = new FileReader();
+    //     reader.addEventListener('load', () => callback(reader.result as string));
+    //     reader.readAsDataURL(img);
+    // };
     // 取消预览
-    const cancelOpen = () => {
-        setOpenImg(false)
-    }
+    // const cancelOpen = () => {
+    //     setOpenImg(false)
+    // }
     // 上传前
-    const beforeUpload = (file: RcFile) => {
-        const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
-        if (!isJpgOrPng) {
-            message.error('只能上传 JPG/PNG 文件!');
-            return false;
-        }
-        const isLt2M = file.size / 1024 / 1024 < 2;
-        if (!isLt2M) {
-            message.error('图片大小必须小于 2MB!');
-            return false;
-        }
+    // const beforeUpload = (file: RcFile) => {
+    //     const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+    //     if (!isJpgOrPng) {
+    //         message.error('只能上传 JPG/PNG 文件!');
+    //         return false;
+    //     }
+    //     const isLt2M = file.size / 1024 / 1024 < 2;
+    //     if (!isLt2M) {
+    //         message.error('图片大小必须小于 2MB!');
+    //         return false;
+    //     }
 
-        return false;
-    };
-    // 图片状态改变时
-    const handleChange: UploadProps['onChange'] = ({ fileList: newFileList }) => {
-        if (newFileList && newFileList.length > 0) {
-            // 如果有头像 就添加 并且把放大的url也设置
-            getBase64(newFileList[0].originFileObj as RcFile, url => {
-                setImageUrl(url)
-            })
-            setUploadAvatar(true)
-            setFileList(newFileList);
+    //     return false;
+    // };
+    // // 图片状态改变时
+    // const handleChange: UploadProps['onChange'] = ({ fileList: newFileList }) => {
+    //     if (newFileList && newFileList.length > 0) {
+    //         // 如果有头像 就添加 并且把放大的url也设置
+    //         getBase64(newFileList[0].originFileObj as RcFile, url => {
+    //             setImageUrl(url)
+    //         })
+    //         setUploadAvatar(true)
+    //         setFileList(newFileList);
 
-        } else {
-            setUploadAvatar(false)
-        }
+    //     } else {
+    //         setUploadAvatar(false)
+    //     }
 
-    };
+    // };
 
-    // upload按钮样式
-    const uploadButton = (
-        <div >
-            {loading ? <LoadingOutlined /> : <PlusOutlined />}
-        </div>
-    );
-    // 预览
-    const handlePreview = () => {
-        setOpenImg(true)
-    };
+    // // upload按钮样式
+    // const uploadButton = (
+    //     <div >
+    //         {loading ? <LoadingOutlined /> : <PlusOutlined />}
+    //     </div>
+    // );
+    // // 预览
+    // const handlePreview = () => {
+    //     setOpenImg(true)
+    // };
 
-    // 删除
-    const removeImg = () => {
-        setFileList([])
-        setUploadAvatar(false)
+    // // 删除
+    // const removeImg = () => {
+    //     setFileList([])
+    //     setUploadAvatar(false)
 
-    }
-    // 提交修改
-    const confirmUpload = async () => {
-        const lengthFile = updateUserForm.getFieldValue('newAvatar');
-        if (lengthFile && lengthFile.length !== 0 && isUploadAvatar) {
-            setLoading(true)
-            updateUserForm.validateFields().then(async (res) => {
-                if (res.newAvatar.fileList.length > 0) {
-                    const formData = new FormData();
-                    fileList.forEach(file => {
-                        formData.append('file', file.originFileObj as File);
-                    });
-                    formData.append('nickname', updateUserForm.getFieldValue('newUsername'))
-                    formData.append('username', userInfo.username);
-                    // 发请求
-                    const res = await updateUserInfo(formData);
-                    if (res) {
-                        message.success("修改用户信息成功！请重新登录")
-                        setLoading(false)
-                        cancelEditInfo()
-                        dispatch(userOut({}))
-                        navitage('/loginView')
-                    }
+    // }
+    // // 提交修改
+    // const confirmUpload = async () => {
+    //     const lengthFile = updateUserForm.getFieldValue('newAvatar');
+    //     if (lengthFile && lengthFile.length !== 0 && isUploadAvatar) {
+    //         setLoading(true)
+    //         updateUserForm.validateFields().then(async (res) => {
+    //             if (res.newAvatar.fileList.length > 0) {
+    //                 const formData = new FormData();
+    //                 fileList.forEach(file => {
+    //                     formData.append('file', file.originFileObj as File);
+    //                 });
+    //                 formData.append('nickname', updateUserForm.getFieldValue('newUsername'))
+    //                 formData.append('username', userInfo.username);
+    //                 // 发请求
+    //                 const res = await updateUserInfo(formData);
+    //                 if (res) {
+    //                     message.success("修改用户信息成功！请重新登录")
+    //                     setLoading(false)
+    //                     cancelEditInfo()
+    //                     dispatch(userOut({}))
+    //                     navitage('/loginView')
+    //                 }
 
-                }
-            })
-        } else {
-            // 无头像修改
-            // 发请求
-            const res = await updateUserInfoNoAvatar({
-                nickname: updateUserForm.getFieldValue('newUsername'),
-                username: userInfo.username
-            });
-            if (res) {
-                message.success("修改用户信息成功！请重新登录")
-                setLoading(false)
-                cancelEditInfo()
-                dispatch(userOut({}))
-                navitage('/loginView')
-            }
-        }
-    }
+    //             }
+    //         })
+    //     } else {
+    //         // 无头像修改
+    //         // 发请求
+    //         const res = await updateUserInfoNoAvatar({
+    //             nickname: updateUserForm.getFieldValue('newUsername'),
+    //             username: userInfo.username
+    //         });
+    //         if (res) {
+    //             message.success("修改用户信息成功！请重新登录")
+    //             setLoading(false)
+    //             cancelEditInfo()
+    //             dispatch(userOut({}))
+    //             navitage('/loginView')
+    //         }
+    //     }
+    // }
 
     return (
         <Layout>
@@ -386,7 +385,7 @@ const MainView = (props: Props) => {
             <Modal open={showInfo} onCancel={() => setShowInfo(false)} title="管理员信息" width={600} footer={
                 <>
                     <Button type='primary' icon={<CheckOutlined />} onClick={() => setShowInfo(false)}>我知道了</Button>
-                    <Button type='primary' onClick={editInfo} disabled>修改信息</Button>
+                    <Button type='primary' disabled>修改信息</Button>
                 </>
             }>
                 <Form size='large' labelCol={{ span: 5 }} wrapperCol={{ span: 19 }}>
@@ -424,7 +423,7 @@ const MainView = (props: Props) => {
                     </Form.Item>
                 </Form>
             </Modal>
-            {/* 修改个人信息 */}
+            {/* 修改个人信息
             <Modal open={showEdit} onCancel={cancelEditInfo} title="修改个人信息" width={700} footer={
                 <div>
                     <Button type='primary' onClick={cancelEditInfo}>取消修改</Button>
@@ -455,10 +454,10 @@ const MainView = (props: Props) => {
                         <Input />
                     </Form.Item>
                 </Form>
-            </Modal>
-            <Modal width={800} open={openImg} title="头像预览" footer={null} onCancel={cancelOpen}>
+            </Modal> */}
+            {/* <Modal width={800} open={openImg} title="头像预览" footer={null} onCancel={cancelOpen}>
                 <img alt="example" style={{ width: '100%' }} src={imageUrl} />
-            </Modal>
+            </Modal> */}
 
         </Layout >
 

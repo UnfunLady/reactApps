@@ -260,6 +260,16 @@ export const addLeave = async (postData: object) => {
         return false;
     }
 }
+// 修改密码
+export const updateEuserPassword = async (postData: object) => {
+    const res: any = await attendanceApi.reqUpdateEduserPassword(postData)
+    if (res.code === 200) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
 
 // 判断员工是否打上午卡了
 export const GetClockInfo = async (postData: object) => {
@@ -319,6 +329,8 @@ interface todayClockData {
         monthClockDelayCount: number,
         monthClockPercentage: number
     },
+    delayClockInfo: [],
+    todayDelayCount: number,
     clockPage: number,
     clockSize: number,
 }
@@ -341,6 +353,8 @@ export class todayInfoInit {
             monthClockDelayCount: 0,
             monthClockPercentage: 0
         },
+        delayClockInfo: [],
+        todayDelayCount: 0,
         clockPage: 1,
         clockSize: 6,
     }
@@ -438,6 +452,15 @@ export const initChartsOne = async (container: HTMLElement) => {
 
 
 }
+// 获取今日打卡迟到信息
+export const todayClockDelayInfo = async (data: todayInfoInit, setData: Function, postData: object) => {
+    const res: any = await attendanceApi.reqGetTodayClockDelayInfo(postData);
+    if (res.code === 200) {
+        data.data.delayClockInfo = res.todayDelayClockInfo;
+        data.data.todayDelayCount = res.delaycount;
+        setData({ ...data })
+    }
+}
 
 // 显示部门信息
 
@@ -486,6 +509,11 @@ interface lockEuserType {
         type: string,
         keyword: string,
     },
+    editForm: {
+        username: string | number,
+        type: string,
+        password: string | number
+    }
     iskeyWord: boolean
 
 }
@@ -495,14 +523,19 @@ export class lockEuserDataInit {
             eusersInfo: [],
             count: 0,
             page: 1,
-            size: 8
+            size: 6
         },
         selectForm: {
             username: '',
             type: '',
             keyword: ''
         },
-        iskeyWord: false
+        iskeyWord: false,
+        editForm: {
+            username: "",
+            type: "",
+            password: ""
+        }
     }
 }
 // 关键字获取
@@ -539,4 +572,13 @@ export const resetEuser = async (postData: Object) => {
         return false;
     }
 
+}
+// 修改账号
+export const updateEuser = async (postData: object) => {
+    const res: any = await attendanceApi.reqUpdateEuser(postData);
+    if (res.code === 200) {
+        return true;
+    } else {
+        return false;
+    }
 }

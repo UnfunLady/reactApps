@@ -1,6 +1,6 @@
 import { Avatar, Calendar, Card, Image, Pagination, Tabs, Tag } from 'antd';
 import { FC, useState, useEffect } from 'react'
-import { initChartsOne, todayInfoInit, getBaseInfoClock, getClockInfoToday } from '../../../type/attendance';
+import { initChartsOne, todayInfoInit, getBaseInfoClock, getClockInfoToday, todayClockDelayInfo } from '../../../type/attendance';
 import './index.less'
 import Table, { ColumnsType } from 'antd/lib/table';
 import { DataType } from '../../../type/employeInfo';
@@ -14,7 +14,7 @@ const Index: FC = () => {
     const getBaseInfo = () => {
         getClockInfoToday(data, setData, { page: data.data.clockPage, size: data.data.clockSize });
         getBaseInfoClock(data, setData);
-
+        todayClockDelayInfo(data, setData, { page: data.data.clockPage, size: data.data.clockSize })
     }
     // 初始化echarts
     const initChart = () => {
@@ -48,7 +48,8 @@ const Index: FC = () => {
             key: 'typeInfo',
             align: 'center',
             render: (_, record: any) => {
-                return <Tag color={Number(moment(record.clockTime).format('HH')) > 9 ? '#ee6666' : 'green'}>{Number(moment(record.clockTime).format('HH')) > 9 ? '迟到' : '正常'}</Tag>
+                return <Tag color={Number(moment(record.clockTime).format('HH')) > 8 && record.type == "上午" ? '#ee6666' : '#2a9838'}>{(Number(moment(record.clockTime).format('HH')) > 8 && record.type == "上午") ?
+                    '迟到' : '正常'}</Tag>
             }
         },
         {
@@ -70,11 +71,19 @@ const Index: FC = () => {
 
     ];
     // 修改页码
-    const changePage = (page: number, pageSize: number) => {
+    const changePage = (page: number, pageSize: number, type: string) => {
         data.data.clockPage = page;
         data.data.clockSize = pageSize;
         setData({ ...data })
-        getClockInfoToday(data, setData, { page: data.data.clockPage, size: data.data.clockSize });
+        switch (type) {
+            case "base":
+                getClockInfoToday(data, setData, { page: data.data.clockPage, size: data.data.clockSize });
+                break;
+            case "delay":
+                todayClockDelayInfo(data, setData, { page: data.data.clockPage, size: data.data.clockSize })
+                break;
+        }
+
     }
     // tabs item
     const tabItems =
@@ -91,13 +100,14 @@ const Index: FC = () => {
                                 total={data.data.allClockCount}
                                 size="default"
                                 showSizeChanger
-                                onChange={changePage}
+                                onChange={(page, PageSize) => changePage(page, PageSize, "base")}
                                 showQuickJumper
                                 defaultPageSize={6}
                                 defaultCurrent={1}
                                 pageSizeOptions={[6]}
                                 showTotal={(total) => `今日共 ${total} 打卡信息`}
                             />
+                            <br />
                         </div>
                     </>,
 
@@ -105,13 +115,30 @@ const Index: FC = () => {
             {
                 label: '出勤',
                 key: '2',
-                children: '出勤',
+                children: "出勤",
 
             },
             {
                 label: '迟到',
                 key: '3',
-                children: '迟到',
+                children: <>
+                    <Table pagination={false} columns={columns} rowKey={(record) => { return Math.random() }} bordered size='small' dataSource={data.data.delayClockInfo} />
+                    <br />
+                    <div style={{ float: 'right' }}>
+                        <Pagination
+                            total={data.data.todayDelayCount}
+                            size="default"
+                            showSizeChanger
+                            onChange={(page, PageSize) => changePage(page, PageSize, "delay")}
+                            showQuickJumper
+                            defaultPageSize={6}
+                            defaultCurrent={1}
+                            pageSizeOptions={[6]}
+                            showTotal={(total) => `今日共 ${total} 迟到信息`}
+                        />
+                        <br />
+                    </div>
+                </>,
             },
             {
                 label: '请假',
@@ -302,7 +329,7 @@ const Index: FC = () => {
                             <div className='tRightBox'>
                                 <div className='explainNumber'>
                                     <div className='topTitle'><span className='topNum'><CountUp start={0} end={data.data.allClockCount} separator="," duration={1} /></span> 人</div>
-                                    <div className='explain'>出勤</div>
+                                    <div className='explain'>打卡数</div>
                                 </div>
                             </div>
                             <div className='tRightBox'>
@@ -314,7 +341,6 @@ const Index: FC = () => {
                         </div>
                         <div className='mainInfo'>
                             <Tabs items={tabItems} />
-
                         </div>
                     </div>
                 </div>

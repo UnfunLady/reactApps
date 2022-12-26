@@ -10,6 +10,7 @@ const ShowClockDeptInfo: FC = () => {
     const [data, setData] = useState(new showDeptInit())
     const location = useLocation();
     const state: any = location.state;
+
     useEffect(() => {
         switch (state.type) {
             case 'morning':
@@ -18,7 +19,6 @@ const ShowClockDeptInfo: FC = () => {
                 data.data.deptData = state.deptData;
                 setData({ ...data })
                 break;
-
             case 'after':
                 // 修改显示
                 data.data.showAfterDeptInfo = true;
@@ -26,6 +26,7 @@ const ShowClockDeptInfo: FC = () => {
                 setData({ ...data })
                 break;
         }
+        console.log(data.data);
     }, [])
 
     const [showEmploye, setShowEmploye] = useState(false);
@@ -37,24 +38,24 @@ const ShowClockDeptInfo: FC = () => {
         data.data.dno = dept.dno;
         data.data.todayEmployeCount = dept.clockNum;
         setData({ ...data })
-        getTodayEmployeClockInfo(data, setData, { dno: data.data.dno, page: data.data.page, size: data.data.size }, setShowEmploye);
+        getTodayEmployeClockInfo(data, setData, { dno: data.data.dno, page: data.data.page, size: data.data.size, type: data.data.showMorningDeptInfo ? "morning" : "after" }, setShowEmploye);
     }
     const changePage = (page: number, pageSize: number) => {
         data.data.page = page;
         data.data.page = pageSize;
         setData({ ...data })
-        getTodayEmployeClockInfo(data, setData, { dno: data.data.dno, page: data.data.page, size: data.data.size }, setShowEmploye);
+        getTodayEmployeClockInfo(data, setData, { dno: data.data.dno, page: data.data.page, size: data.data.size, type: data.data.showAfterDeptInfo ? "after" : "morning" }, setShowEmploye);
     }
     const colums: ColumnsType<DataType> = [
 
         {
-            title: '员工号',
+            title: '员工名',
             key: 'employname',
             dataIndex: 'employname',
             align: 'center',
         },
         {
-            title: '员工名',
+            title: '员工号',
             key: 'employno',
             dataIndex: 'employno',
             align: 'center',
@@ -137,8 +138,9 @@ const ShowClockDeptInfo: FC = () => {
                 closable={false}
                 onClose={onClose}
                 open={showEmploye}
+                height="450px"
             >
-                <Table pagination={false} bordered columns={colums} dataSource={data.data.employeData} size="small" />
+                <Table rowKey={(record: any) => record.employno + Math.random()} pagination={false} bordered columns={colums} dataSource={data.data.employeData} size="small" />
                 <br />
                 <div style={{ float: "right" }}>
                     <Pagination

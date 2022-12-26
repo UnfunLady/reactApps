@@ -65,7 +65,19 @@ const reqGetEusersInfoBykeyWord = (data: Object) => {
 const reqResetEuser = (data: Object) => {
     return request({ url: '/api/resetEuser', method: 'post', data })
 }
+// 修改账号
+const reqUpdateEuser = (data: Object) => {
+    return request({ url: '/api/updateEuser', method: 'post', data })
+}
+// 修改员工账号密码
+const reqUpdateEduserPassword = (data: Object) => {
+    return request({ url: '/api/updateEuserPassword', method: 'post', data })
+}
 
+// 获取今日打卡迟到信息
+const reqGetTodayClockDelayInfo = (params: Object) => {
+    return request({ url: '/api/getTodayClockDelayInfo', method: 'get', params })
+}
 export default {
     reqGetEmployeLeavePage,
     reqUpdateEmployeLeave,
@@ -83,5 +95,8 @@ export default {
     reqGetTodayEmployeClockInfo,
     reqGetEusersInfo,
     reqGetEusersInfoBykeyWord,
-    reqResetEuser
+    reqResetEuser,
+    reqUpdateEuser,
+    reqUpdateEduserPassword,
+    reqGetTodayClockDelayInfo
 }

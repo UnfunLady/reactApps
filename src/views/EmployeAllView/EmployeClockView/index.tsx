@@ -13,7 +13,7 @@ const EmployeIndexView: FC = () => {
         return state.user.userList.userInfo || {}
     })
     // 获取该用户所有部门id和小组id
-    
+
     // 获取当前时间
     const [nowTime, setTime] = useState(moment().format("HH:mm:ss"))
     // 获取当前小时
@@ -58,14 +58,14 @@ const EmployeIndexView: FC = () => {
                 type: !isClockMorning && !isClockAfter ? "上午" : "下午",
                 clockTime: moment().format("YYYY-MM-DD HH:mm:ss")
             })
+
         })
-        saveClockInfo(postData,ClockInfo)
-       
+        saveClockInfo(postData, ClockInfo)
+
 
     }
     // 打卡
     const clock = async () => {
-
         if (isClockAfter && isClockMorning) {
             message.warning("今日已完成全部打卡！")
         } else {
@@ -87,11 +87,8 @@ const EmployeIndexView: FC = () => {
                     employeno: userInfo.username
                 });
                 if (res != undefined) {
-                    res.map((info: any) => {
-                        //    插入打卡表
-                        saveClock(info)
-                    })
-                    ClockInfo()
+                    saveClock(res)
+
                 }
             }
         }

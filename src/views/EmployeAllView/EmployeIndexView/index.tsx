@@ -141,29 +141,29 @@ const EmployeIndexView: FC = () => {
                                 {
                                     data.employeIndex.employeInfo.map((dept: any) => {
                                         return (
-                                           
-                                                <Col className="gutter-row" span={6} key={dept.id} >
-                                                    <Card style={{ borderRadius: "5px", padding: '8px 0' }} className="card">
-                                                        <div className="content" style={{minHeight:"180px"}}>
-                                                            <div className="item">
-                                                                <Avatar src={dept.avatar} />
-                                                            </div>
-                                                            <div className="item" style={{ marginLeft: "20px" }}>
-                                                                <Tooltip overlayInnerStyle={{ color: 'gray', minWidth: "500px" }} title={dept.explain} color="white" key={dept.id} >
-                                                                    <p style={{ cursor: "help" }}>{dept.dname}</p>
-                                                                </Tooltip>
-                                                                <p className="explain">{dept.explain}</p>
-                                                            </div>
-                                                            <div className="item" style={{ minWidth: "50px" }}>
-                                                                <span style={{ color: "red" }}>{dept.depallCount}人</span>
-                                                            </div>
+
+                                            <Col className="gutter-row" span={6} key={dept.id} >
+                                                <Card style={{ borderRadius: "5px", padding: '8px 0' }} className="card">
+                                                    <div className="content" style={{ minHeight: "180px" }}>
+                                                        <div className="item">
+                                                            <Avatar src={dept.avatar} />
                                                         </div>
-                                                        <div className="action" >
-                                                            <Button type="link" onClick={() => { showDeptDetail(dept) }} >查看具体详情</Button>
+                                                        <div className="item" style={{ marginLeft: "20px" }}>
+                                                            <Tooltip overlayInnerStyle={{ color: 'gray', minWidth: "500px" }} title={dept.explain} color="white" key={dept.id} >
+                                                                <p style={{ cursor: "help" }}>{dept.dname}</p>
+                                                            </Tooltip>
+                                                            <p className="explain">{dept.explain}</p>
                                                         </div>
-                                                    </Card>
-                                                </Col>
-                                        
+                                                        <div className="item" style={{ minWidth: "50px" }}>
+                                                            <span style={{ color: "red" }}>{dept.depallCount}人</span>
+                                                        </div>
+                                                    </div>
+                                                    <div className="action" >
+                                                        <Button type="link" onClick={() => { showDeptDetail(dept) }} >查看具体详情</Button>
+                                                    </div>
+                                                </Card>
+                                            </Col>
+
                                         )
                                     })
                                 }
@@ -176,7 +176,7 @@ const EmployeIndexView: FC = () => {
                                 <Button type='primary' icon={<ArrowLeftOutlined />} size="large" onClick={back}>返回主页</Button>
                                 <br />
                                 <br />
-                                <Table pagination={false} bordered columns={columns} dataSource={data.employeIndex.leaveInfo} />
+                                <Table rowKey={(record) => record.leaveNumber} pagination={false} bordered columns={columns} dataSource={data.employeIndex.leaveInfo} />
                             </>
                             : data.employeIndex.showInfo == true ? <>
                                 <Button type='primary' icon={<ArrowLeftOutlined />} size="large" onClick={back}>返回主页</Button>
