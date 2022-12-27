@@ -331,6 +331,10 @@ interface todayClockData {
     },
     delayClockInfo: [],
     todayDelayCount: number,
+    leaveInfo: [],
+    leaveCount: number,
+    normalInfo: [],
+    normalCount: number,
     clockPage: number,
     clockSize: number,
 }
@@ -355,6 +359,10 @@ export class todayInfoInit {
         },
         delayClockInfo: [],
         todayDelayCount: 0,
+        leaveInfo: [],
+        leaveCount: 0,
+        normalInfo: [],
+        normalCount: 0,
         clockPage: 1,
         clockSize: 6,
     }
@@ -461,6 +469,24 @@ export const todayClockDelayInfo = async (data: todayInfoInit, setData: Function
         setData({ ...data })
     }
 }
+// 获取今日请假信息
+export const todayLeaveInfo = async (data: todayInfoInit, setData: Function, postData: object) => {
+    const res: any = await attendanceApi.reqGetTodayLeaveInfo(postData);
+    if (res.code === 200) {
+        data.data.leaveInfo = res.todayLeaveInfo;
+        data.data.leaveCount = res.leaveCount;
+        setData({ ...data })
+    }
+}
+// 获取今日正常信息
+export const todayNormalInfo = async (data: todayInfoInit, setData: Function, postData: object) => {
+    const res: any = await attendanceApi.reqGetTodayNormalInfo(postData);
+    if (res.code === 200) {
+        data.data.normalInfo = res.todayNormalClockInfo;
+        data.data.normalCount = res.normalCount;
+        setData({ ...data })
+    }
+}
 
 // 显示部门信息
 
@@ -495,6 +521,7 @@ export const getTodayEmployeClockInfo = async (data: showDeptInit, setData: Func
         setShowEmploye(true)
     }
 }
+
 
 // 账号封禁相关
 interface lockEuserType {

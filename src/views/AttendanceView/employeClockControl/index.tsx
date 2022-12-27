@@ -1,6 +1,6 @@
-import { Avatar, Calendar, Card, Image, Pagination, Tabs, Tag } from 'antd';
+import { Avatar, Button, Calendar, Card, Image, Pagination, Tabs, Tag } from 'antd';
 import { FC, useState, useEffect } from 'react'
-import { initChartsOne, todayInfoInit, getBaseInfoClock, getClockInfoToday, todayClockDelayInfo } from '../../../type/attendance';
+import { initChartsOne, todayInfoInit, getBaseInfoClock, getClockInfoToday, todayClockDelayInfo, todayLeaveInfo, todayNormalInfo } from '../../../type/attendance';
 import './index.less'
 import Table, { ColumnsType } from 'antd/lib/table';
 import { DataType } from '../../../type/employeInfo';
@@ -15,6 +15,8 @@ const Index: FC = () => {
         getClockInfoToday(data, setData, { page: data.data.clockPage, size: data.data.clockSize });
         getBaseInfoClock(data, setData);
         todayClockDelayInfo(data, setData, { page: data.data.clockPage, size: data.data.clockSize })
+        todayLeaveInfo(data, setData, { page: data.data.clockPage, size: data.data.clockSize })
+        todayNormalInfo(data, setData, { page: data.data.clockPage, size: data.data.clockSize })
     }
     // 初始化echarts
     const initChart = () => {
@@ -24,6 +26,7 @@ const Index: FC = () => {
         getBaseInfo()
         initChart()
     }, [])
+    // 打卡信息cloums
     const columns: ColumnsType<DataType> = [
         {
             title: '员工',
@@ -70,6 +73,69 @@ const Index: FC = () => {
         },
 
     ];
+    // 请假信息cloums
+    const leaveColumns: ColumnsType<DataType> = [
+        {
+            title: '员工',
+            key: 'employename',
+            dataIndex: 'employename',
+            align: 'center',
+        },
+        {
+            title: '员工号',
+            dataIndex: 'employeno',
+            key: 'employeno',
+            align: 'center',
+        },
+        {
+            title: '部门号',
+            key: 'dno',
+            dataIndex: 'dno',
+            align: 'center',
+        },
+        {
+            title: '小组号',
+            key: 'deptid',
+            dataIndex: 'deptid',
+            align: 'center',
+        },
+        {
+            title: '请假日期',
+            key: 'leaveWhen',
+            align: 'center',
+            render: (_, record: any) => {
+                return <Tag>{(moment(record.leaveWhen).format("YYYY-MM-DD HH:mm:ss"))}</Tag>
+            }
+        },
+        {
+            title: '请假天数',
+            key: 'leaveLong',
+            align: 'center',
+            render: (_, record: any) => {
+                return <Tag color='red' >{record.leaveLong}</Tag>
+            }
+        },
+        {
+            title: '审批人',
+            key: 'whichVerfiy',
+            align: 'center',
+            render: (_, record: any) => {
+                return <Tag >{record.whichVerfiy}</Tag>
+            }
+        },
+        {
+            title: '操作',
+            key: 'nothing',
+            align: 'center',
+            render: (_, record: any) => {
+                return <Button type='primary' onClick={toVerfiy}>审批</Button>
+            }
+        },
+    ];
+    // 审批请假
+    const toVerfiy = () => {
+        navigate("/homeView/attendanceView/employeAttendance")
+    }
     // 修改页码
     const changePage = (page: number, pageSize: number, type: string) => {
         data.data.clockPage = page;
@@ -81,6 +147,12 @@ const Index: FC = () => {
                 break;
             case "delay":
                 todayClockDelayInfo(data, setData, { page: data.data.clockPage, size: data.data.clockSize })
+                break;
+            case "leave":
+                todayLeaveInfo(data, setData, { page: data.data.clockPage, size: data.data.clockSize })
+                break;
+            case "normal":
+                todayNormalInfo(data, setData, { page: data.data.clockPage, size: data.data.clockSize })
                 break;
         }
 
@@ -104,7 +176,7 @@ const Index: FC = () => {
                                 showQuickJumper
                                 defaultPageSize={6}
                                 defaultCurrent={1}
-                                pageSizeOptions={[6]}
+                                pageSizeOptions={[6, 10, 15]}
                                 showTotal={(total) => `今日共 ${total} 打卡信息`}
                             />
                             <br />
@@ -113,9 +185,26 @@ const Index: FC = () => {
 
             },
             {
-                label: '出勤',
+                label: '准时',
                 key: '2',
-                children: "出勤",
+                children: <>
+                    <Table pagination={false} columns={columns} rowKey={(record) => { return Math.random() }} bordered size='small' dataSource={data.data.normalInfo} />
+                    <br />
+                    <div style={{ float: 'right' }}>
+                        <Pagination
+                            total={data.data.normalCount}
+                            size="default"
+                            showSizeChanger
+                            onChange={(page, PageSize) => changePage(page, PageSize, "normal")}
+                            showQuickJumper
+                            defaultPageSize={6}
+                            defaultCurrent={1}
+                            pageSizeOptions={[6, 10, 15]}
+                            showTotal={(total) => `今日共 ${total} 准时信息`}
+                        />
+                        <br />
+                    </div>
+                </>,
 
             },
             {
@@ -133,7 +222,7 @@ const Index: FC = () => {
                             showQuickJumper
                             defaultPageSize={6}
                             defaultCurrent={1}
-                            pageSizeOptions={[6]}
+                            pageSizeOptions={[6, 10, 15]}
                             showTotal={(total) => `今日共 ${total} 迟到信息`}
                         />
                         <br />
@@ -143,7 +232,24 @@ const Index: FC = () => {
             {
                 label: '请假',
                 key: '4',
-                children: '请假',
+                children: <>
+                    <Table pagination={false} columns={leaveColumns} rowKey={(record) => { return Math.random() }} bordered size='small' dataSource={data.data.leaveInfo} />
+                    <br />
+                    <div style={{ float: 'right' }}>
+                        <Pagination
+                            total={data.data.leaveCount}
+                            size="default"
+                            showSizeChanger
+                            onChange={(page, PageSize) => changePage(page, PageSize, "leave")}
+                            showQuickJumper
+                            defaultPageSize={6}
+                            defaultCurrent={1}
+                            pageSizeOptions={[6]}
+                            showTotal={(total) => `今日共 ${total} 请假信息`}
+                        />
+                        <br />
+                    </div>
+                </>,
             },
         ]
     // 展示部门打卡信息

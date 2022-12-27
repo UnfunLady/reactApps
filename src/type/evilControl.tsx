@@ -1,5 +1,5 @@
 import { message } from 'antd'
-import { evilControl } from '../api'
+import { evilControl, mapApi } from '../api'
 import * as echarts from 'echarts';
 import { SAVAEVILDATAINFO } from '../store/constant'
 type EChartsOption = echarts.EChartsOption
@@ -27,32 +27,33 @@ export class chinaInfoInit {
                 color: '#ffa352',
                 data: []
             },
+            // 无症状不发布了
+            // {
+            //     id: 1,
+            //     title: '无症状感染者',
+            //     color: '#791618',
+            //     data: []
+            // },
             {
                 id: 1,
-                title: '无症状感染者',
-                color: '#791618',
-                data: []
-            },
-            {
-                id: 2,
                 title: '现有确诊',
                 color: '#e44a3d',
                 data: []
             },
             {
-                id: 3,
+                id: 2,
                 title: '累计确诊',
                 color: '#a31d13',
                 data: []
             },
             {
-                id: 4,
+                id: 3,
                 title: '累计死亡',
                 color: '#333333',
                 data: []
             },
             {
-                id: 5,
+                id: 4,
                 title: '累计治愈',
                 color: '#34aa70',
                 data: []
@@ -202,28 +203,41 @@ const initEchartsyData = (data: chinaInfoInit, setData: Function) => {
 export const numberInit = (data: chinaInfoInit, setData: Function) => {
     // 设计的有问题只能一个个赋值
     data.chinaInfo.allInfo[0]['data'] = {
-        oneNumber: data.chinaInfo.evilData.suspectedCount,
-        twoNumber: data.chinaInfo.evilData['suspectedIncr']
+        // oneNumber: data.chinaInfo.evilData.suspectedCount,
+        // twoNumber: data.chinaInfo.evilData['suspectedIncr']
+        oneNumber: data.chinaInfo.evilData.total.input,
+        twoNumber: data.chinaInfo.evilData.today.input
     };
+    // 无症状患者不发布了
+    // data.chinaInfo.allInfo[1]['data'] = {
+    //     // oneNumber: data.chinaInfo.evilData['seriousCount'],
+    //     // twoNumber: data.chinaInfo.evilData['seriousIncr']
+    //     oneNumber: 0,
+    //     twoNumber: 0
+    // };
     data.chinaInfo.allInfo[1]['data'] = {
-        oneNumber: data.chinaInfo.evilData['seriousCount'],
-        twoNumber: data.chinaInfo.evilData['seriousIncr']
+        // oneNumber: data.chinaInfo.evilData['currentConfirmedCount'],
+        // twoNumber: data.chinaInfo.evilData['currentConfirmedIncr']
+        oneNumber: data.chinaInfo.evilData.total.confirm - data.chinaInfo.evilData.total.dead - data.chinaInfo.evilData.total.heal,
+        twoNumber: data.chinaInfo.evilData.today.storeConfirm
     };
     data.chinaInfo.allInfo[2]['data'] = {
-        oneNumber: data.chinaInfo.evilData['currentConfirmedCount'],
-        twoNumber: data.chinaInfo.evilData['currentConfirmedIncr']
+        // oneNumber: data.chinaInfo.evilData['confirmedCount'],
+        // twoNumber: data.chinaInfo.evilData['confirmedIncr']
+        oneNumber: data.chinaInfo.evilData.total.confirm,
+        twoNumber: data.chinaInfo.evilData.today.confirm
     };
     data.chinaInfo.allInfo[3]['data'] = {
-        oneNumber: data.chinaInfo.evilData['confirmedCount'],
-        twoNumber: data.chinaInfo.evilData['confirmedIncr']
+        // oneNumber: data.chinaInfo.evilData['deadCount'],
+        // twoNumber: data.chinaInfo.evilData['deadIncr']
+        oneNumber: data.chinaInfo.evilData.total.dead,
+        twoNumber: data.chinaInfo.evilData.today.dead
     };
     data.chinaInfo.allInfo[4]['data'] = {
-        oneNumber: data.chinaInfo.evilData['deadCount'],
-        twoNumber: data.chinaInfo.evilData['deadIncr']
-    };
-    data.chinaInfo.allInfo[5]['data'] = {
-        oneNumber: data.chinaInfo.evilData['curedCount'],
-        twoNumber: data.chinaInfo.evilData['curedIncr']
+        // oneNumber: data.chinaInfo.evilData['curedCount'],
+        // twoNumber: data.chinaInfo.evilData['curedIncr']
+        oneNumber: data.chinaInfo.evilData.total.heal,
+        twoNumber: data.chinaInfo.evilData.today.heal
     };
     setData({ ...data })
 }
@@ -231,7 +245,8 @@ export const numberInit = (data: chinaInfoInit, setData: Function) => {
 // 缓存的chinaInfo
 export const getSavedAllEvilInfo = (data: chinaInfoInit, setData: Function, evilData: any) => {
     data.chinaInfo.evilData = evilData
-    data.chinaInfo.updateTime = timestampToTime(evilData.modifyTime)
+    // data.chinaInfo.updateTime = timestampToTime(evilData.modifyTime)
+    data.chinaInfo.updateTime = evilData.lastUpdateTime;
     setData({ ...data })
     numberInit(data, setData)
     initEchartsxData(data, setData)
@@ -240,13 +255,18 @@ export const getSavedAllEvilInfo = (data: chinaInfoInit, setData: Function, evil
 }
 // 获取信息
 export const getAllEvilInfo = async (data: chinaInfoInit, setData: Function, dispatch: Function) => {
-    const res: any = await evilControl.reqGetEvilInfo()
-    if (res.code === 200) {
-        data.chinaInfo.evilData = res.newslist[0].desc
+    const t = new Date().getTime() * 2;
+    const res: any = await mapApi.getChinaEvilInfo(t)
+    if (res.code === 10000) {
+        console.log(res.data.chinaTotal);
+
+        // data.chinaInfo.evilData = res.newslist[0].desc
+        data.chinaInfo.evilData = res.data.chinaTotal;
         // 将时间转换格式
-        data.chinaInfo.updateTime = timestampToTime(data.chinaInfo.evilData['modifyTime'])
+        // data.chinaInfo.updateTime = timestampToTime(data.chinaInfo.evilData['modifyTime'])
+        data.chinaInfo.updateTime = res.data.lastUpdateTime;
         setData({ ...data })
-        dispatch({ type: SAVAEVILDATAINFO, data: res.newslist[0].desc })
+        dispatch({ type: SAVAEVILDATAINFO, data: { ...res.data.chinaTotal, lastUpdateTime: res.data.lastUpdateTime } })
         numberInit(data, setData)
         initEchartsxData(data, setData)
         initEchartsyData(data, setData)

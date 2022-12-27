@@ -33,7 +33,6 @@ const ShowClockDeptInfo: FC = () => {
     const onClose = () => {
         setShowEmploye(false)
     }
-
     const showClockEmployeInfo = (dept: any) => {
         data.data.dno = dept.dno;
         data.data.todayEmployeCount = dept.clockNum;
@@ -47,7 +46,6 @@ const ShowClockDeptInfo: FC = () => {
         getTodayEmployeClockInfo(data, setData, { dno: data.data.dno, page: data.data.page, size: data.data.size, type: data.data.showAfterDeptInfo ? "after" : "morning" }, setShowEmploye);
     }
     const colums: ColumnsType<DataType> = [
-
         {
             title: '员工名',
             key: 'employname',
@@ -94,11 +92,8 @@ const ShowClockDeptInfo: FC = () => {
         },
     ]
     return (
-
         <div style={{ margin: "30px" }}>
-
             {data.data.deptData.length > 0 ? <>
-
                 <Row justify="space-around" style={{ margin: "180px auto" }}>
                     {data.data.deptData.map((dept: any) => {
                         return (
@@ -123,7 +118,6 @@ const ShowClockDeptInfo: FC = () => {
                         )
                     })}
                 </Row>
-
             </> :
                 <>
                     <div style={{ margin: "180px auto" }}>
@@ -131,7 +125,6 @@ const ShowClockDeptInfo: FC = () => {
                     </div>
                 </>
             }
-
             <Drawer
                 title="该部门打卡信息如下"
                 placement={"top"}

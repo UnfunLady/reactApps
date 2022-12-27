@@ -78,6 +78,14 @@ const reqUpdateEduserPassword = (data: Object) => {
 const reqGetTodayClockDelayInfo = (params: Object) => {
     return request({ url: '/api/getTodayClockDelayInfo', method: 'get', params })
 }
+// 获取今日请假信息
+const reqGetTodayLeaveInfo = (params: Object) => {
+    return request({ url: '/api/getTodayLeaveInfo', method: 'get', params })
+}
+// 今日正常信息
+const reqGetTodayNormalInfo = (params: Object) => {
+    return request({ url: '/api/getTodayClockNormalInfo', method: 'get', params })
+}
 export default {
     reqGetEmployeLeavePage,
     reqUpdateEmployeLeave,
@@ -98,5 +106,7 @@ export default {
     reqResetEuser,
     reqUpdateEuser,
     reqUpdateEduserPassword,
-    reqGetTodayClockDelayInfo
+    reqGetTodayClockDelayInfo,
+    reqGetTodayLeaveInfo,
+    reqGetTodayNormalInfo
 }
