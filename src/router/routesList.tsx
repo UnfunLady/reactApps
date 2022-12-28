@@ -27,6 +27,7 @@ const EmployeAttendance = lazy(() => import("../views/AttendanceView/employeAtte
 const EmployeClock = lazy(() => import("../views/AttendanceView/employeClockControl"))
 const ShowClockDeptInfo = lazy(() => import("../views/AttendanceView/showClockDeptInfo"))
 const LockEmployeView = lazy(() => import("../views/LockAccountView"))
+const ClockInfoControllazy = lazy(() => import("../views/AttendanceView/clockInfoControl"))
 export {
     LockEmployeView,
     HomeView,
@@ -55,5 +56,6 @@ export {
     LoginView,
     NotFound,
     RecoverEmploye,
-    RecoverGroup
+    RecoverGroup,
+    ClockInfoControllazy
 }

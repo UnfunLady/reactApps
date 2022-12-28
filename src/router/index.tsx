@@ -27,7 +27,11 @@ import { MenuOutlined, SolutionOutlined, RightSquareOutlined, SettingOutlined, I
 // import EmployeAttendance from '../views/AttendanceView/employeAttendanceControl'
 // import EmployeClock from '../views/AttendanceView/employeClockControl'
 // import ShowClockDeptInfo from '../views/AttendanceView/showClockDeptInfo'
-import { LockEmployeView, HomeView, MainView, EmployeView, EmployeInfo, EmployeSalary, SalaryIndexView, DepartmentSalaryDetail, EmployeDetailView, DepartmentView, DepartmentEditView, AddGroupView, AddDepartmentView, DeleteDepartmentView, DMainView, EvilControl, ChinaInfo, ChinaMap, CompanyInfo, ShowNoCovid, Attendance, EmployeAttendance, EmployeClock, ShowClockDeptInfo, RecoverEmploye, RecoverGroup, LoginView, NotFound } from './routesList';
+import {
+    LockEmployeView, HomeView, MainView, EmployeView, EmployeInfo, EmployeSalary, SalaryIndexView, DepartmentSalaryDetail, EmployeDetailView, DepartmentView,
+    DepartmentEditView, AddGroupView, AddDepartmentView, DeleteDepartmentView, DMainView, EvilControl, ChinaInfo, ChinaMap, CompanyInfo, ShowNoCovid, Attendance,
+    EmployeAttendance, EmployeClock, ShowClockDeptInfo, RecoverEmploye, RecoverGroup, LoginView, NotFound, ClockInfoControllazy
+} from './routesList';
 const routes: any = [
     //重定向
     {
@@ -356,8 +360,18 @@ const routes: any = [
                         icon: <RightSquareOutlined />,
                         show: false,
                         auth: true,
+                    },
+                    {
+                        path: 'clockInfoControllazy',
+                        absolutePath: '/homeView/attendanceView/clockInfoControllazy',
+                        element: <ClockInfoControllazy />,
+                        title: '打卡信息管理',
+                        breadcrumbName: '打卡信息管理',
+                        icon: <RightSquareOutlined />,
+                        show: true,
+                        auth: true,
 
-                    }
+                    },
 
                 ]
             },
@@ -442,6 +456,7 @@ export const breadcrumbNameMap: Record<string, string> = {
     '/homeView/lockEmployeAccount': '员工账号管理',
     '/homeView/attendanceView/employeAttendance': '员工请假审批',
     '/homeView/attendanceView/employeClock': '打卡出勤信息',
-    '/homeView/attendanceView/showClockDeptInfo': '打卡部门信息'
+    '/homeView/attendanceView/showClockDeptInfo': '打卡部门信息',
+    '/homeView/attendanceView/clockInfoControllazy': "打卡信息管理",
 };
 export default routes

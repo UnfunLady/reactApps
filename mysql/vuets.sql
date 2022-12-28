@@ -11,7 +11,7 @@
  Target Server Version : 80029
  File Encoding         : 65001
 
- Date: 26/12/2022 18:58:22
+ Date: 28/12/2022 17:47:43
 */
 
 SET NAMES utf8mb4;
@@ -57,6 +57,14 @@ INSERT INTO `clockdepall` VALUES ('2022-12-26', 1, 'false', 'false');
 INSERT INTO `clockdepall` VALUES ('2022-12-26', 16, 'false', 'false');
 INSERT INTO `clockdepall` VALUES ('2022-12-26', 2, 'false', 'false');
 INSERT INTO `clockdepall` VALUES ('2022-12-26', 39, 'true', 'true');
+INSERT INTO `clockdepall` VALUES ('2022-12-27', 1, 'false', 'false');
+INSERT INTO `clockdepall` VALUES ('2022-12-27', 16, 'false', 'false');
+INSERT INTO `clockdepall` VALUES ('2022-12-27', 2, 'false', 'false');
+INSERT INTO `clockdepall` VALUES ('2022-12-27', 39, 'true', 'false');
+INSERT INTO `clockdepall` VALUES ('2022-12-28', 1, 'false', 'false');
+INSERT INTO `clockdepall` VALUES ('2022-12-28', 2, 'false', 'false');
+INSERT INTO `clockdepall` VALUES ('2022-12-28', 39, 'false', 'false');
+INSERT INTO `clockdepall` VALUES ('2022-12-28', 16, 'false', 'false');
 
 -- ----------------------------
 -- Table structure for clockemploye
@@ -91,6 +99,10 @@ INSERT INTO `clockemploye` VALUES (1, 1, 1, '鲁潜223', '上午', '2022-12-26 1
 INSERT INTO `clockemploye` VALUES (16, 76, 1, '鲁潜223', '上午', '2022-12-26 15:13:35', NULL);
 INSERT INTO `clockemploye` VALUES (1, 1, 1, '鲁潜223', '下午', '2022-12-26 18:04:33', NULL);
 INSERT INTO `clockemploye` VALUES (16, 76, 1, '鲁潜223', '下午', '2022-12-26 18:04:33', NULL);
+INSERT INTO `clockemploye` VALUES (1, 1, 1, '鲁潜223', '上午', '2022-12-27 14:21:31', NULL);
+INSERT INTO `clockemploye` VALUES (16, 76, 1, '鲁潜223', '上午', '2022-12-27 14:21:31', NULL);
+INSERT INTO `clockemploye` VALUES (1, 1, 1, '鲁潜223', '上午', '2022-12-28 16:04:32', NULL);
+INSERT INTO `clockemploye` VALUES (16, 76, 1, '鲁潜223', '上午', '2022-12-28 16:04:32', NULL);
 INSERT INTO `clockemploye` VALUES (39, 112, 2, '邵金鑫', '上午', '2022-12-13 18:17:31', '广州');
 INSERT INTO `clockemploye` VALUES (39, 112, 2, '邵金鑫', '上午', '2022-12-14 18:17:31', '广州');
 INSERT INTO `clockemploye` VALUES (1, 1, 2, '邵金鑫', '上午', '2022-12-20 10:12:27', NULL);
@@ -112,11 +124,22 @@ INSERT INTO `clockemploye` VALUES (1, 1, 2, '邵金鑫', '上午', '2022-12-26 1
 INSERT INTO `clockemploye` VALUES (2, 5, 2, '邵金鑫', '上午', '2022-12-26 15:20:03', NULL);
 INSERT INTO `clockemploye` VALUES (39, 112, 2, '邵金鑫', '上午', '2022-12-26 15:20:03', NULL);
 INSERT INTO `clockemploye` VALUES (39, 112, 2, '邵金鑫', '下午', '2022-12-26 18:20:03', NULL);
+INSERT INTO `clockemploye` VALUES (1, 1, 2, '邵金鑫', '上午', '2022-12-27 14:21:40', NULL);
+INSERT INTO `clockemploye` VALUES (2, 5, 2, '邵金鑫', '上午', '2022-12-27 14:21:40', NULL);
+INSERT INTO `clockemploye` VALUES (39, 112, 2, '邵金鑫', '上午', '2022-12-27 14:21:40', NULL);
+INSERT INTO `clockemploye` VALUES (1, 1, 2, '邵金鑫', '上午', '2022-12-28 16:04:25', NULL);
+INSERT INTO `clockemploye` VALUES (2, 5, 2, '邵金鑫', '上午', '2022-12-28 16:04:25', NULL);
+INSERT INTO `clockemploye` VALUES (39, 112, 2, '邵金鑫', '上午', '2022-12-28 16:04:25', NULL);
 INSERT INTO `clockemploye` VALUES (1, 1, 4, '潘 琪', '上午', '2022-12-26 15:22:00', NULL);
 INSERT INTO `clockemploye` VALUES (16, 76, 4, '潘 琪', '上午', '2022-12-26 15:22:00', NULL);
 INSERT INTO `clockemploye` VALUES (1, 1, 4, '潘 琪', '下午', '2022-12-26 18:10:16', NULL);
 INSERT INTO `clockemploye` VALUES (16, 76, 4, '潘 琪', '下午', '2022-12-26 18:10:16', NULL);
+INSERT INTO `clockemploye` VALUES (1, 1, 4, '潘 琪', '上午', '2022-12-27 14:21:47', NULL);
+INSERT INTO `clockemploye` VALUES (16, 76, 4, '潘 琪', '上午', '2022-12-27 14:21:47', NULL);
 INSERT INTO `clockemploye` VALUES (1, 1, 16, '顾金鑫1', '上午', '2022-12-26 15:14:11', NULL);
+INSERT INTO `clockemploye` VALUES (1, 1, 16, '顾金鑫1', '上午', '2022-12-27 08:21:55', NULL);
+INSERT INTO `clockemploye` VALUES (1, 1, 16, '顾金鑫1', '上午', '2022-12-28 16:04:15', NULL);
+INSERT INTO `clockemploye` VALUES (39, 110, 262, 'testboss', '上午', '2022-12-27 16:37:49', NULL);
 
 -- ----------------------------
 -- Table structure for covidinfo
@@ -381,6 +404,7 @@ INSERT INTO `covidinfo` VALUES (6, 16, 249, 'true', 'true', 'true');
 INSERT INTO `covidinfo` VALUES (5, 13, 250, 'false', 'false', 'false');
 INSERT INTO `covidinfo` VALUES (1, 1, 252, 'false', 'false', 'false');
 INSERT INTO `covidinfo` VALUES (1, 2, 253, 'false', 'false', 'false');
+INSERT INTO `covidinfo` VALUES (39, 110, 262, 'false', 'false', 'false');
 
 -- ----------------------------
 -- Table structure for depall
@@ -398,7 +422,7 @@ CREATE TABLE `depall`  (
   `allClockMorning` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'false',
   `allClockAfter` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'false',
   PRIMARY KEY (`dno`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 41 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 42 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of depall
@@ -411,7 +435,7 @@ INSERT INTO `depall` VALUES (5, '运维团队', '设计并开发高效的监控�
 INSERT INTO `depall` VALUES (6, '经营团队', '以可控的方式，尽可能高效的完成产品功能的迭代的变更工作，搞好市场调查与预测，选定产品发展方向，制定长期发展规划', 'https://img1.baidu.com/it/u=312885407,2370214083&fm=253&fmt=auto&app=138&f=JPEG', 13, 1, 'false', 1, 'false', 'false');
 INSERT INTO `depall` VALUES (7, '行政团队', '负责公司全体员工的后勤保障工作，负责接待来宾（比如：政府部门、职能部门人员），接听或转接外部电话，负责公司员工的考勤管理', 'https://img0.baidu.com/it/u=3450002477,2924136512&fm=253&fmt=auto&app=138&f=PNG', 10, 1, 'false', 2, 'false', 'false');
 INSERT INTO `depall` VALUES (16, '测试团队', '在规定的条件下对程序进行操作，以发现程序错误，衡量软件质量，并对其是否能满足设计要求进行评估', 'http://127.0.0.1:8888/images/uploadAvatarZengYu76264logo.jpg', 7, 1, 'false', 4, 'false', 'false');
-INSERT INTO `depall` VALUES (39, 'test1', '参与分布式test', 'http://127.0.0.1:8888/images/uploadAvatarZengYu46412log.jpg', 1, 2, 'true', 0, 'false', 'false');
+INSERT INTO `depall` VALUES (39, 'test1', '参与分布式test', 'http://127.0.0.1:8888/images/uploadAvatarZengYu46412log.jpg', 2, 2, 'true', 1, 'false', 'false');
 
 -- ----------------------------
 -- Table structure for dept
@@ -427,7 +451,7 @@ CREATE TABLE `dept`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `fk_dno`(`deptno`) USING BTREE,
   CONSTRAINT `fk_dno` FOREIGN KEY (`deptno`) REFERENCES `depall` (`dno`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 112 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 113 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of dept
@@ -450,7 +474,7 @@ INSERT INTO `dept` VALUES (15, 5, '运维团队3组', '深圳', 10, 10);
 INSERT INTO `dept` VALUES (16, 6, '经营团队1组', '广州', 13, 12);
 INSERT INTO `dept` VALUES (17, 7, '行政团队1组', '广州', 10, 8);
 INSERT INTO `dept` VALUES (76, 16, '测试小组1组', '北京', 7, 3);
-INSERT INTO `dept` VALUES (110, 39, 'test1小组1', '河源', 0, 0);
+INSERT INTO `dept` VALUES (110, 39, 'test1小组1', '河源', 1, 1);
 INSERT INTO `dept` VALUES (112, 39, '贴图', '贴图', 1, 1);
 
 -- ----------------------------
@@ -500,7 +524,7 @@ CREATE TABLE `employee`  (
   INDEX `employname`(`employname`) USING BTREE,
   INDEX `employno`(`employno`) USING BTREE,
   CONSTRAINT `fk_deptno` FOREIGN KEY (`deptno`) REFERENCES `dept` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 261 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 263 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of employee
@@ -751,6 +775,7 @@ INSERT INTO `employee` VALUES (16, 249, '啊11', '12', '女', '2', '2', '2022-12
 INSERT INTO `employee` VALUES (13, 250, '1231231', '22', '女', '2', '2', '2022-11-22', '2', '湖北省 黄冈市', '3500', 'true');
 INSERT INTO `employee` VALUES (1, 252, 'test22', '2', '男', '2', '2', '2022-12-29', '2', '广东省 珠海市', '2222', 'true');
 INSERT INTO `employee` VALUES (2, 253, 'test2玩玩', '2', '男', '2', '2', '2022-12-29', '2', '广东省 珠海市', '2222', 'true');
+INSERT INTO `employee` VALUES (110, 262, 'testboss', '19', '男', '123', '123', '2022-12-23', '123', '广东省 湛江市', '1111', 'true');
 
 -- ----------------------------
 -- Table structure for employeredo
@@ -1092,6 +1117,7 @@ INSERT INTO `employesalarydetail` VALUES (16, 249, '啊11', 'true', 'true', 'tru
 INSERT INTO `employesalarydetail` VALUES (13, 250, '1231231', 'true', 'true', 'true', 'true', 'true', 100, 3500, 'true');
 INSERT INTO `employesalarydetail` VALUES (1, 252, 'test22', 'true', 'true', 'true', 'true', 'true', 100, 2222, 'true');
 INSERT INTO `employesalarydetail` VALUES (2, 253, 'test2玩玩', 'true', 'true', 'true', 'true', 'true', 100, 2222, 'true');
+INSERT INTO `employesalarydetail` VALUES (110, 262, 'testboss', 'true', 'true', 'true', 'true', 'true', 100, 1111, 'true');
 
 -- ----------------------------
 -- Table structure for employesub
@@ -1140,6 +1166,7 @@ INSERT INTO `eusers` VALUES ('11', '88888888', '普通员工', '1', '2', NULL);
 INSERT INTO `eusers` VALUES ('12', '88888888', '普通员工', '1', '2', NULL);
 INSERT INTO `eusers` VALUES ('14', '88888888', '普通员工', '1', '2', NULL);
 INSERT INTO `eusers` VALUES ('16', '88888888', '普通员工', '0', '2', NULL);
+INSERT INTO `eusers` VALUES ('262', '88888888', '普通员工', '0', '2', NULL);
 
 -- ----------------------------
 -- Table structure for leaverequest
@@ -1158,7 +1185,7 @@ CREATE TABLE `leaverequest`  (
   `whichVerfiy` varchar(255) CHARACTER SET gb2312 COLLATE gb2312_chinese_ci NULL DEFAULT '暂无人核审' COMMENT '谁核审',
   `employename` varchar(255) CHARACTER SET gb2312 COLLATE gb2312_chinese_ci NOT NULL COMMENT '员工姓名',
   PRIMARY KEY (`leaveNumber`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 138253611 CHARACTER SET = gb2312 COLLATE = gb2312_chinese_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 138253616 CHARACTER SET = gb2312 COLLATE = gb2312_chinese_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of leaverequest
@@ -1169,7 +1196,9 @@ INSERT INTO `leaverequest` VALUES (138253609, '事假', '1天', 1, '2022-12-30 1
 INSERT INTO `leaverequest` VALUES (138253610, '事假', '1周', 1, '2022-12-19 09:16:37', '<p>允许通过😇</p>', 'true', 1, 1, 'admin', '鲁潜223');
 INSERT INTO `leaverequest` VALUES (138253611, '事假', '1天', 2, '2022-12-23 14:24:19', '<p>去去去😿👎👎</p>', 'true', 112, 39, 'admin', '邵金鑫');
 INSERT INTO `leaverequest` VALUES (138253612, '事假', '1天', 16, '2022-12-26 15:14:32', '<p>最近人手缺 晚点请</p>', 'false', 1, 1, 'admin', '顾金鑫1');
-INSERT INTO `leaverequest` VALUES (138253613, '病假', '一周以上', 4, '2022-12-26 15:22:07', '暂无答复', 'none', 1, 1, '暂无人核审', '潘 琪');
+INSERT INTO `leaverequest` VALUES (138253613, '病假', '一周以上', 4, '2022-12-26 15:22:07', '不予通过', 'false', 1, 1, 'admin', '潘 琪');
+INSERT INTO `leaverequest` VALUES (138253614, '病假', '一周以上', 4, '2022-12-27 15:22:07', '<p>😌</p>', 'true', 1, 1, 'admin', '潘 琪');
+INSERT INTO `leaverequest` VALUES (138253615, '事假', '1天', 4, '2022-12-27 07:16:40', '<p>不准请假😋</p>', 'false', 1, 1, 'admin', '潘 琪');
 
 -- ----------------------------
 -- Table structure for users

@@ -609,3 +609,39 @@ export const updateEuser = async (postData: object) => {
         return false;
     }
 }
+
+
+// 所有打卡信息管理
+interface allClockInfoType {
+    allClockInfo: []
+}
+export class clockInfoControlInit {
+    data: allClockInfoType = {
+        allClockInfo: []
+    }
+}
+// 获取部门树
+export const getDepallTree = async (data: clockInfoControlInit, setData: Function) => {
+    const res: any = await attendanceApi.reqGetDepallTreeInfo()
+    if (res.code === 200) {
+        data.data.allClockInfo = res.depallTreeList.map((depall: any) => {
+            return {
+                key: depall.key + Math.random() + 'depallKey',
+                dno: depall.key,
+                title: depall.title,
+                children: depall.children.map((children: any) => {
+                    return {
+                        key: children.key + Math.random(),
+                        deptId: children.key,
+                        title: children.title,
+                        dno: depall.key
+                    }
+                })
+            }
+        });
+
+        setData({ ...data })
+    } else {
+        message.error("获取部门信息失败！")
+    }
+}
