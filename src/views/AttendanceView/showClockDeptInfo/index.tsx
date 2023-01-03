@@ -78,7 +78,8 @@ const ShowClockDeptInfo: FC = () => {
             key: 'typeInfo',
             align: 'center',
             render: (_, record: any) => {
-                return <Tag color={Number(moment(record.clockTime).format('HH')) > 9 ? '#ee6666' : 'green'}>{Number(moment(record.clockTime).format('HH')) > 9 ? '迟到' : '正常'}</Tag>
+                return <Tag color={(Number(moment(record.clockTime).format('HH')) > 8 && record.type == "上午" || Number(moment(record.clockTime).format('HH')) < 18 && record.type == "下午") ? '#ee6666' : '#2a9838'}>{(Number(moment(record.clockTime).format('HH')) > 8 && record.type == "上午") ?
+                    '迟到' : (Number(moment(record.clockTime).format('HH')) < 18 && record.type == "下午") ? "早退" : "正常"}</Tag>
             }
         },
         {

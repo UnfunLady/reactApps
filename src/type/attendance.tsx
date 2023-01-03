@@ -1,5 +1,6 @@
 import { message } from "antd"
 import { attendanceApi, employe } from "../api"
+import { CarryOutOutlined, CalendarOutlined } from '@ant-design/icons'
 import { Select } from 'antd'
 import * as echarts from 'echarts'
 const { Option } = Select
@@ -613,28 +614,60 @@ export const updateEuser = async (postData: object) => {
 
 // 所有打卡信息管理
 interface allClockInfoType {
-    allClockInfo: []
+    // 树结构
+    allClockTreeInfo: [],
+    // 打卡信息
+    allClockInfo: [],
+    // 打卡数
+    allClockCount: number,
+    // 修改form
+    editForm: {
+        dno: number,
+        employename: string,
+        employeno: string | number,
+        deptId: string | number,
+        typeInfo: string,
+        clockTime: string,
+        originClockTime: string,
+        type: string,
+    }
 }
 export class clockInfoControlInit {
     data: allClockInfoType = {
-        allClockInfo: []
+        allClockTreeInfo: [],
+        allClockInfo: [],
+        allClockCount: 0,
+        editForm: {
+            dno: 0,
+            employename: '',
+            employeno: 0,
+            deptId: 0,
+            typeInfo: '',
+            originClockTime: '',
+            clockTime: '',
+            type: '',
+        }
     }
+
 }
 // 获取部门树
 export const getDepallTree = async (data: clockInfoControlInit, setData: Function) => {
     const res: any = await attendanceApi.reqGetDepallTreeInfo()
     if (res.code === 200) {
-        data.data.allClockInfo = res.depallTreeList.map((depall: any) => {
+        data.data.allClockTreeInfo = res.depallTreeList.map((depall: any) => {
             return {
                 key: depall.key + Math.random() + 'depallKey',
                 dno: depall.key,
                 title: depall.title,
+                icon: <CarryOutOutlined />,
+                isFather: true,
                 children: depall.children.map((children: any) => {
                     return {
                         key: children.key + Math.random(),
                         deptId: children.key,
                         title: children.title,
-                        dno: depall.key
+                        dno: depall.key,
+                        icon: <CalendarOutlined />,
                     }
                 })
             }
@@ -643,5 +676,25 @@ export const getDepallTree = async (data: clockInfoControlInit, setData: Functio
         setData({ ...data })
     } else {
         message.error("获取部门信息失败！")
+    }
+}
+// 获取所选部门或小组的打卡信息
+export const getClockInfoTree = async (data: clockInfoControlInit, setData: Function, postData: object) => {
+    const res: any = await attendanceApi.reqGetClockTreeInfo(postData);
+    if (res.code === 200) {
+        data.data.allClockInfo = res.ClockInfo;
+        setData({ ...data })
+    } else {
+        data.data.allClockInfo = [];
+    }
+}
+
+// 修改打卡信息
+export const updateClockInfo = async (postData: object) => {
+    const res: any = await attendanceApi.reqUpdateClockInfo(postData);
+    if (res.code === 200) {
+        return true;
+    } else {
+        return false;
     }
 }

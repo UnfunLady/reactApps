@@ -90,6 +90,15 @@ const reqGetTodayNormalInfo = (params: Object) => {
 const reqGetDepallTreeInfo = () => {
     return request({ url: '/api/getTreeInfo', method: 'get' })
 }
+// 根据部门号或小组号获取打卡信息
+
+const reqGetClockTreeInfo = (data: object) => {
+    return request({ url: '/api/getClockInfoTree', method: 'post', data })
+}
+// 修改打卡信息
+const reqUpdateClockInfo = (data: object) => {
+    return request({ url: '/api/editClockInfo', method: 'post', data })
+}
 export default {
     reqGetEmployeLeavePage,
     reqUpdateEmployeLeave,
@@ -113,5 +122,7 @@ export default {
     reqGetTodayClockDelayInfo,
     reqGetTodayLeaveInfo,
     reqGetTodayNormalInfo,
-    reqGetDepallTreeInfo
+    reqGetDepallTreeInfo,
+    reqGetClockTreeInfo,
+    reqUpdateClockInfo
 }

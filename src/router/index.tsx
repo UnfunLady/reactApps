@@ -1,5 +1,5 @@
 import { Navigate, } from 'react-router-dom'
-import { MenuOutlined, SolutionOutlined, RightSquareOutlined, SettingOutlined, IssuesCloseOutlined, FileProtectOutlined, HighlightOutlined, UserSwitchOutlined, SafetyOutlined, AreaChartOutlined, InsuranceOutlined, HomeOutlined, BlockOutlined, DatabaseOutlined, MoneyCollectOutlined, AppstoreOutlined, UserOutlined, TeamOutlined, DeleteOutlined } from '@ant-design/icons';
+import { MenuOutlined, SolutionOutlined, FundProjectionScreenOutlined, RightSquareOutlined, SettingOutlined, IssuesCloseOutlined, FileProtectOutlined, HighlightOutlined, UserSwitchOutlined, SafetyOutlined, AreaChartOutlined, InsuranceOutlined, HomeOutlined, BlockOutlined, DatabaseOutlined, MoneyCollectOutlined, AppstoreOutlined, UserOutlined, TeamOutlined, DeleteOutlined } from '@ant-design/icons';
 // import HomeView from '../views/HomeView'
 // import MainView from '../views/MainView'
 // import EmployeView from '../views/EmployeView'
@@ -30,7 +30,7 @@ import { MenuOutlined, SolutionOutlined, RightSquareOutlined, SettingOutlined, I
 import {
     LockEmployeView, HomeView, MainView, EmployeView, EmployeInfo, EmployeSalary, SalaryIndexView, DepartmentSalaryDetail, EmployeDetailView, DepartmentView,
     DepartmentEditView, AddGroupView, AddDepartmentView, DeleteDepartmentView, DMainView, EvilControl, ChinaInfo, ChinaMap, CompanyInfo, ShowNoCovid, Attendance,
-    EmployeAttendance, EmployeClock, ShowClockDeptInfo, RecoverEmploye, RecoverGroup, LoginView, NotFound, ClockInfoControllazy
+    EmployeAttendance, EmployeClock, ShowClockDeptInfo, RecoverEmploye, RecoverGroup, LoginView, NotFound, ClockInfoControllazy, NoticeView
 } from './routesList';
 const routes: any = [
     //重定向
@@ -405,6 +405,16 @@ const routes: any = [
                 show: true,
                 auth: true,
             },
+            {
+                path: 'noticeView',
+                absolutePath: '/homeView/noticeView',
+                element: <NoticeView />,
+                title: '公告管理',
+                breadcrumbName: '公告管理',
+                icon: <FundProjectionScreenOutlined />,
+                show: true,
+                auth: true,
+            },
         ]
     },
     {
@@ -458,5 +468,6 @@ export const breadcrumbNameMap: Record<string, string> = {
     '/homeView/attendanceView/employeClock': '打卡出勤信息',
     '/homeView/attendanceView/showClockDeptInfo': '打卡部门信息',
     '/homeView/attendanceView/clockInfoControllazy': "打卡信息管理",
+    '/homeView/noticeView': '公告管理'
 };
 export default routes
