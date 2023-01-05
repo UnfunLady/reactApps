@@ -99,6 +99,29 @@ const reqGetClockTreeInfo = (data: object) => {
 const reqUpdateClockInfo = (data: object) => {
     return request({ url: '/api/editClockInfo', method: 'post', data })
 }
+
+// 获取全部公告
+const reqGetAllNoticeInfo = (params: object) => {
+    return request({ url: '/api/getAllNoticeInfo', method: 'get', params })
+}
+// 删除多余图片
+const reqDeleteImageList = (data: object) => {
+    return request({ url: '/api/deleteNoticeImage', method: 'post', data })
+}
+// 获取全部小组信息
+
+const reqGetAllDeptInfo = () => {
+    return request({ url: '/api/getAllDeptInfo', method: 'get' })
+}
+
+// 添加公告
+const reqAddNotice = (data: object) => {
+    return request({ url: '/api/addNotice', method: 'post', data })
+}
+// 删除公告
+const reqDelNotice = (data: object) => {
+    return request({ url: '/api/deleteNotice', method: 'post', data })
+}
 export default {
     reqGetEmployeLeavePage,
     reqUpdateEmployeLeave,
@@ -124,5 +147,10 @@ export default {
     reqGetTodayNormalInfo,
     reqGetDepallTreeInfo,
     reqGetClockTreeInfo,
-    reqUpdateClockInfo
+    reqUpdateClockInfo,
+    reqDeleteImageList,
+    reqGetAllDeptInfo,
+    reqAddNotice,
+    reqGetAllNoticeInfo,
+    reqDelNotice
 }

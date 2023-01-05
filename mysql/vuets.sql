@@ -11,7 +11,7 @@
  Target Server Version : 80029
  File Encoding         : 65001
 
- Date: 28/12/2022 17:47:43
+ Date: 05/01/2023 18:32:14
 */
 
 SET NAMES utf8mb4;
@@ -65,6 +65,10 @@ INSERT INTO `clockdepall` VALUES ('2022-12-28', 1, 'false', 'false');
 INSERT INTO `clockdepall` VALUES ('2022-12-28', 2, 'false', 'false');
 INSERT INTO `clockdepall` VALUES ('2022-12-28', 39, 'false', 'false');
 INSERT INTO `clockdepall` VALUES ('2022-12-28', 16, 'false', 'false');
+INSERT INTO `clockdepall` VALUES ('2023-01-03', 1, 'false', 'false');
+INSERT INTO `clockdepall` VALUES ('2023-01-03', 2, 'false', 'false');
+INSERT INTO `clockdepall` VALUES ('2023-01-03', 39, 'false', 'false');
+INSERT INTO `clockdepall` VALUES ('2023-01-03', 16, 'false', 'false');
 
 -- ----------------------------
 -- Table structure for clockemploye
@@ -103,6 +107,8 @@ INSERT INTO `clockemploye` VALUES (1, 1, 1, '鲁潜223', '上午', '2022-12-27 1
 INSERT INTO `clockemploye` VALUES (16, 76, 1, '鲁潜223', '上午', '2022-12-27 14:21:31', NULL);
 INSERT INTO `clockemploye` VALUES (1, 1, 1, '鲁潜223', '上午', '2022-12-28 16:04:32', NULL);
 INSERT INTO `clockemploye` VALUES (16, 76, 1, '鲁潜223', '上午', '2022-12-28 16:04:32', NULL);
+INSERT INTO `clockemploye` VALUES (1, 1, 1, '鲁潜223', '上午', '2023-01-03 11:15:49', NULL);
+INSERT INTO `clockemploye` VALUES (16, 76, 1, '鲁潜223', '上午', '2023-01-03 11:15:49', NULL);
 INSERT INTO `clockemploye` VALUES (39, 112, 2, '邵金鑫', '上午', '2022-12-13 18:17:31', '广州');
 INSERT INTO `clockemploye` VALUES (39, 112, 2, '邵金鑫', '上午', '2022-12-14 18:17:31', '广州');
 INSERT INTO `clockemploye` VALUES (1, 1, 2, '邵金鑫', '上午', '2022-12-20 10:12:27', NULL);
@@ -130,6 +136,9 @@ INSERT INTO `clockemploye` VALUES (39, 112, 2, '邵金鑫', '上午', '2022-12-2
 INSERT INTO `clockemploye` VALUES (1, 1, 2, '邵金鑫', '上午', '2022-12-28 16:04:25', NULL);
 INSERT INTO `clockemploye` VALUES (2, 5, 2, '邵金鑫', '上午', '2022-12-28 16:04:25', NULL);
 INSERT INTO `clockemploye` VALUES (39, 112, 2, '邵金鑫', '上午', '2022-12-28 16:04:25', NULL);
+INSERT INTO `clockemploye` VALUES (39, 112, 2, '邵金鑫', '上午', '2023-01-03 07:15:39', NULL);
+INSERT INTO `clockemploye` VALUES (1, 1, 2, '邵金鑫', '上午', '2023-01-03 11:15:39', NULL);
+INSERT INTO `clockemploye` VALUES (2, 5, 2, '邵金鑫', '上午', '2023-01-03 11:15:39', NULL);
 INSERT INTO `clockemploye` VALUES (1, 1, 4, '潘 琪', '上午', '2022-12-26 15:22:00', NULL);
 INSERT INTO `clockemploye` VALUES (16, 76, 4, '潘 琪', '上午', '2022-12-26 15:22:00', NULL);
 INSERT INTO `clockemploye` VALUES (1, 1, 4, '潘 琪', '下午', '2022-12-26 18:10:16', NULL);
@@ -139,7 +148,8 @@ INSERT INTO `clockemploye` VALUES (16, 76, 4, '潘 琪', '上午', '2022-12-27 1
 INSERT INTO `clockemploye` VALUES (1, 1, 16, '顾金鑫1', '上午', '2022-12-26 15:14:11', NULL);
 INSERT INTO `clockemploye` VALUES (1, 1, 16, '顾金鑫1', '上午', '2022-12-27 08:21:55', NULL);
 INSERT INTO `clockemploye` VALUES (1, 1, 16, '顾金鑫1', '上午', '2022-12-28 16:04:15', NULL);
-INSERT INTO `clockemploye` VALUES (39, 110, 262, 'testboss', '上午', '2022-12-27 16:37:49', NULL);
+INSERT INTO `clockemploye` VALUES (1, 1, 16, '顾金鑫1', '上午', '2023-01-03 11:16:02', NULL);
+INSERT INTO `clockemploye` VALUES (39, 110, 262, 'testboss', '上午', '2022-12-27 09:37:49', NULL);
 
 -- ----------------------------
 -- Table structure for covidinfo
@@ -1185,7 +1195,7 @@ CREATE TABLE `leaverequest`  (
   `whichVerfiy` varchar(255) CHARACTER SET gb2312 COLLATE gb2312_chinese_ci NULL DEFAULT '暂无人核审' COMMENT '谁核审',
   `employename` varchar(255) CHARACTER SET gb2312 COLLATE gb2312_chinese_ci NOT NULL COMMENT '员工姓名',
   PRIMARY KEY (`leaveNumber`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 138253616 CHARACTER SET = gb2312 COLLATE = gb2312_chinese_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 138253617 CHARACTER SET = gb2312 COLLATE = gb2312_chinese_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of leaverequest
@@ -1199,6 +1209,35 @@ INSERT INTO `leaverequest` VALUES (138253612, '事假', '1天', 16, '2022-12-26 
 INSERT INTO `leaverequest` VALUES (138253613, '病假', '一周以上', 4, '2022-12-26 15:22:07', '不予通过', 'false', 1, 1, 'admin', '潘 琪');
 INSERT INTO `leaverequest` VALUES (138253614, '病假', '一周以上', 4, '2022-12-27 15:22:07', '<p>😌</p>', 'true', 1, 1, 'admin', '潘 琪');
 INSERT INTO `leaverequest` VALUES (138253615, '事假', '1天', 4, '2022-12-27 07:16:40', '<p>不准请假😋</p>', 'false', 1, 1, 'admin', '潘 琪');
+INSERT INTO `leaverequest` VALUES (138253616, '事假', '1天', 16, '2023-01-03 11:16:14', '<p>💚早去早回</p>', 'true', 1, 1, 'admin', '顾金鑫1');
+
+-- ----------------------------
+-- Table structure for notice
+-- ----------------------------
+DROP TABLE IF EXISTS `notice`;
+CREATE TABLE `notice`  (
+  `thyme` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `specialDno` int(0) UNSIGNED NULL DEFAULT 0,
+  `specialDeptId` int(0) UNSIGNED NULL DEFAULT 0,
+  `content` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `isAll` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `id` int(0) NOT NULL AUTO_INCREMENT,
+  `startTime` date NULL DEFAULT NULL,
+  `endTime` date NULL DEFAULT NULL,
+  `postMan` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `postTime` datetime(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of notice
+-- ----------------------------
+INSERT INTO `notice` VALUES ('春节放假通知', 0, 0, '放假时间', 'true', 1, '2023-01-05', '2023-01-06', 'admin', '2023-01-05 16:08:05');
+INSERT INTO `notice` VALUES ('今日公告1', 0, 0, '<p>今天天气真好</p><div class=\"media-wrap image-wrap\"><img src=\"http://localhost:8888/images/Notice/uploadNoticeZengYu110634005HW7sRly8h8vh4v2jmrj30go0goq3p.jpg\"/></div><p></p>', 'true', 16, '2023-01-05', '2023-01-06', 'admin', '2023-01-05 16:11:11');
+INSERT INTO `notice` VALUES ('今日你公告2', 1, 3, '<p>哈哈</p>', 'false', 17, '2023-01-05', '2023-01-12', 'admin', '2023-01-05 16:11:58');
+INSERT INTO `notice` VALUES ('123123', 0, 0, '<p></p><div class=\"media-wrap image-wrap\"><img src=\"http://localhost:8888/images/Notice/uploadNoticeZengYu70621animals-4642101_960_720.jpg\"/></div><p></p>', 'true', 18, '2023-01-05', '2023-01-13', 'admin', '2023-01-05 17:28:07');
+INSERT INTO `notice` VALUES ('公告test公告test', 1, 3, '<p>🤣公告test</p><p><u>哈哈</u></p><ul><li>你好</li></ul>', 'false', 19, '2023-01-05', '2023-01-06', 'admin', '2023-01-05 17:29:19');
+INSERT INTO `notice` VALUES ('公告test公告test', 1, 1, '<p>🤣公告test</p><p><u>哈哈</u></p><ul><li>你好</li></ul>', 'false', 20, '2023-01-05', '2023-01-06', 'admin', '2023-01-05 17:29:19');
 
 -- ----------------------------
 -- Table structure for users
