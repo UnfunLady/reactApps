@@ -11,11 +11,37 @@
  Target Server Version : 80029
  File Encoding         : 65001
 
- Date: 30/09/2022 18:19:36
+ Date: 06/01/2023 18:32:17
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for clockdepall
+-- ----------------------------
+DROP TABLE IF EXISTS `clockdepall`;
+CREATE TABLE `clockdepall`  (
+  `clockDay` date NULL DEFAULT NULL,
+  `dno` int(0) NULL DEFAULT NULL,
+  `allClockMorning` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'false',
+  `allClockAfter` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'false'
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for clockemploye
+-- ----------------------------
+DROP TABLE IF EXISTS `clockemploye`;
+CREATE TABLE `clockemploye`  (
+  `dno` int(0) NOT NULL,
+  `deptid` int(0) NOT NULL,
+  `employeno` int(0) NOT NULL,
+  `employename` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `clockTime` datetime(0) NOT NULL,
+  `location` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`employeno`, `clockTime`, `employename`, `deptid`, `dno`, `type`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for covidinfo
@@ -44,8 +70,10 @@ CREATE TABLE `depall`  (
   `groupCount` int(0) NOT NULL DEFAULT 0,
   `isAllCovid` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'false',
   `noCovid` int(0) NOT NULL DEFAULT 0,
+  `allClockMorning` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'false',
+  `allClockAfter` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'false',
   PRIMARY KEY (`dno`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 42 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for dept
@@ -61,7 +89,7 @@ CREATE TABLE `dept`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `fk_dno`(`deptno`) USING BTREE,
   CONSTRAINT `fk_dno` FOREIGN KEY (`deptno`) REFERENCES `depall` (`dno`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 90 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 113 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for deptredo
@@ -100,7 +128,7 @@ CREATE TABLE `employee`  (
   INDEX `employname`(`employname`) USING BTREE,
   INDEX `employno`(`employno`) USING BTREE,
   CONSTRAINT `fk_deptno` FOREIGN KEY (`deptno`) REFERENCES `dept` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 242 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 263 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for employeredo
@@ -158,6 +186,7 @@ CREATE TABLE `employesalarydetail`  (
   `usePerformance` int(0) NOT NULL DEFAULT 100 COMMENT '是否有绩效',
   `salary` int(0) NOT NULL COMMENT '底薪',
   `isuse` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'true' COMMENT '是否拥有补贴 取决于团队整体',
+  PRIMARY KEY (`employno`, `deptno`) USING BTREE,
   INDEX `detail_deptno`(`deptno`) USING BTREE,
   INDEX `detail_name`(`employname`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
@@ -176,6 +205,56 @@ CREATE TABLE `employesub`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Table structure for eusers
+-- ----------------------------
+DROP TABLE IF EXISTS `eusers`;
+CREATE TABLE `eusers`  (
+  `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '88888888',
+  `nickname` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '普通员工',
+  `islock` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '0',
+  `level` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '2',
+  `avatar` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for leaverequest
+-- ----------------------------
+DROP TABLE IF EXISTS `leaverequest`;
+CREATE TABLE `leaverequest`  (
+  `leaveNumber` int(0) NOT NULL AUTO_INCREMENT,
+  `whyLeave` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `leaveLong` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `employeno` int(0) NOT NULL,
+  `leaveWhen` datetime(0) NOT NULL,
+  `reply` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '暂无答复' COMMENT '答复',
+  `verfiyState` varchar(255) CHARACTER SET gb2312 COLLATE gb2312_chinese_ci NOT NULL DEFAULT 'none',
+  `deptid` int(0) NOT NULL COMMENT '小组号',
+  `dno` int(0) NOT NULL COMMENT '所在团队',
+  `whichVerfiy` varchar(255) CHARACTER SET gb2312 COLLATE gb2312_chinese_ci NULL DEFAULT '暂无人核审' COMMENT '谁核审',
+  `employename` varchar(255) CHARACTER SET gb2312 COLLATE gb2312_chinese_ci NOT NULL COMMENT '员工姓名',
+  PRIMARY KEY (`leaveNumber`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 138253618 CHARACTER SET = gb2312 COLLATE = gb2312_chinese_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for notice
+-- ----------------------------
+DROP TABLE IF EXISTS `notice`;
+CREATE TABLE `notice`  (
+  `thyme` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `specialDno` int(0) UNSIGNED NULL DEFAULT 0,
+  `specialDeptId` int(0) UNSIGNED NULL DEFAULT 0,
+  `content` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `isAll` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `id` int(0) NOT NULL AUTO_INCREMENT,
+  `startTime` date NULL DEFAULT NULL,
+  `endTime` date NULL DEFAULT NULL,
+  `postMan` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `postTime` datetime(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
 -- Table structure for users
 -- ----------------------------
 DROP TABLE IF EXISTS `users`;
@@ -189,6 +268,45 @@ CREATE TABLE `users`  (
   `token` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'token',
   PRIMARY KEY (`username`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Triggers structure for table clockemploye
+-- ----------------------------
+DROP TRIGGER IF EXISTS `isAllClock`;
+delimiter ;;
+CREATE TRIGGER `isAllClock` AFTER INSERT ON `clockemploye` FOR EACH ROW begin
+declare cDeptCount int(255);
+declare cNowCount int(255);
+declare cNowCountAfter int(255);
+declare isExist int(10);
+declare nowDateFormat date;
+set nowDateFormat=(SELECT DATE_FORMAT(new.clockTime, '%Y-%m-%d'));
+set cDeptCount=(select count from depall where dno=new.dno);
+set cNowCount=(select count(*) from clockemploye where dno=new.dno AND type="上午" AND (SELECT DATE_FORMAT(clockTime, '%Y-%m-%d'))=nowDateFormat);
+set cNowcountAfter=(select count(*) from clockemploye where dno=new.dno AND type="下午" AND (SELECT DATE_FORMAT(clockTime, '%Y-%m-%d'))=nowDateFormat);
+-- 判段部门打卡表是否有今天数据 没有则新增有则修改
+-- 如果上午打卡人数等于总数 则上午全勤 下午同理
+-- 如果没有则insert新的数据
+set isExist=(select count(*) from clockdepall where (clockDay=nowDateFormat) AND dno=new.dno) ;
+if(isExist>0) then	if(cDeptCount=cNowCount) then
+	update clockdepall set allClockMorning ='true' WHERE dno=new.dno AND clockDay=nowDateFormat;
+	end if;
+	if(cDeptCount=cNowCountAfter) then
+	update clockdepall set allClockAfter ='true' WHERE dno=new.dno AND clockDay=nowDateFormat;
+	end if;
+else
+INSERT INTO `clockdepall`(`clockDay`, `dno`) VALUES (nowDateFormat,new.dno);
+	if(cDeptCount=cNowCount) then
+	update clockdepall set allClockMorning ='true' WHERE dno=new.dno AND clockDay=nowDateFormat;
+	end if;
+	if(cDeptCount=cNowCountAfter) then
+	update clockdepall set allClockAfter ='true' WHERE dno=new.dno AND clockDay=nowDateFormat;
+	end if;
+end if;
+
+end
+;;
+delimiter ;
 
 -- ----------------------------
 -- Triggers structure for table covidinfo
@@ -340,17 +458,24 @@ delimiter ;
 -- ----------------------------
 -- Triggers structure for table employee
 -- ----------------------------
-DROP TRIGGER IF EXISTS `triggercountdelete`;
+DROP TRIGGER IF EXISTS `triggercountadd`;
 delimiter ;;
-CREATE TRIGGER `triggercountdelete` AFTER DELETE ON `employee` FOR EACH ROW begin
+CREATE TRIGGER `triggercountadd` AFTER INSERT ON `employee` FOR EACH ROW begin
 declare newcoun int(255);
--- 删除后更新总数
-set newcoun=(select count(*) from employee,dept where employee.deptno=dept.id and employee.deptno=old.deptno);
-update dept  set  count =newcoun where dept.id=old.deptno;
--- 删除员工明细
-delete from employesalarydetail where employno=old.employno AND deptno=old.deptno;
--- 删除员工疫苗表
-delete from covidinfo where employid=old.employno AND deptid=old.deptno;
+-- 查询新员工的部门号
+declare depaid int (255);
+-- 更新小组总数
+set newcoun=(select count(*) from employee,dept where employee.deptno=dept.id and employee.deptno=new.deptno);
+update dept  set  count =newcoun where dept.id=new.deptno;
+
+-- 工资细节插入新的
+INSERT INTO `employesalarydetail`(`deptno`, `employno`, `employname`,`salary`) VALUES (new.deptno, new.employno, new.employname,new.employsalary);
+
+
+-- 查询新员工部门号用于插入到疫苗表
+set depaid=(select DISTINCT dept.deptno from dept WHERE id=new.deptno);
+-- 插入数据到疫苗表
+INSERT INTO `covidinfo`(`depallid`, `deptid`, `employid`, `firstInoculation`, `secondInoculation`, `threeInoculation`) VALUES (depaid, new.deptno, new.employno, 'false', 'false', 'false');
 end
 ;;
 delimiter ;
@@ -373,8 +498,10 @@ update dept  set  count =oldcoun where dept.id=old.deptno;
 
 -- 删掉之前的薪资信息
 DELETE from employesalarydetail WHERE employno=old.employno AND deptno=old.deptno;
+
 -- 工资细节插入新的
 INSERT INTO `employesalarydetail`(`deptno`, `employno`, `employname`,`salary`) VALUES (new.deptno, new.employno, new.employname,new.employsalary);
+
 set newDepallid=(SELECT DISTINCT d.deptno from dept d,depall de WHERE d.id=new.deptno);
 UPDATE `covidinfo` SET `depallid` = newDepallid,deptid=new.deptno  WHERE `deptid` =old.deptno AND `employid` = old.employno;
 
@@ -385,24 +512,19 @@ delimiter ;
 -- ----------------------------
 -- Triggers structure for table employee
 -- ----------------------------
-DROP TRIGGER IF EXISTS `triggercountadd`;
+DROP TRIGGER IF EXISTS `triggercountdelete`;
 delimiter ;;
-CREATE TRIGGER `triggercountadd` AFTER INSERT ON `employee` FOR EACH ROW begin
+CREATE TRIGGER `triggercountdelete` AFTER DELETE ON `employee` FOR EACH ROW begin
 declare newcoun int(255);
--- 查询新员工的部门号
-declare depaid int (255);
--- 更新小组总数
-set newcoun=(select count(*) from employee,dept where employee.deptno=dept.id and employee.deptno=new.deptno);
-update dept  set  count =newcoun where dept.id=new.deptno;
-
--- 工资细节插入新的
-INSERT INTO `employesalarydetail`(`deptno`, `employno`, `employname`,`salary`) VALUES (new.deptno, new.employno, new.employname,new.employsalary);
-
-
--- 查询新员工部门号用于插入到疫苗表
-set depaid=(select DISTINCT dept.deptno from dept WHERE id=new.deptno);
--- 插入数据到疫苗表
-INSERT INTO `covidinfo`(`depallid`, `deptid`, `employid`, `firstInoculation`, `secondInoculation`, `threeInoculation`) VALUES (depaid, new.deptno, new.employno, 'false', 'false', 'false');
+-- 删除后更新总数
+set newcoun=(select count(*) from employee,dept where employee.deptno=dept.id and employee.deptno=old.deptno);
+update dept  set  count =newcoun where dept.id=old.deptno;
+-- 删除员工明细
+delete from employesalarydetail where employno=old.employno AND deptno=old.deptno;
+-- 删除员工疫苗表
+delete from covidinfo where employid=old.employno AND deptid=old.deptno;
+-- 删除员工表账号密码
+delete from eusers WHERE username=old.employno;
 end
 ;;
 delimiter ;

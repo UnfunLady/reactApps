@@ -1,13 +1,13 @@
 // 员工菜单
 import { Navigate } from 'react-router-dom';
-import { MenuOutlined, AppstoreOutlined, RightSquareOutlined, InfoCircleOutlined } from '@ant-design/icons';
+import { MenuOutlined, AppstoreOutlined, AlertOutlined, RightSquareOutlined, InfoCircleOutlined } from '@ant-design/icons';
 import EmployeIndexView from '../../views/EmployeAllView/EmployeIndexView';
 import EmployeHomeView from '../../views/EmployeHomeView'
 import LoginView from '../../views/LoginView';
 import EmployeClockView from '../../views/EmployeAllView/EmployeClockView'
 import NotFound from '../../component/404NotFoundView';
 import EmployeLeaveView from '../../views/EmployeAllView/EmployeLeaveView';
-
+import EmployeNoticeView from '../../views/EmployeAllView/EmployeNoticeView';
 const eroutes: any = [
     // 重定向
     {
@@ -55,7 +55,7 @@ const eroutes: any = [
                 icon: <RightSquareOutlined />,
                 show: true,
                 auth: true,
-          
+
             },
 
             {
@@ -65,6 +65,17 @@ const eroutes: any = [
                 title: '请假申请',
                 breadcrumbName: '请假申请',
                 icon: <InfoCircleOutlined />,
+                show: true,
+                auth: true,
+            },
+
+            {
+                path: 'employeNoticeView',
+                absolutePath: '/homeView/employeNoticeView',
+                element: <EmployeNoticeView />,
+                title: '公告信息',
+                breadcrumbName: '公告信息',
+                icon: <AlertOutlined />,
                 show: true,
                 auth: true,
             },
@@ -97,6 +108,7 @@ export const breadcrumbNameMapEmploye: Record<string, string> = {
     '/homeView/mainView': '我的主要信息',
     '/homeView/employeClockView': '上班打卡',
     '/homeView/employeLeaveView': '请假申请',
+    '/homeView/employeNoticeView': '公告信息'
 };
 
 export default eroutes;

@@ -8,7 +8,6 @@ import BraftEditor from 'braft-editor'
 // 引入编辑器样式
 import 'braft-editor/dist/index.css'
 import { ContentUtils } from 'braft-utils'
-import './index.less'
 import { RcFile, UploadFile, UploadProps } from 'antd/lib/upload'
 import { attendanceApi } from '../../api'
 import Table, { ColumnsType } from 'antd/lib/table'
@@ -126,6 +125,7 @@ const NoticView: FC = () => {
                 }
             })
             setSelectDept(selectDept)
+
         }
     }
     // 获取全部公告
@@ -137,6 +137,10 @@ const NoticView: FC = () => {
             setPageData({
                 ...pageData
             })
+            searchForm.setFieldsValue({
+                keyword: undefined
+            })
+            searchForm.resetFields()
         }
     }
     const changePage = (page: number, pageSize: number) => {
@@ -145,13 +149,45 @@ const NoticView: FC = () => {
         setPageData({
             ...pageData
         })
-        getAllNotice()
+        if (searchForm.getFieldValue("keyword") != undefined) {
+            searchNotice()
+        } else {
+            getAllNotice()
+        }
     }
     useEffect(() => {
         setContent(BraftEditor.createEditorState(null))
         getAllDeptInfo()
         getAllNotice()
     }, [])
+
+    // 关键字查找
+    const searchNotice = () => {
+        if (searchForm.getFieldValue("keyword") == undefined || searchForm.getFieldValue("keyword").trim() == "") {
+            message.warn("不能输入空字符！")
+        } else {
+            searchForm.validateFields().then(async () => {
+                const getData = {
+                    keyWord: searchForm.getFieldValue("keyword"),
+                    page: pageData.page,
+                    size: pageData.pageSize
+                }
+                const res: any = await attendanceApi.reqGetNoticeByKeyWord(getData);
+                if (res.code === 200) {
+                    setNoticeInfo(res.noticeInfo);
+                    pageData.count = res.count;
+                    setPageData({
+                        ...pageData
+                    })
+                }
+            }).catch(() => {
+                message.warn("请按要求输入数据")
+            })
+        }
+
+    }
+
+
     // 上传前
     const beforeUpload = (file: RcFile) => {
         const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
@@ -181,7 +217,6 @@ const NoticView: FC = () => {
 
     }
     // 公告Select
-
     const changeSelect = (value: string[], option: any) => {
         setselectArray(option)
     }
@@ -312,11 +347,12 @@ const NoticView: FC = () => {
         <div style={{ margin: "30px" }}>
             <Card>
                 <Form form={searchForm} size="large" layout='inline'>
-                    <Form.Item name="keyword" >
+                    <Form.Item name="keyword" rules={[{ required: true, message: "关键字不能为空" }]}>
                         <Input placeholder='输入公告主题或ID' />
                     </Form.Item>
-                    <Button icon={<SearchOutlined />}>搜索</Button>
+                    <Button icon={<SearchOutlined />} onClick={searchNotice}>搜索</Button>
                     <Button style={{ marginLeft: "20px" }} danger icon={<SearchOutlined />} onClick={() => setShowNotice(true)}>发布新公告</Button>
+                    <Button style={{ marginLeft: "20px" }} icon={<SearchOutlined />} onClick={() => getAllNotice()}>查看全部公告</Button>
 
                 </Form>
                 <br />
@@ -398,7 +434,6 @@ const NoticView: FC = () => {
                         <Button type="primary" danger >删除</Button>
                     </Popconfirm>
                 </div>
-
                 <Card title="公告内容" style={{ marginTop: "60px" }}>
                     <div dangerouslySetInnerHTML={{ __html: noticeDetail.content }}></div>
                 </Card>

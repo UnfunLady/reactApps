@@ -122,6 +122,16 @@ const reqAddNotice = (data: object) => {
 const reqDelNotice = (data: object) => {
     return request({ url: '/api/deleteNotice', method: 'post', data })
 }
+// 关键字查找公告
+
+const reqGetNoticeByKeyWord = (params: object) => {
+    return request({ url: '/api/getNoticeByKeyWord', method: 'get', params })
+}
+// 员工获取公告
+
+const reqGetNoticeEmploye = (params: object) => {
+    return request({ url: '/api/getNoticeEmploye', method: 'get', params })
+}
 export default {
     reqGetEmployeLeavePage,
     reqUpdateEmployeLeave,
@@ -152,5 +162,7 @@ export default {
     reqGetAllDeptInfo,
     reqAddNotice,
     reqGetAllNoticeInfo,
-    reqDelNotice
+    reqDelNotice,
+    reqGetNoticeByKeyWord,
+    reqGetNoticeEmploye
 }

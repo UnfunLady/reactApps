@@ -1,32 +1,5 @@
 import { Navigate, } from 'react-router-dom'
 import { MenuOutlined, SolutionOutlined, FundProjectionScreenOutlined, RightSquareOutlined, SettingOutlined, IssuesCloseOutlined, FileProtectOutlined, HighlightOutlined, UserSwitchOutlined, SafetyOutlined, AreaChartOutlined, InsuranceOutlined, HomeOutlined, BlockOutlined, DatabaseOutlined, MoneyCollectOutlined, AppstoreOutlined, UserOutlined, TeamOutlined, DeleteOutlined } from '@ant-design/icons';
-// import HomeView from '../views/HomeView'
-// import MainView from '../views/MainView'
-// import EmployeView from '../views/EmployeView'
-// import EmployeInfo from '../views/EmployeView/EmployeInfo'
-// import EmployeSalary from '../views/EmployeView/EmployeSalary';
-// import SalaryIndexView from '../views/EmployeView/EmployeSalary/IndexView';
-// import DepartmentSalaryDetail from '../views/EmployeView/EmployeSalary/IndexView/departmentSalaryDetail';
-// import EmployeDetailView from '../views/EmployeView/EmployeSalary/IndexView/employeDetailView';
-// import DepartmentView from '../views/DepartmentView';
-// import DepartmentEditView from '../views/DepartmentView/DepartmentEditView'
-// import AddGroupView from '../views/DepartmentView/AddGroupView'
-// import AddDepartmentView from '../views/DepartmentView/AddDepartmentView';
-// import DeleteDepartmentView from '../views/DepartmentView/DeleteDepartmentView';
-// import DMainView from '../views/DepartmentView/DeleteDepartmentView/MainView'
-// import EvilControl from '../views/EvilControl';
-// import ChinaInfo from '../views/EvilControl/ChinaInfo';
-// import CompanyInfo from '../views/EvilControl/CompanyInfo';
-// import ShowNoCovid from '../views/EvilControl/ShowNoCovid';
-// import ChinaMap from '../views/EvilControl/ChinaMap'
-// import LoginView from '../views/LoginView';
-// import NotFound from '../component/404NotFoundView';
-// import RecoverEmploye from '../views/RecoverEmploye';
-// import RecoverGroup from '../views/RecoverGroup';
-// import Attendance from '../views/AttendanceView'
-// import EmployeAttendance from '../views/AttendanceView/employeAttendanceControl'
-// import EmployeClock from '../views/AttendanceView/employeClockControl'
-// import ShowClockDeptInfo from '../views/AttendanceView/showClockDeptInfo'
 import {
     LockEmployeView, HomeView, MainView, EmployeView, EmployeInfo, EmployeSalary, SalaryIndexView, DepartmentSalaryDetail, EmployeDetailView, DepartmentView,
     DepartmentEditView, AddGroupView, AddDepartmentView, DeleteDepartmentView, DMainView, EvilControl, ChinaInfo, ChinaMap, CompanyInfo, ShowNoCovid, Attendance,

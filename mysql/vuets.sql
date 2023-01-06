@@ -11,7 +11,7 @@
  Target Server Version : 80029
  File Encoding         : 65001
 
- Date: 05/01/2023 18:32:14
+ Date: 06/01/2023 18:31:52
 */
 
 SET NAMES utf8mb4;
@@ -69,6 +69,8 @@ INSERT INTO `clockdepall` VALUES ('2023-01-03', 1, 'false', 'false');
 INSERT INTO `clockdepall` VALUES ('2023-01-03', 2, 'false', 'false');
 INSERT INTO `clockdepall` VALUES ('2023-01-03', 39, 'false', 'false');
 INSERT INTO `clockdepall` VALUES ('2023-01-03', 16, 'false', 'false');
+INSERT INTO `clockdepall` VALUES ('2023-01-06', 1, 'false', 'false');
+INSERT INTO `clockdepall` VALUES ('2023-01-06', 16, 'false', 'false');
 
 -- ----------------------------
 -- Table structure for clockemploye
@@ -109,6 +111,8 @@ INSERT INTO `clockemploye` VALUES (1, 1, 1, '鲁潜223', '上午', '2022-12-28 1
 INSERT INTO `clockemploye` VALUES (16, 76, 1, '鲁潜223', '上午', '2022-12-28 16:04:32', NULL);
 INSERT INTO `clockemploye` VALUES (1, 1, 1, '鲁潜223', '上午', '2023-01-03 11:15:49', NULL);
 INSERT INTO `clockemploye` VALUES (16, 76, 1, '鲁潜223', '上午', '2023-01-03 11:15:49', NULL);
+INSERT INTO `clockemploye` VALUES (1, 1, 1, '鲁潜223', '上午', '2023-01-06 14:19:09', NULL);
+INSERT INTO `clockemploye` VALUES (16, 76, 1, '鲁潜223', '上午', '2023-01-06 14:19:09', NULL);
 INSERT INTO `clockemploye` VALUES (39, 112, 2, '邵金鑫', '上午', '2022-12-13 18:17:31', '广州');
 INSERT INTO `clockemploye` VALUES (39, 112, 2, '邵金鑫', '上午', '2022-12-14 18:17:31', '广州');
 INSERT INTO `clockemploye` VALUES (1, 1, 2, '邵金鑫', '上午', '2022-12-20 10:12:27', NULL);
@@ -881,7 +885,7 @@ CREATE TABLE `employesalarydetail`  (
 -- ----------------------------
 -- Records of employesalarydetail
 -- ----------------------------
-INSERT INTO `employesalarydetail` VALUES (1, 1, '鲁潜223', 'true', 'true', 'true', 'true', 'true', 100, 4000, 'true');
+INSERT INTO `employesalarydetail` VALUES (1, 1, '鲁潜223', 'true', 'true', 'false', 'true', 'true', 100, 4000, 'true');
 INSERT INTO `employesalarydetail` VALUES (76, 1, '鲁潜223', 'true', 'true', 'true', 'true', 'true', 100, 3500, 'true');
 INSERT INTO `employesalarydetail` VALUES (1, 2, '邵金鑫', 'true', 'true', 'true', 'true', 'true', 100, 3500, 'true');
 INSERT INTO `employesalarydetail` VALUES (5, 2, '邵金鑫', 'true', 'true', 'true', 'true', 'true', 100, 3500, 'true');
@@ -1163,7 +1167,7 @@ CREATE TABLE `eusers`  (
 -- ----------------------------
 -- Records of eusers
 -- ----------------------------
-INSERT INTO `eusers` VALUES ('1', '88888888', '普通员工', '0', '2', '');
+INSERT INTO `eusers` VALUES ('1', '12345', '普通员工', '0', '2', '');
 INSERT INTO `eusers` VALUES ('2', '88888888', '普通员工', '0', '2', ' ');
 INSERT INTO `eusers` VALUES ('3', '88888888', '普通员工', '0', '2', NULL);
 INSERT INTO `eusers` VALUES ('4', '88888888', '普通员工', '0', '2', NULL);
@@ -1210,6 +1214,7 @@ INSERT INTO `leaverequest` VALUES (138253613, '病假', '一周以上', 4, '2022
 INSERT INTO `leaverequest` VALUES (138253614, '病假', '一周以上', 4, '2022-12-27 15:22:07', '<p>😌</p>', 'true', 1, 1, 'admin', '潘 琪');
 INSERT INTO `leaverequest` VALUES (138253615, '事假', '1天', 4, '2022-12-27 07:16:40', '<p>不准请假😋</p>', 'false', 1, 1, 'admin', '潘 琪');
 INSERT INTO `leaverequest` VALUES (138253616, '事假', '1天', 16, '2023-01-03 11:16:14', '<p>💚早去早回</p>', 'true', 1, 1, 'admin', '顾金鑫1');
+INSERT INTO `leaverequest` VALUES (138253617, '事假', '1天', 1, '2023-01-06 16:38:45', '<p>😋</p>', 'true', 76, 16, 'admin', '鲁潜223');
 
 -- ----------------------------
 -- Table structure for notice
@@ -1234,10 +1239,10 @@ CREATE TABLE `notice`  (
 -- ----------------------------
 INSERT INTO `notice` VALUES ('春节放假通知', 0, 0, '放假时间', 'true', 1, '2023-01-05', '2023-01-06', 'admin', '2023-01-05 16:08:05');
 INSERT INTO `notice` VALUES ('今日公告1', 0, 0, '<p>今天天气真好</p><div class=\"media-wrap image-wrap\"><img src=\"http://localhost:8888/images/Notice/uploadNoticeZengYu110634005HW7sRly8h8vh4v2jmrj30go0goq3p.jpg\"/></div><p></p>', 'true', 16, '2023-01-05', '2023-01-06', 'admin', '2023-01-05 16:11:11');
-INSERT INTO `notice` VALUES ('今日你公告2', 1, 3, '<p>哈哈</p>', 'false', 17, '2023-01-05', '2023-01-12', 'admin', '2023-01-05 16:11:58');
 INSERT INTO `notice` VALUES ('123123', 0, 0, '<p></p><div class=\"media-wrap image-wrap\"><img src=\"http://localhost:8888/images/Notice/uploadNoticeZengYu70621animals-4642101_960_720.jpg\"/></div><p></p>', 'true', 18, '2023-01-05', '2023-01-13', 'admin', '2023-01-05 17:28:07');
 INSERT INTO `notice` VALUES ('公告test公告test', 1, 3, '<p>🤣公告test</p><p><u>哈哈</u></p><ul><li>你好</li></ul>', 'false', 19, '2023-01-05', '2023-01-06', 'admin', '2023-01-05 17:29:19');
 INSERT INTO `notice` VALUES ('公告test公告test', 1, 1, '<p>🤣公告test</p><p><u>哈哈</u></p><ul><li>你好</li></ul>', 'false', 20, '2023-01-05', '2023-01-06', 'admin', '2023-01-05 17:29:19');
+INSERT INTO `notice` VALUES ('放假通知！', 0, 0, '<p></p><div class=\"media-wrap image-wrap\"><img src=\"http://localhost:8888/images/Notice/uploadNoticeZengYu4571440a85adf-7a9c-4ab4-a22f-65f7426c7ba6.png\"/></div><p></p>', 'true', 22, '2023-01-19', '2023-01-29', 'admin', '2023-01-06 11:40:42');
 
 -- ----------------------------
 -- Table structure for users
