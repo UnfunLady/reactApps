@@ -10,6 +10,7 @@
     "@types/jest": "^27.5.2",
     "@types/node": "^16.11.56",
     "@types/react-dom": "^18.0.6",
+    "animate.css": "^4.1.1",
     "antd": "^4.22.8",
     "axios": "^0.27.2",
     "braft-editor": "^2.3.9",

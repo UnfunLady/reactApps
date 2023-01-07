@@ -348,6 +348,7 @@ const MainView = (props: Props) => {
                     openKeys={data.mainViewData.OpenKeys}
                     mode="inline"
                     theme="dark"
+                    multiple={true}
                     onOpenChange={onOpenChange}
                     items={data.mainViewData.menuList}
                 >
@@ -376,7 +377,7 @@ const MainView = (props: Props) => {
                         </Row>
                     </div>
                 </Header>
-                <Content>
+                <Content >
                     <Suspense fallback={<SuspenseView />}>
                         {isAlive ? <RouterBeforeEach /> : ''}
                     </Suspense>

@@ -144,7 +144,7 @@ export const getAllDept = async (data: employeInfoDataInit, setData: Function) =
 }
 // 选择部门后获取小组
 export const getGroup = async (data: employeInfoDataInit, setData: Function) => {
-    const res: any = await employe.reqGetDeptByDno({dno:data.initData.selectForm.dno})
+    const res: any = await employe.reqGetDeptByDno({ dno: data.initData.selectForm.dno })
     if (res.code === 200) {
         data.initData.groupInfo = res.groupInfo;
         data.initData.groupSelect = data.initData.groupInfo.map((group: deptOrGroupInfo) => {
@@ -264,7 +264,7 @@ export const employeSelect = (data: employeInfoDataInit, setData: Function) => {
 }
 // 选择了部门后获取新的小组
 export const changeAddOrUpdateSelect = async (data: employeInfoDataInit, setData: Function) => {
-    const res: any = await employe.reqGetDeptByDno({dno:data.initData.addOrUpdateForm.dno})
+    const res: any = await employe.reqGetDeptByDno({ dno: data.initData.addOrUpdateForm.dno })
     if (res.code === 200) {
         data.initData.addOrUpdateForm.groupInfo = res.groupInfo;
         data.initData.addOrUpdateForm.groupSelect = data.initData.addOrUpdateForm.groupInfo.map((group: deptOrGroupInfo) => {
@@ -278,52 +278,52 @@ export const changeAddOrUpdateSelect = async (data: employeInfoDataInit, setData
 }
 
 // 添加或修改员工
-export const cofimAddOrUpdate = async (data: employeInfoDataInit) => {
+export const cofimAddOrUpdate = async (data: employeInfoDataInit, setData: Function, getEmploye: Function) => {
     if (data.initData.addOrUpdateForm.isUpdate) {
-        const updateObj={
-            "employno":data.initData.addOrUpdateForm.employno,
-            "deptno":data.initData.addOrUpdateForm.deptno,
+        const updateObj = {
+            "employno": data.initData.addOrUpdateForm.employno,
+            "deptno": data.initData.addOrUpdateForm.deptno,
             "employname": data.initData.addOrUpdateForm.employname,
             "employage": data.initData.addOrUpdateForm.employage,
-            "employsex":data.initData.addOrUpdateForm.employsex,
-            "employidcard":data.initData.addOrUpdateForm.employidcard,
+            "employsex": data.initData.addOrUpdateForm.employsex,
+            "employidcard": data.initData.addOrUpdateForm.employidcard,
             "employphone": data.initData.addOrUpdateForm.employphone,
             "entryDate": data.initData.addOrUpdateForm.entryDate,
             "employemail": data.initData.addOrUpdateForm.employemail,
-            "employaddress":  data.initData.addOrUpdateForm.employaddress,
+            "employaddress": data.initData.addOrUpdateForm.employaddress,
             "employsalary": data.initData.addOrUpdateForm.employsalary,
             "isUpdate": true,
             "changeGroup": false,
-            "oldDeptno":data.initData.selectForm.deptId,
+            "oldDeptno": data.initData.selectForm.deptId,
         }
         const res: any = await employe.reqAddOrUpdateEmploye(updateObj)
         if (res.code === 200) {
             message.success('修改员工成功！')
+            getEmploye(data, setData)
         } else {
             message.error('修改员工失败！')
         }
     } else {
-        const addObj={
-            "employno":data.initData.addOrUpdateForm.employno,
-            "deptno":data.initData.addOrUpdateForm.deptno,
+        const addObj = {
+            "employno": data.initData.addOrUpdateForm.employno,
+            "deptno": data.initData.addOrUpdateForm.deptno,
             "employname": data.initData.addOrUpdateForm.employname,
             "employage": data.initData.addOrUpdateForm.employage,
-            "employsex":data.initData.addOrUpdateForm.employsex,
-            "employidcard":data.initData.addOrUpdateForm.employidcard,
+            "employsex": data.initData.addOrUpdateForm.employsex,
+            "employidcard": data.initData.addOrUpdateForm.employidcard,
             "employphone": data.initData.addOrUpdateForm.employphone,
             "entryDate": data.initData.addOrUpdateForm.entryDate,
             "employemail": data.initData.addOrUpdateForm.employemail,
-            "employaddress":  data.initData.addOrUpdateForm.employaddress,
+            "employaddress": data.initData.addOrUpdateForm.employaddress,
             "employsalary": data.initData.addOrUpdateForm.employsalary,
             "isUpdate": false,
             "changeGroup": false,
-            "oldDeptno":data.initData.selectForm.deptId,
+            "oldDeptno": data.initData.selectForm.deptId,
         }
-        console.log(addObj);
-        
         const res: any = await employe.reqAddOrUpdateEmploye(addObj)
         if (res.code === 200) {
             message.success('添加员工成功！')
+            getEmploye(data, setData)
         } else {
             message.error('添加员工失败！')
         }
@@ -339,8 +339,8 @@ export const editEmploye = (key: any, data: employeInfoDataInit, setData: Functi
     // 点击修改时筛选出默认选中的部门和团队 在form的initValues设置了
     data.initData.addOrUpdateForm.isUpdate = true
     addOrUpdateForm.setFieldsValue({
-        deptno: data.initData.selectForm.deptId,
-        dno: data.initData.selectForm.dno,
+        deptno: data.initData.selectForm.deptId.toString(),
+        dno: data.initData.selectForm.dno.toString(),
         employage: key.employage,
         employemail: key.employemail,
         employidcard: key.employidcard,
@@ -352,7 +352,7 @@ export const editEmploye = (key: any, data: employeInfoDataInit, setData: Functi
 
     })
     setOpen(true)
-  
+
 }
 
 // 删除员工

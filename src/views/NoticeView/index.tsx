@@ -420,7 +420,7 @@ const NoticView: FC = () => {
                     <Descriptions.Item label="可见小组"><Tag color='red'>{noticeDetail.isAll == "true" ? "全部" : noticeDetail.specialDeptId}</Tag></Descriptions.Item>
                     <Descriptions.Item label="公告主题"><Tag color='red'>{noticeDetail.thyme}</Tag></Descriptions.Item>
                     <Descriptions.Item label="发布者"><Tag >{noticeDetail.postMan}</Tag></Descriptions.Item>
-                    <Descriptions.Item label="发布时间"><Tag >{noticeDetail.postTime}</Tag></Descriptions.Item>
+                    <Descriptions.Item label="发布时间"><Tag >{moment(noticeDetail.postTime).format("YYYY-MM-DD HH:mm:ss")}</Tag></Descriptions.Item>
                     <Descriptions.Item label="公告起止"><Tag color="red">{noticeDetail.startTime}---{noticeDetail.endTime}</Tag></Descriptions.Item>
                 </Descriptions>
                 <br />
@@ -435,7 +435,7 @@ const NoticView: FC = () => {
                     </Popconfirm>
                 </div>
                 <Card title="公告内容" style={{ marginTop: "60px" }}>
-                    <div dangerouslySetInnerHTML={{ __html: noticeDetail.content }}></div>
+                    <div dangerouslySetInnerHTML={{ __html: noticeDetail.content }} style={{ maxWidth: "1300px", overflow: "scroll" }}></div>
                 </Card>
             </Modal>
         </div>

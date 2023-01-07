@@ -119,7 +119,8 @@ const EmployeInfo: FC = () => {
             align: 'center',
             render: (_, record: { key: React.Key }) =>
                 <>
-                    <Button style={{ height: "27px", borderRadius: "3px", border: "none", fontSize: "12px" }} type="primary" icon={<EditOutlined />} onClick={() => editEmploye(record, data, setData, setOpen, addOrUpdateForm)}>修改</Button>
+                    <Button style={{ height: "27px", borderRadius: "3px", border: "none", fontSize: "12px" }} type="primary" icon={<EditOutlined />}
+                        onClick={() => editEmploye(record, data, setData, setOpen, addOrUpdateForm)}>修改</Button>
                     <Popconfirm title={`您确定要删除员工吗？`} cancelText="取消" okText="删除" onConfirm={() => confirmDelete(record)}>
                         <Button style={{ height: "27px", marginLeft: "15px", borderRadius: "3px", border: "none", fontSize: "12px" }} danger icon={<DeleteOutlined />} type='primary'>删除</Button>
                     </Popconfirm>
@@ -180,8 +181,7 @@ const EmployeInfo: FC = () => {
             // 修改地址
             data.initData.addOrUpdateForm.employaddress = data.initData.addOrUpdateForm.province + ' ' + data.initData.addOrUpdateForm.city
             // todo添加员工
-            cofimAddOrUpdate(data)
-            getEmploye(data, setData)
+            cofimAddOrUpdate(data, setData, getEmploye)
             addOrUpdateForm.resetFields()
 
         }).catch(err => {

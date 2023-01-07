@@ -6,6 +6,7 @@ import './index.less'
 import { useSelector } from 'react-redux'
 import { ColumnsType } from 'antd/lib/table'
 import { DataType } from '../../../type/employeInfo'
+import moment from 'moment'
 const EmployeNoticeView: FC = () => {
     // 初始化
     const [data, setData] = useState(new employeNoticeInit())
@@ -54,7 +55,7 @@ const EmployeNoticeView: FC = () => {
             dataIndex: 'postTime',
             align: 'center',
             render: (_, record: any) => {
-                return <Tag color='#476080' >{record.postTime}</Tag>
+                return <Tag color='#476080' >{moment(record.postTime).format("YYYY-MM-DD HH:mm:ss")}</Tag>
             }
         },
         {
@@ -185,7 +186,7 @@ const EmployeNoticeView: FC = () => {
                     <Descriptions.Item label="可见小组"><Tag color='red'>{data.data.noticeDetail.isAll == "true" ? "全部" : data.data.noticeDetail.specialDeptId}</Tag></Descriptions.Item>
                     <Descriptions.Item label="公告主题"><Tag color='red'>{data.data.noticeDetail.thyme}</Tag></Descriptions.Item>
                     <Descriptions.Item label="发布者"><Tag >{data.data.noticeDetail.postMan}</Tag></Descriptions.Item>
-                    <Descriptions.Item label="发布时间"><Tag >{data.data.noticeDetail.postTime}</Tag></Descriptions.Item>
+                    <Descriptions.Item label="发布时间"><Tag >{moment(data.data.noticeDetail.postTime).format("YYYY-MM-DD HH:mm:ss")}</Tag></Descriptions.Item>
                     <Descriptions.Item label="公告起止"><Tag color="red">{data.data.noticeDetail.startTime}---{data.data.noticeDetail.endTime}</Tag></Descriptions.Item>
                 </Descriptions>
                 <br />
