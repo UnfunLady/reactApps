@@ -123,7 +123,6 @@ const MainView = (props: Props) => {
         }
     };
     const onOpenChange = (openKeys: string[]) => {
-
         data.mainViewData.OpenKeys = openKeys
         setData({ ...data })
     }

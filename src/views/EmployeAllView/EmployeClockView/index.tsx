@@ -13,7 +13,6 @@ const EmployeIndexView: FC = () => {
         return state.user.userList.userInfo || {}
     })
     // 获取该用户所有部门id和小组id
-
     // 获取当前时间
     const [nowTime, setTime] = useState(moment().format("HH:mm:ss"))
     // 获取当前小时
@@ -35,7 +34,6 @@ const EmployeIndexView: FC = () => {
         }
 
     }
-
     useEffect(() => {
         setHour(moment().hours())
         ClockInfo();
@@ -61,8 +59,6 @@ const EmployeIndexView: FC = () => {
 
         })
         saveClockInfo(postData, ClockInfo)
-
-
     }
     // 打卡
     const clock = async () => {

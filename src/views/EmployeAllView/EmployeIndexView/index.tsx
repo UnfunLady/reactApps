@@ -223,8 +223,6 @@ const EmployeIndexView: FC = () => {
                                 </div>
                             </>)
                 }
-
-
                 <br />
                 {/* 部门详情页 */}
                 <div style={{ display: data.employeIndex.showDeptDetail == true ? "block" : "none" }}>
