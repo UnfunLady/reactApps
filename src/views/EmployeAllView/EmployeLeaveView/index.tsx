@@ -5,6 +5,7 @@ import { ArrowRightOutlined, ArrowLeftOutlined } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
 import Header from '../../../component/Header';
 import { addLeave, employeLeaveRequestInit, getAllDept, getGroup, getName } from '../../../type/attendance';
+import moment from 'moment';
 const EmployeLeaveView: FC = () => {
     const [data, setData] = useState(new employeLeaveRequestInit())
     const { Step } = Steps;
@@ -57,6 +58,8 @@ const EmployeLeaveView: FC = () => {
                     data.data.employeLeaveForm.dno = leaveForm.getFieldValue("dno")
                     data.data.employeLeaveForm.employename = data.data.employeBaseData.employename;
                     data.data.employeLeaveForm.employeno = data.data.employeBaseData.employeno as number;
+                    data.data.employeLeaveForm.postTime = moment().format("YYYY-MM-DD HH:mm:ss");
+
                     data.data.active++;
                     setData({ ...data })
                 })
@@ -99,6 +102,10 @@ const EmployeLeaveView: FC = () => {
         leaveForm.resetFields();
         data.data.active = 0;
         data.data.employeBaseData = { employename: undefined, employeno: 0 }
+        leaveForm.setFieldsValue({
+            whyLeave: "事假",
+            leaveLong: "0.5天"
+        })
         setData({ ...data })
     }
     return (

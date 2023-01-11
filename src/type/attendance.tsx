@@ -19,6 +19,7 @@ interface employeLeave {
         verfiyState: string | number,
         whichVerfiy: string | number,
         whyLeave: string | number,
+        postTime: string,
     },
     count: number,
     page: number,
@@ -42,6 +43,7 @@ export class employeLeaveInit {
             verfiyState: "",
             whichVerfiy: "",
             whyLeave: "",
+            postTime: ""
         },
         count: 0,
         page: 1,
@@ -161,7 +163,8 @@ interface employeLeaveRequest {
         employeno: number,
         employename: string | undefined,
         deptid: number,
-        dno: number
+        dno: number,
+        postTime: string,
     },
     depallSelect: [],
     deptSelect: [],
@@ -186,7 +189,8 @@ export class employeLeaveRequestInit {
             employeno: 0,
             employename: "",
             deptid: 0,
-            dno: 0
+            dno: 0,
+            postTime: ""
         },
         depallSelect: [],
         deptSelect: [],

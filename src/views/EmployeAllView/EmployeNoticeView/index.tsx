@@ -190,7 +190,7 @@ const EmployeNoticeView: FC = () => {
                     <Descriptions.Item label="公告起止"><Tag color="red">{data.data.noticeDetail.startTime}---{data.data.noticeDetail.endTime}</Tag></Descriptions.Item>
                 </Descriptions>
                 <br />
-                <Card title="公告内容" style={{ marginTop: "60px" }}>
+                <Card title="公告内容" style={{ marginTop: "60px",overflow:"scroll" }}>
                     <div dangerouslySetInnerHTML={{ __html: data.data.noticeDetail.content }}></div>
                 </Card>
             </Modal>

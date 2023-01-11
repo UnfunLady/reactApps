@@ -47,6 +47,7 @@ const Index: FC = () => {
             dataIndex: 'dno',
             align: 'center'
         },
+
         {
             title: '审核回复',
             dataIndex: 'reply',
@@ -56,7 +57,7 @@ const Index: FC = () => {
             },
         },
         {
-            title: '申请时间',
+            title: '请假时间',
             dataIndex: 'leaveWhen',
             align: 'center'
         },
@@ -245,6 +246,7 @@ const Index: FC = () => {
                     <Descriptions.Item label="部门号"><Tag color='green'>{data.employeLeave.checkInfo.dno}</Tag></Descriptions.Item>
                     <Descriptions.Item label="小组号"><Tag color='green'>{data.employeLeave.checkInfo.deptid}</Tag></Descriptions.Item>
                     <Descriptions.Item label="请假日期"><Tag color='green'>{data.employeLeave.checkInfo.leaveWhen}</Tag></Descriptions.Item>
+                    <Descriptions.Item label="申请时间"><Tag color='green'>{data.employeLeave.checkInfo.postTime}</Tag></Descriptions.Item>
                     <Descriptions.Item label="请假缘由"><Tag color='red'>{data.employeLeave.checkInfo.whyLeave}</Tag></Descriptions.Item>
                     <Descriptions.Item label="请假天数"><Tag color='red'>{data.employeLeave.checkInfo.leaveLong}</Tag></Descriptions.Item>
                     <Descriptions.Item label="审核回复"><Tag color='red'><span className='reply' dangerouslySetInnerHTML={{ __html: data.employeLeave.checkInfo.reply }}></span></Tag></Descriptions.Item>
