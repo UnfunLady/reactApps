@@ -85,7 +85,6 @@ export default function RecoverGroup() {
         },
     ];
     return (
-
         <div style={{ margin: "30px" }}>
             <Header title='恢复解散的小组' explain='解散的小组员工无法恢复' />
             <br />

@@ -56,8 +56,6 @@ export default function GroupMainView() {
     // 提交信息
     const submitInfo = () => {
         newGroupForm.validateFields().then(res => {
-            console.log(res);
-
             data.addGroupData.active++
             data.addGroupData.confirmForm = data.addGroupData.allDeptInfo.filter((dept: any) => {
                 return dept.dno === parseInt(newGroupForm.getFieldValue("deptno"))
@@ -94,6 +92,9 @@ export default function GroupMainView() {
             data.addGroupData.confirmForm = {}
             data.addGroupData.loading = false
             data.addGroupData.addSuccess = true
+            setData({ ...data })
+        } else {
+            data.addGroupData.loading = false
             setData({ ...data })
         }
     }
