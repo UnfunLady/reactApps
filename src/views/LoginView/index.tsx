@@ -8,7 +8,6 @@ import { useNavigate } from 'react-router-dom'
 import 'animate.css';
 import './index.less'
 import { useEffect } from 'react'
-import { removeAllListeners } from 'process'
 export default function LoginView() {
     const dispatch = useDispatch()
     // 登录验证
