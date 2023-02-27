@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import Header from '../../../component/Header';
 import { Calendar, Card, Tag, Timeline, message } from 'antd';
 import { ClockCircleOutlined, CheckOutlined } from '@ant-design/icons'
@@ -10,7 +10,7 @@ import moment from 'moment'
 const EmployeIndexView: FC = () => {
     // 用户数据
     const userInfo = useSelector((state: any) => {
-        return state.user.userList.userInfo || {}
+        return state.user.userList.userInfo
     })
     // 获取该用户所有部门id和小组id
     // 获取当前时间

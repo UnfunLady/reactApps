@@ -3,12 +3,12 @@ import { useState, useEffect, Suspense } from 'react'
 // 引入路由表
 import routes from '../../router'
 // 引入location获取路径
-import { useLocation, useNavigate, Outlet, Link } from 'react-router-dom';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { Layout, Col, Row, Dropdown, Breadcrumb, Button, Menu, Avatar, message, Modal, Form, Tag, Input, Upload } from 'antd';
 // 引入type数据
 import type { MenuProps } from 'antd'
 import { mainViewDataInit, getMenuNodes, updatePassword, updateUserInfo, updateUserInfoNoAvatar } from '../../type/mainView';
-import { MenuFoldOutlined, MenuUnfoldOutlined, DownOutlined, PlusOutlined, LoadingOutlined, CheckOutlined } from '@ant-design/icons';
+import { MenuFoldOutlined, MenuUnfoldOutlined, DownOutlined, BulbOutlined, PlusOutlined, LoadingOutlined, CheckOutlined } from '@ant-design/icons';
 import './index.less'
 import { breadcrumbNameMap } from '../../router';
 import PubSub from 'pubsub-js'
@@ -108,6 +108,7 @@ const MainView = (props: Props) => {
         data.mainViewData.isClose = !data.mainViewData.isClose
         setData({ ...data })
     }
+
     // 跳转路由
     const onClick: MenuProps['onClick'] = e => {
         // 修改默认选中菜单
@@ -181,6 +182,7 @@ const MainView = (props: Props) => {
     const [showEdit, setShowEdit] = useState(false)
     // 头像相关
     const [loading, setLoading] = useState(false);
+
     const [imageUrl, setImageUrl] = useState<any>(userInfo.avatar);
     const [fileList, setFileList] = useState<UploadFile[]>([
     ]);
@@ -346,7 +348,7 @@ const MainView = (props: Props) => {
                     defaultOpenKeys={data.mainViewData.OpenKeys}
                     openKeys={data.mainViewData.OpenKeys}
                     mode="inline"
-                    theme="dark"
+                    theme={"dark"}
                     multiple={true}
                     onOpenChange={onOpenChange}
                     items={data.mainViewData.menuList}
@@ -359,7 +361,9 @@ const MainView = (props: Props) => {
                         <Row align='middle'>
                             <Col span={1} >
                                 <Button onClick={changeClose} type="link" icon={!data.mainViewData.isClose ? <MenuFoldOutlined /> : <MenuUnfoldOutlined />} />
+                      
                             </Col>
+
                             <Col span={8} >
                                 <Breadcrumb >{breadCrumbCheck()}</Breadcrumb>
                             </Col>

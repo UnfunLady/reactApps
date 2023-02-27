@@ -1,5 +1,5 @@
 import { Spin } from 'antd'
-import { FC, useState, useEffect } from 'react'
+import { FC } from 'react'
 import './index.less'
 const SuspenseView: FC = () => {
 

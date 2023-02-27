@@ -11,9 +11,37 @@ class userInit {
         userInfo: []
     }
 }
+// export const constant = {
+//     SETTOKEN: 'setTokenInfo',
+//     SETUSERINFO: 'setUserInfo',
+//     USEROUT: 'userOut'
+// }
+
+// const actions = {
+//     setTokenInfo(state: userInit, data: any) {
+//         state.userList.userInfo = data.token
+//         state.userList.isLogin = true
+//         return { ...state }
+//     },
+//     setUserInfo(state: userInit, data: any) {
+//         state.userList.userInfo = data.Info
+//         return { ...state }
+//     },
+//     userOut(state: userInit, data: any) {
+//         state = new userInit()
+//         return { ...state }
+//     },
+
+// }
 
 export default function userLoginControl(preState = new userInit(), action: any) {
     const { type, data } = action
+    // 动态渲染switch case
+    // for (let key in constant) {
+    //     if (type === constant[key]) {
+    //         actions[constant[key]](preState, data)
+    //     }
+    // }
     switch (type) {
         case SETTOKEN:
             // 登录
@@ -32,4 +60,7 @@ export default function userLoginControl(preState = new userInit(), action: any)
         default:
             return preState
     }
+
+
+
 }

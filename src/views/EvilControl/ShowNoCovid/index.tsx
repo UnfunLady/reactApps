@@ -242,7 +242,7 @@ export default function ShowNoCovid() {
                     }
                 </div>
                 <div style={{ marginTop: "20px" }}>
-                    <Table rowKey={record => record.key} pagination={false} bordered columns={columns} dataSource={data.employeData.isAllEmploye ? data.employeData.allTableData : data.employeData.evilTableData} />
+                    <Table rowKey={record => Math.random()} pagination={false} bordered columns={columns} dataSource={data.employeData.isAllEmploye ? data.employeData.allTableData : data.employeData.evilTableData} />
                     <br />
                     <Pagination style={{ float: "right" }} pageSize={8} onChange={changePage} pageSizeOptions={[8, 10, 15]} showTotal={total => `共 ${total} 名员工`} showSizeChanger showQuickJumper total={data.employeData.isAllEmploye ? data.employeData.allCount : data.employeData.someCount} />
                 </div>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .f {
+        width: 600px;
+        height: 300px;
+        background-color: antiquewhite;
+    }
+
+    .c {
+
+        width: 90%;
+        height: 300px;
+        background-color: aqua;
+    }
+</style>
+
+<body>
+    <div class="f" id="f1">
+        <div class="c"></div>
+    </div>
+    <script>
+        function MyPromise(execute) {
+            let that = this;
+            this.status = "pending"
+            this.value = undefined
+            this.reason = undefined;
+            const resolve = (value) => {
+                if (that.status === "pending") {
+                    that.value = value;
+                    that.status = "resolved"
+                }
+            }
+            const reject = (value) => {
+                if (that.status === "pending") {
+                    that.reason = value;
+                    that.status = "rejected"
+                }
+            }
+
+            try {
+                execute(resolve, reject)
+            } catch (error) {
+                reject(error)
+            }
+
+            MyPromise.prototype.then = function (res, rej) {
+                if (this.status === "resolved") {
+                    return res(this.value)
+                }
+                if (this.status === "rejected") {
+                    rej(this.value)
+                }
+            }
+
+        }
+
+        const m = new MyPromise((res, rej) => {
+            res(123)
+        })
+
+        m.then((res) => {
+            console.log(res);
+        })
+        console.log(m);
+    </script>
+</body>
+
+</html>
