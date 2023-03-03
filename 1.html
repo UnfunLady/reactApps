@@ -135,6 +135,7 @@
     </div>
     </div>
 
+    <input type="text" name="" id="ip">
     <script>
 
         // function countStr(str) {
@@ -200,14 +201,63 @@
 
         // })(" a bc d")
 
-        (function (str, target) {
-            for (let i = 0; i < str.length; i++) {
-                if (str.match(/target/)) {
+        // function deepClone(obj) {
+        //     if (obj == null || typeof obj !== "object") return obj
+        //     let result = obj instanceof Array ? [] : {};
+        //     obj instanceof Array
+        //     for (let key in obj) {
+        //         if (obj.hasOwnProperty(key)) {
+        //             result[key] = deepClone(obj[key])
+        //         }
+        //     }
+        //     return result;
+        // }
+        // const obj = {
+        //     a: 1,
+        //     b: {
+        //         c: 2
+        //     }
+        // }
+        // const o = deepClone(obj)
+        // console.log(o);
+        // console.log(JSON.parse(JSON.stringify(obj)));
 
+        function deepClone(obj) {
+            if (obj == null || typeof obj !== "object") return obj
+            let result = obj instanceof Array ? [] : {}
+            for (let key in obj) {
+                if (obj.hasOwnProperty(key)) {
+                    result[key] = deepClone(obj[key])
                 }
             }
+        }
+        function antiShake(fn, wait) {
+            let timer = null;
+            return args => {
+                console.log(args);
+                if (timer) clearTimeout(timer)
+                timer = setTimeout(fn, wait)
+            }
 
-        })("abcdeda", "a")
+        }
+
+        function throttle(fn, wait, arguments) {
+
+            let time = 0;
+            return function () {
+                const now = new Date().getTime();
+                if (now - time > wait) {
+                    console.log(arguments);
+                    fn()
+                    time = now
+                }
+            }
+        }
+        function a() {
+            console.log(1);
+        }
+        ip.addEventListener("input", antiShake(a, 1000, 12));
+
     </script>
 
 

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <span class="box1"></span>
+        <span class="box2"></span>
+    </div>
+    <script>
+        let Dep = {
+            // 容器
+            clientList: {},
+            listen: function (key, fn) {
+                // 如果容器有订阅的方法key值则函数push进去 否则赋值为空数组
+                (this.clientList[key] || (this.clientList[key] = [])).push(fn)
+            },
+            trigger: function () {
+                // 获取第一个参数
+                let key = Array.prototype.shift.call(arguments),
+                    fns = this.clientList[key];
+                if (!fns || fns.lenght === 0) {
+                    return false
+                }
+                for (let i = 0; i < fns.length; i++) {
+                    fns[i].apply(this, arguments)
+                }
+
+            }
+        }
+        // 劫持  数据 目标  目标key  选择器
+        let dataHi = function ({ data, tag, datakey, selector }) {
+            let value = "",
+                el = document.querySelector(selector);
+            Object.defineProperty(data, datakey, {
+                get: function () {
+                    console.log("获取值！");
+                    return value;
+                },
+                set: function (newVal) {
+                    console.log("设置值！");
+                    value = newVal;
+                    // 发布
+                    Dep.trigger(tag, newVal)
+                }
+            })
+
+            Dep.listen(tag, function (text) {
+                el.innerHTML = text;
+            })
+
+        }
+
+        let obj = {}
+        dataHi({ data: obj, tag: 'view-1', datakey: 'one', selector: '.box1' })
+        dataHi({ data: obj, tag: 'view-2', datakey: 'two', selector: '.box2' })
+        // 初始化赋值
+        obj.one = '我是第一个span'
+        obj.two = '我是第二个span'
+        function deepClone(obj) {
+            if (obj == null || typeof obj !== "object") return obj;
+            let result = obj instanceof Array ? [] : {};
+
+            for (let key in obj) {
+                if (obj.hasOwnProperty(key)) {
+                    result[key] = deepClone(obj[key])
+                }
+            }
+            return result
+        }
+
+
+    </script>
+</body>
+
+</html>
