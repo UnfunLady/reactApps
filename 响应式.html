@@ -63,6 +63,7 @@
         // 初始化赋值
         obj.one = '我是第一个span'
         obj.two = '我是第二个span'
+        
         function deepClone(obj) {
             if (obj == null || typeof obj !== "object") return obj;
             let result = obj instanceof Array ? [] : {};
@@ -73,6 +74,7 @@
                 }
             }
             return result
+            
         }
 
 
